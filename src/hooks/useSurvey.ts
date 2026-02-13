@@ -31,8 +31,9 @@ function determineFormType(fichaAnswers: Record<string, string>): 'A' | 'B' {
   return 'B';
 }
 
-export function useSurvey() {
+export function useSurvey({ campaignId }: { campaignId: string }) {
   const [phase, setPhase] = useState<Phase>('consent');
+  // ... (keep state)
   const [consentName, setConsentName] = useState('');
   const [consentDoc, setConsentDoc] = useState('');
   const [consentAccepted, setConsentAccepted] = useState(false);
@@ -198,25 +199,23 @@ export function useSurvey() {
     }
 
     setIsSubmitting(true);
-    
+
     try {
       // Save all data to database
       const allData = {
+        campaignId,
+        cedula: consentDoc, // Assuming consentDoc is the ID
         consentName,
         consentDoc,
         consentAccepted,
         formType,
-        fichaData: fichaAnswers,
-        intralaboralData: intralaboralAnswers,
-        extralaboralData: extralaboralAnswers,
-        estresData: estresAnswers,
-        filters: {
-          clientes: filterClientes,
-          jefatura: filterJefatura,
-        },
+        fichaAnswers,
+        intralaboralAnswers,
+        extralaboralAnswers,
+        estresAnswers,
       };
 
-      const response = await fetch('/api/surveys', {
+      const response = await fetch('/api/survey/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -225,20 +224,19 @@ export function useSurvey() {
       });
 
       if (!response.ok) {
-        throw new Error('Error al guardar la encuesta');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Error al guardar la encuesta');
       }
 
       const result = await response.json();
-      
+
       if (result.success) {
         setPhase('success');
         setErrors([]);
-      } else {
-        throw new Error(result.error || 'Error al guardar la encuesta');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error submitting survey:', error);
-      setErrors(['Error al guardar la encuesta. Por favor, intente nuevamente.']);
+      setErrors([error.message || 'Error al guardar la encuesta.']);
       scrollToTop();
     } finally {
       setIsSubmitting(false);

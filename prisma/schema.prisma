@@ -4,10 +4,57 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Empresa {
+  id        String    @id @default(cuid())
+  name      String
+  nit       String?
+  campanas  Campana[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Campana {
+  id            String        @id @default(cuid())
+  name          String
+  empresaId     String
+  empresa       Empresa       @relation(fields: [empresaId], references: [id])
+  participantes Participante[]
+  token         String        @unique // For public access URL
+  isActive      Boolean       @default(true)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Participante {
+  id             String          @id @default(cuid())
+  cedula         String
+  email          String?
+  campanaId      String
+  campana        Campana         @relation(fields: [campanaId], references: [id])
+  surveyResponse SurveyResponse?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@unique([cedula, campanaId]) // Prevent duplicate responses for same campaign
 }
 
 model SurveyResponse {
-  id               String   @id @default(cuid())
+  id               String       @id @default(cuid())
+  participanteId   String       @unique
+  participante     Participante @relation(fields: [participanteId], references: [id])
+  
+  // Data fields
   consentName      String
   consentDoc       String
   consentAccepted  Boolean
@@ -16,7 +63,8 @@ model SurveyResponse {
   intralaboralData Json
   extralaboralData Json
   estresData       Json
-  filters          Json
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  filters          Json // Demographics/Filters snapshot
+  
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
 }
