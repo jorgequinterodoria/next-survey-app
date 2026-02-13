@@ -1,10 +1,10 @@
 'use client';
 
 import { useSurvey } from '@/hooks/useSurvey';
-import { ConsentScreen } from '@components/ConsentScreen';
-import { FichaScreen } from '@/components/FichaScreen';
-import { LikertSection } from '@/components/LikertSection';
-import { SuccessScreen } from '@/components/SuccessScreen';
+import { ConsentScreen } from '@/components/ConsentScreen'
+import { FichaScreen } from '@/components/FichaScreen'
+import { LikertSection } from '@/components/LikertSection'
+import { SuccessScreen } from '@/components/SuccessScreen'
 import { ProgressIndicator } from '@/components/ProgressIndicator';
 import { Brain, Shield } from 'lucide-react';
 import {
@@ -89,7 +89,9 @@ export default function Home() {
         {phase === 'ficha' && (
           <FichaScreen
             fichaAnswers={fichaAnswers}
-            onAnswer={(k, v) => setFichaAnswers((p) => ({ ...p, [k]: v }))}
+            onAnswer={(k: string, v: string) =>
+              setFichaAnswers((p: Record<string, string>) => ({ ...p, [k]: v }))
+            }
             onNext={handleFichaNext}
             errors={errors}
           />
@@ -111,7 +113,9 @@ export default function Home() {
               sectionIndex={currentSectionIndex}
               totalSections={sections.length}
               answers={answersMap}
-              onAnswer={(k, v) => setAnswers((p) => ({ ...p, [k]: v }))}
+              onAnswer={(k: string, v: string) =>
+                setAnswers((p: Record<string, string>) => ({ ...p, [k]: v }))
+              }
               onNext={handleSectionNext}
               onPrev={handleSectionPrev}
               likertOptions={options}
