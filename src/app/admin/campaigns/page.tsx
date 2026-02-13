@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import { createCampaign } from '@/app/actions/admin'
+import { createCampaign, toggleCampaignStatus } from '@/app/actions/admin'
 import { Megaphone, Link as LinkIcon, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 
@@ -20,7 +20,7 @@ export default async function CampaignsPage() {
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold flex items-center gap-2">
+        <h1 className="text-2xl font-bold flex items-center gap-2 text-gray-900">
           <Megaphone className="h-6 w-6" />
           Campañas
         </h1>
@@ -28,7 +28,7 @@ export default async function CampaignsPage() {
 
       {/* Create Form */}
       <div className="bg-white p-6 rounded-lg shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Nueva Campaña</h2>
+        <h2 className="text-lg font-semibold mb-4 text-gray-900">Nueva Campaña</h2>
         <form action={async (formData) => {
           'use server'
           await createCampaign(formData)
@@ -38,7 +38,7 @@ export default async function CampaignsPage() {
             <select
               name="empresaId"
               required
-              className="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
             >
                 <option value="">Seleccionar empresa...</option>
                 {companies.map(c => (
@@ -52,7 +52,7 @@ export default async function CampaignsPage() {
               name="name"
               type="text"
               required
-              className="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Ej: Evaluación 2024"
             />
           </div>
@@ -94,9 +94,21 @@ export default async function CampaignsPage() {
                     </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${campana.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                        {campana.isActive ? 'Activa' : 'Inactiva'}
-                    </span>
+                    <form action={async () => {
+                        'use server'
+                        await toggleCampaignStatus(campana.id, !campana.isActive)
+                    }}>
+                        <button 
+                            type="submit"
+                            className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full cursor-pointer transition-colors ${
+                                campana.isActive 
+                                    ? 'bg-green-100 text-green-800 hover:bg-green-200' 
+                                    : 'bg-red-100 text-red-800 hover:bg-red-200'
+                            }`}
+                        >
+                            {campana.isActive ? 'Activa' : 'Inactiva'}
+                        </button>
+                    </form>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-gray-500">{campana._count.participantes}</td>
               </tr>

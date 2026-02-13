@@ -92,10 +92,14 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
     answers: Record<string, string>,
     filterVal?: string | null
   ): string[] => {
+    // Si tiene filtro y no se ha respondido
     if (section.filtro) {
-      if (!filterVal) return ['Debe responder la pregunta filtro'];
+      if (!filterVal) return ['Debe responder la pregunta inicial (Sí/No)'];
+      // Si respondió NO, no valida preguntas internas
       if (filterVal === 'no') return [];
     }
+    
+    // Validar preguntas internas (solo si no hay filtro o si filtro es 'si')
     const errs: string[] = [];
     for (const q of section.preguntas) {
       if (!answers[`${section.key}_${q.id}`]) {
@@ -234,9 +238,13 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
         setPhase('success');
         setErrors([]);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error submitting survey:', error);
-      setErrors([error.message || 'Error al guardar la encuesta.']);
+      let message = 'Error al guardar la encuesta.';
+      if (error instanceof Error) {
+        message = error.message;
+      }
+      setErrors([message]);
       scrollToTop();
     } finally {
       setIsSubmitting(false);

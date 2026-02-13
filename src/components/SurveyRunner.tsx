@@ -166,12 +166,22 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
                   <div className="bg-red-50 border border-red-200 rounded-xl p-4">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-sm font-semibold text-red-700">
-                        Debe responder todas las preguntas para finalizar
+                        {errors.some(e => e.startsWith('Pregunta')) 
+                          ? 'Debe responder todas las preguntas para finalizar'
+                          : 'Hubo un error al procesar la encuesta'}
                       </span>
                     </div>
-                    <p className="text-xs text-red-500">
-                      {errors.length} pregunta(s) sin responder
-                    </p>
+                    {errors.some(e => e.startsWith('Pregunta')) ? (
+                      <p className="text-xs text-red-500">
+                        {errors.length} pregunta(s) sin responder
+                      </p>
+                    ) : (
+                      <ul className="list-disc list-inside text-xs text-red-500 mt-1">
+                        {errors.map((err, i) => (
+                          <li key={i}>{err}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 )}
 

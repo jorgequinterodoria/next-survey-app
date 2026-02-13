@@ -51,9 +51,9 @@ export default async function ResultsPage() {
                 <td className="px-6 py-4 whitespace-nowrap text-gray-500">{p.campana.name}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                     {p.surveyResponse ? (
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            Completada
-                        </span>
+                        <Link href={`/admin/results/${p.surveyResponse.id}`} className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer">
+                            Completada - Ver Informe
+                        </Link>
                     ) : (
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
                             Pendiente

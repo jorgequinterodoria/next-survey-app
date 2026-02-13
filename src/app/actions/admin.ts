@@ -3,6 +3,30 @@
 import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import { randomBytes } from 'crypto'
+import bcrypt from 'bcryptjs'
+
+export async function createAdmin(formData: FormData) {
+    const email = formData.get('email') as string
+    const password = formData.get('password') as string
+
+    if (!email || !password) return { error: 'Email and password are required' }
+
+    try {
+        const hashedPassword = await bcrypt.hash(password, 10)
+
+        await prisma.admin.create({
+            data: {
+                email,
+                password: hashedPassword,
+            },
+        })
+        revalidatePath('/admin/admins')
+        return { success: true }
+    } catch (error) {
+        console.error(error)
+        return { error: 'Failed to create admin' }
+    }
+}
 
 export async function createCompany(formData: FormData) {
     const name = formData.get('name') as string

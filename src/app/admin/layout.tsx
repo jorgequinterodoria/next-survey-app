@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
-import { LayoutDashboard, Building2, Megaphone, Users, LogOut } from 'lucide-react'
+import { LayoutDashboard, Building2, Megaphone, Users, LogOut, ShieldCheck } from 'lucide-react'
 
 export default function AdminLayout({
   children,
@@ -22,7 +22,13 @@ export default function AdminLayout({
     { href: '/admin/companies', label: 'Empresas', icon: Building2 },
     { href: '/admin/campaigns', label: 'Campañas', icon: Megaphone },
     { href: '/admin/results', label: 'Resultados', icon: Users },
+    { href: '/admin/admins', label: 'Administradores', icon: ShieldCheck },
   ]
+
+  // Si estamos en login, no mostrar el layout del dashboard
+  if (pathname === '/admin/login') {
+    return <>{children}</>
+  }
 
   return (
     <div className="flex min-h-screen bg-gray-100">

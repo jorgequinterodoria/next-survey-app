@@ -11,7 +11,7 @@ export default async function CompaniesPage() {
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold flex items-center gap-2">
+        <h1 className="text-2xl font-bold flex items-center gap-2 text-gray-900">
           <Building2 className="h-6 w-6" />
           Empresas
         </h1>
@@ -19,7 +19,7 @@ export default async function CompaniesPage() {
 
       {/* Create Form */}
       <div className="bg-white p-6 rounded-lg shadow-sm">
-        <h2 className="text-lg font-semibold mb-4">Nueva Empresa</h2>
+        <h2 className="text-lg font-semibold mb-4 text-gray-900">Nueva Empresa</h2>
         <form action={async (formData) => {
           'use server'
           await createCompany(formData)
@@ -30,7 +30,7 @@ export default async function CompaniesPage() {
               name="name"
               type="text"
               required
-              className="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Ej: Acme Corp"
             />
           </div>
@@ -39,7 +39,7 @@ export default async function CompaniesPage() {
             <input
               name="nit"
               type="text"
-              className="w-full rounded-md border border-gray-300 p-2 text-sm focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Ej: 900.123.456"
             />
           </div>

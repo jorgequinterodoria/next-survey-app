@@ -64,6 +64,7 @@ model SurveyResponse {
   extralaboralData Json
   estresData       Json
   filters          Json // Demographics/Filters snapshot
+  results          Json? // Processed scores and risk levels
   
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt

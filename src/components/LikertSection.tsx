@@ -111,36 +111,37 @@
            )}
  
            {section.filtro && onFilterChange && (
-             <div className={`p-4 rounded-xl border-2 border-dashed border-slate-300 ${c.bg}`}>
-               <p className="text-sm font-semibold text-slate-700 mb-3">{section.filtro}</p>
-               <div className="flex gap-3">
-                {['si', 'no'].map((v) => (
-                  <label
-                    key={v}
-                    className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg border-2 cursor-pointer transition-all font-medium text-sm ${
-                      filterValue === v
-                        ? `${c.ring} ring-2 text-slate-700`
-                        : 'border-slate-200 hover:bg-slate-50 text-slate-600'
-                    }`}
-                  >
-                     <input
-                       type="radio"
-                       name={`filter_${section.key}`}
-                       value={v}
-                       checked={filterValue === v}
-                       onChange={() => onFilterChange(v)}
-                       className="sr-only"
-                     />
-                     {v === 'si' ? 'Sí' : 'No'}
-                   </label>
-                 ))}
-               </div>
-             </div>
-           )}
- 
-           {showQuestions && (
-             <div className="space-y-3">
-               {section.preguntas.map((q) => (
+            <div className={`p-4 rounded-xl border-2 border-dashed border-slate-300 ${c.bg}`}>
+              <p className="text-sm font-semibold text-slate-700 mb-3">{section.filtro}</p>
+              <div className="flex gap-3">
+               {['si', 'no'].map((v) => (
+                 <label
+                   key={v}
+                   className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg border-2 cursor-pointer transition-all font-medium text-sm ${
+                     filterValue === v
+                       ? `${c.ring} ring-2 text-slate-700`
+                       : 'border-slate-200 hover:bg-slate-50 text-slate-600'
+                   }`}
+                 >
+                    <input
+                      type="radio"
+                      name={`filter_${section.key}`}
+                      value={v}
+                      checked={filterValue === v}
+                      onChange={() => onFilterChange(v)}
+                      className="sr-only"
+                    />
+                    {v === 'si' ? 'Sí' : 'No'}
+                  </label>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Mostrar preguntas SOLO si no hay filtro O si el filtro es 'si' */}
+          {(showQuestions) && (
+            <div className="space-y-3">
+              {section.preguntas.map((q) => (
                  <div
                    key={q.id}
                    className={`p-4 rounded-xl border transition-all ${
