@@ -50,7 +50,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
   }
 
   // Parsear resultados guardados
-  const results = response.results as Record<string, DimensionResult> || {}
+  const results = (response.results as unknown as Record<string, DimensionResult>) || {}
   
   // Agrupar por dominio (Intra, Extra, Estrés)
   const intraResults = Object.entries(results)
@@ -65,7 +65,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
     .filter(([key]) => key.startsWith('Estrés'))
     .reduce((obj, [key, val]) => ({ ...obj, [key]: val }), {})
 
-  const ficha = response.fichaData as any
+  const ficha = (response.fichaData as unknown as Record<string, string>) || {}
 
   return (
     <div className="space-y-6">

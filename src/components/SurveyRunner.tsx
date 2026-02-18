@@ -6,6 +6,9 @@ import { FichaScreen } from '@/components/FichaScreen'
 import { LikertSection } from '@/components/LikertSection'
 import { SuccessScreen } from '@/components/SuccessScreen'
 import { ProgressIndicator } from '@/components/ProgressIndicator';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { LoadingButton } from '@/components/LoadingButton';
+import { SectionProgress } from '@/components/FieldStatus';
 import { Brain, Shield } from 'lucide-react';
 import {
   LIKERT_OPTIONS_INTRALABORAL,
@@ -33,6 +36,7 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
     currentSectionIndex,
     formType,
     errors,
+    isSubmitting,
     filterClientes,
     progressSteps,
     getCurrentSections,
@@ -54,23 +58,24 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
   } = useSurvey({ campaignId });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40">
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 shadow-sm">
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3">
           <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-md">
             <Brain className="w-6 h-6 text-white" />
           </div>
           <div className="flex-1 min-w-0">
-            <h1 className="text-sm font-bold text-slate-800 truncate">
+            <h1 className="text-sm font-bold text-slate-800 dark:text-slate-100 truncate">
               {companyName} - {campaignName}
             </h1>
-            <p className="text-[10px] text-slate-400 flex items-center gap-1">
+            <p className="text-[10px] text-slate-400 dark:text-slate-500 flex items-center gap-1">
               <Shield className="w-3 h-3" />
               Batería de Riesgo Psicosocial
             </p>
           </div>
+          <ThemeToggle />
           {phase !== 'consent' && phase !== 'success' && (
-            <span className="text-[10px] bg-blue-100 text-blue-700 font-bold px-2 py-1 rounded-full">
+            <span className="text-[10px] bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-bold px-2 py-1 rounded-full">
               Forma {formType}
             </span>
           )}
@@ -140,7 +145,7 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
 
         {phase === 'estres' && (
           <div className="max-w-2xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
               <div className="bg-gradient-to-r from-rose-600 to-pink-700 px-6 py-5">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs font-medium text-white/70 uppercase tracking-wide">
@@ -157,26 +162,37 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
                 </p>
               </div>
 
-              <div className="h-1.5 bg-slate-100">
+              <div className="h-1.5 bg-slate-100 dark:bg-slate-700">
                 <div className="h-full bg-rose-600 w-full" />
               </div>
 
               <div className="p-5 space-y-4">
+                {(() => {
+                  const answeredCount = estresQuestions.filter(q => estresAnswers[`estres_${q.id}`]).length;
+                  return (
+                    <SectionProgress
+                      current={answeredCount}
+                      total={estresQuestions.length}
+                      label={`${answeredCount}/${estresQuestions.length} preguntas respondidas`}
+                    />
+                  );
+                })()}
+
                 {errors.length > 0 && (
-                  <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+                  <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm font-semibold text-red-700">
-                        {errors.some(e => e.startsWith('Pregunta')) 
+                      <span className="text-sm font-semibold text-red-700 dark:text-red-300">
+                        {errors.some(e => e.startsWith('Pregunta'))
                           ? 'Debe responder todas las preguntas para finalizar'
                           : 'Hubo un error al procesar la encuesta'}
                       </span>
                     </div>
                     {errors.some(e => e.startsWith('Pregunta')) ? (
-                      <p className="text-xs text-red-500">
+                      <p className="text-xs text-red-500 dark:text-red-400">
                         {errors.length} pregunta(s) sin responder
                       </p>
                     ) : (
-                      <ul className="list-disc list-inside text-xs text-red-500 mt-1">
+                      <ul className="list-disc list-inside text-xs text-red-500 dark:text-red-400 mt-1">
                         {errors.map((err, i) => (
                           <li key={i}>{err}</li>
                         ))}
@@ -185,61 +201,76 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
                   </div>
                 )}
 
-                {estresQuestions.map((q) => (
-                  <div
-                    key={q.id}
-                    className={`p-4 rounded-xl border transition-all ${estresAnswers[`estres_${q.id}`]
-                        ? 'border-slate-200 bg-white'
-                        : errors.length > 0
-                          ? 'border-red-300 bg-red-50'
-                          : 'border-slate-200'
-                      }`}
-                  >
-                    <p className="text-sm font-medium text-slate-700 mb-3">
-                      <span className="text-slate-400 mr-1">{q.id}.</span> {q.texto}
-                    </p>
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                      {LIKERT_OPTIONS_ESTRES.map((opt) => (
-                        <label
-                          key={opt.value}
-                          className={`flex items-center justify-center py-2 px-2 rounded-lg border cursor-pointer transition-all text-xs font-medium text-center ${estresAnswers[`estres_${q.id}`] === opt.value
-                              ? 'ring-1 ring-rose-500 border-rose-500 bg-rose-50'
-                              : 'border-slate-200 hover:bg-slate-50 text-slate-600'
-                            }`}
-                        >
-                          <input
-                            type="radio"
-                            name={`estres_${q.id}`}
-                            value={opt.value}
-                            checked={estresAnswers[`estres_${q.id}`] === opt.value}
-                            onChange={() =>
-                              setEstresAnswers((p) => ({
-                                ...p,
-                                [`estres_${q.id}`]: opt.value,
-                              }))
-                            }
-                            className="sr-only"
-                          />
-                          {opt.label}
-                        </label>
-                      ))}
+                {estresQuestions.map((q) => {
+                  const isAnswered = !!estresAnswers[`estres_${q.id}`];
+                  return (
+                    <div
+                      key={q.id}
+                      className={`p-4 rounded-xl border transition-all ${isAnswered
+                          ? 'border-green-300 dark:border-green-700 bg-green-50/30 dark:bg-green-900/10'
+                          : errors.length > 0
+                            ? 'border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-900/20'
+                            : 'border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-700/30'
+                        }`}
+                    >
+                      <div className="flex items-start justify-between gap-2">
+                        <p className="text-sm font-medium text-slate-700 dark:text-slate-200 mb-3 flex-1">
+                          <span className="text-slate-400 dark:text-slate-500 mr-1">{q.id}.</span> {q.texto}
+                        </p>
+                        {isAnswered && (
+                          <span className="text-green-500 text-xs">✓</span>
+                        )}
+                      </div>
+                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        {LIKERT_OPTIONS_ESTRES.map((opt) => {
+                          const isSelected = estresAnswers[`estres_${q.id}`] === opt.value;
+                          return (
+                            <label
+                              key={opt.value}
+                              className={`flex items-center justify-center py-2 px-2 rounded-lg border cursor-pointer transition-all text-xs font-medium text-center ${
+                                isSelected
+                                  ? 'ring-1 ring-rose-500 border-rose-500 bg-rose-50 text-rose-700 dark:ring-rose-400 dark:border-rose-400 dark:bg-rose-900/40 dark:text-rose-200'
+                                  : 'border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200'
+                              }`}
+                            >
+                              <input
+                                type="radio"
+                                name={`estres_${q.id}`}
+                                value={opt.value}
+                                checked={isSelected}
+                                onChange={() =>
+                                  setEstresAnswers((p) => ({
+                                    ...p,
+                                    [`estres_${q.id}`]: opt.value,
+                                  }))
+                                }
+                                className="sr-only"
+                              />
+                              {opt.label}
+                            </label>
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
 
                 <div className="flex gap-3 pt-2">
-                  <button
+                  <LoadingButton
                     onClick={goBackFromEstres}
-                    className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-semibold text-sm hover:bg-slate-200 transition-all flex items-center justify-center gap-1"
+                    variant="secondary"
+                    disabled={isSubmitting}
                   >
                     Anterior
-                  </button>
-                  <button
+                  </LoadingButton>
+                  <LoadingButton
                     onClick={handleEstresNext}
-                    className="flex-1 py-3 bg-green-600 text-white rounded-xl font-semibold text-sm hover:bg-green-700 transition-all shadow-lg shadow-green-200 flex items-center justify-center gap-1"
+                    variant="success"
+                    isLoading={isSubmitting}
+                    loadingText="Guardando..."
                   >
                     Finalizar y Guardar
-                  </button>
+                  </LoadingButton>
                 </div>
               </div>
             </div>
