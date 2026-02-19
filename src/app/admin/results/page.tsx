@@ -28,7 +28,7 @@ export default async function ResultsPage() {
             target="_blank"
         >
             <Download className="h-4 w-4" />
-            Exportar CSV
+            Exportar a Excel
         </Link>
       </div>
 
