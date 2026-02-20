@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { createCampaign, toggleCampaignStatus } from '@/app/actions/admin'
 import { Megaphone, Link as LinkIcon, ExternalLink } from 'lucide-react'
+import { GenerateReportButton } from '@/components/reports/GenerateReportButton';
 import Link from 'next/link'
 
 export default async function CampaignsPage() {
@@ -75,6 +76,7 @@ export default async function CampaignsPage() {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Token / Link</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Participantes</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
@@ -111,6 +113,13 @@ export default async function CampaignsPage() {
                     </form>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-gray-500">{campana._count.participantes}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                    <GenerateReportButton
+                        campanaId={campana.id}
+                        campanaName={campana.name}
+                        empresaName={campana.empresa.name}
+                    />
+                </td>
               </tr>
             )})}
              {campaigns.length === 0 && (
