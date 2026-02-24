@@ -45,6 +45,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
   const [formType, setFormType] = useState<'A' | 'B'>('B');
   const [errors, setErrors] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
 
   // Filter states for conditional sections
   const [filterClientes, setFilterClientes] = useState<string | null>(null);
@@ -98,7 +99,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
       // Si respondió NO, no valida preguntas internas
       if (filterVal === 'no') return [];
     }
-    
+
     // Validar preguntas internas (solo si no hay filtro o si filtro es 'si')
     const errs: string[] = [];
     for (const q of section.preguntas) {
@@ -120,10 +121,40 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
     return errs;
   };
 
-  const handleConsentNext = () => {
+  const handleConsentNext = async () => {
     if (consentName.trim() && consentDoc.trim() && consentAccepted) {
-      setPhase('ficha');
+      setIsVerifying(true);
       setErrors([]);
+      try {
+        const response = await fetch('/api/survey/verify-cedula', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            campaignId,
+            cedula: consentDoc,
+          }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Error al verificar la cédula');
+        }
+
+        const data = await response.json();
+
+        if (data.hasCompleted) {
+          setErrors(['Ya has completado la encuesta para esta campaña.']);
+        } else {
+          setPhase('ficha');
+        }
+      } catch (error: any) {
+        console.error('Error verifying cedula:', error);
+        setErrors([error.message || 'Error al verificar la cédula. Por favor, intenta de nuevo.']);
+      } finally {
+        setIsVerifying(false);
+      }
     }
   };
 
@@ -299,6 +330,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
     formType,
     errors,
     isSubmitting,
+    isVerifying,
     filterClientes,
     filterJefatura,
     progressSteps,

@@ -37,6 +37,7 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
     formType,
     errors,
     isSubmitting,
+    isVerifying,
     filterClientes,
     progressSteps,
     getCurrentSections,
@@ -94,6 +95,8 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
             onDocChange={setConsentDoc}
             onAccept={setConsentAccepted}
             onNext={handleConsentNext}
+            errors={errors}
+            isVerifying={isVerifying}
           />
         )}
 

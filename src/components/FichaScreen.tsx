@@ -159,6 +159,61 @@
                         </label>
                       ))}
                     </div>
+                  ) : q.tipo === 'years' ? (
+                    <div className="space-y-3">
+                      <label
+                        className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
+                          fichaAnswers[`ficha_${q.id}`] === 'Menos de 1 año'
+                            ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 ring-1 ring-emerald-500'
+                            : 'border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700/50'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name={`ficha_${q.id}_type`}
+                          checked={fichaAnswers[`ficha_${q.id}`] === 'Menos de 1 año'}
+                          onChange={() => onAnswer(`ficha_${q.id}`, 'Menos de 1 año')}
+                          className="w-4 h-4 text-emerald-600 focus:ring-emerald-500"
+                        />
+                        <span className="text-sm text-slate-700 dark:text-slate-200">Si lleva menos de un año marque esta opción</span>
+                      </label>
+
+                      <label
+                        className={`flex flex-col gap-2 p-3 rounded-lg border cursor-pointer transition-all ${
+                          fichaAnswers[`ficha_${q.id}`] !== 'Menos de 1 año' && fichaAnswers[`ficha_${q.id}`] !== undefined && fichaAnswers[`ficha_${q.id}`] !== ''
+                            ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 ring-1 ring-emerald-500'
+                            : 'border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700/50'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="radio"
+                            name={`ficha_${q.id}_type`}
+                            checked={fichaAnswers[`ficha_${q.id}`] !== 'Menos de 1 año' && fichaAnswers[`ficha_${q.id}`] !== undefined && fichaAnswers[`ficha_${q.id}`] !== ''}
+                            onChange={() => {
+                              // Solo ponemos un string numérico inicial si venían de 'Menos de 1 año'
+                              if (fichaAnswers[`ficha_${q.id}`] === 'Menos de 1 año' || !fichaAnswers[`ficha_${q.id}`]) {
+                                onAnswer(`ficha_${q.id}`, '1');
+                              }
+                            }}
+                            className="w-4 h-4 text-emerald-600 focus:ring-emerald-500"
+                          />
+                          <span className="text-sm text-slate-700 dark:text-slate-200">Si lleva más de un año, anote cuántos años:</span>
+                        </div>
+                        {fichaAnswers[`ficha_${q.id}`] !== 'Menos de 1 año' && fichaAnswers[`ficha_${q.id}`] !== undefined && fichaAnswers[`ficha_${q.id}`] !== '' && (
+                          <div className="ml-7">
+                            <input
+                              type="number"
+                              min="1"
+                              value={fichaAnswers[`ficha_${q.id}`]}
+                              onChange={(e) => onAnswer(`ficha_${q.id}`, e.target.value)}
+                              className="w-full sm:w-1/2 px-3 py-2 border rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all text-sm text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-700 placeholder-slate-400 dark:placeholder-slate-500 border-green-400 dark:border-green-600"
+                              placeholder="Ej. 2"
+                            />
+                          </div>
+                        )}
+                      </label>
+                    </div>
                   ) : null}
                 </div>
               );

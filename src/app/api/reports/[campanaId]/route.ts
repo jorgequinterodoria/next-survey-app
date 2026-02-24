@@ -64,7 +64,7 @@ export async function POST(
     const date = new Date().toISOString().split('T')[0];
     const filename = `Informe_Riesgo_Psicosocial_${safeEmpresaName}_${date}.docx`;
 
-    return new NextResponse(docBuffer, {
+    return new NextResponse(docBuffer as unknown as BodyInit, {
       status: 200,
       headers: {
         'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',

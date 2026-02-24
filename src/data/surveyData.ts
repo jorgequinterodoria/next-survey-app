@@ -14,7 +14,7 @@ export interface SurveySection {
 export interface FichaQuestion {
   id: number;
   texto: string;
-  tipo: 'text' | 'select' | 'number' | 'radio';
+  tipo: 'text' | 'select' | 'number' | 'radio' | 'years';
   opciones?: string[];
   subfields?: { label: string; key: string }[];
 }
@@ -608,7 +608,7 @@ export const fichaQuestions: FichaQuestion[] = [
       { label: 'Departamento', key: 'departamento_trabajo' },
     ],
   },
-  { id: 11, texto: '¿Hace cuántos años que trabaja en esta empresa?', tipo: 'text' },
+  { id: 11, texto: '¿Hace cuántos años que trabaja en esta empresa?', tipo: 'years' },
   { id: 12, texto: '¿Cuál es el nombre del cargo que ocupa en la empresa?', tipo: 'text' },
   {
     id: 13,
@@ -621,7 +621,7 @@ export const fichaQuestions: FichaQuestion[] = [
       'Operario, operador, ayudante, servicios generales',
     ],
   },
-  { id: 14, texto: '¿Hace cuántos años que desempeña el cargo u oficio actual en esta empresa?', tipo: 'text' },
+  { id: 14, texto: '¿Hace cuántos años que desempeña el cargo u oficio actual en esta empresa?', tipo: 'years' },
   { id: 15, texto: 'Nombre del departamento, área o sección de la empresa en el que trabaja', tipo: 'text' },
   {
     id: 16,
