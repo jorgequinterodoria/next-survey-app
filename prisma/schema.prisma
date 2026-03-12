@@ -57,6 +57,7 @@ model SurveyResponse {
   // Data fields
   consentName      String
   consentDoc       String
+  consentSignature String
   consentAccepted  Boolean
   formType         String
   fichaData        Json

@@ -18,6 +18,7 @@ export async function POST(request: Request) {
             email,
             consentName,
             consentDoc,
+            consentSignature,
             consentAccepted,
             formType,
             fichaAnswers,
@@ -33,6 +34,7 @@ export async function POST(request: Request) {
         if (!consentAccepted) missingErrors.push('Debe aceptar el consentimiento informado.')
         if (!consentName?.trim()) missingErrors.push('Falta el nombre en el consentimiento.')
         if (!consentDoc?.trim()) missingErrors.push('Falta el documento en el consentimiento.')
+        if (!consentSignature?.trim()) missingErrors.push('Falta la firma en el consentimiento.')
 
         // 2. Validate Ficha
         if (fichaAnswers) {
@@ -158,6 +160,7 @@ export async function POST(request: Request) {
                 participanteId: participant.id,
                 consentName,
                 consentDoc,
+                consentSignature,
                 consentAccepted,
                 formType,
                 fichaData: fichaAnswers,

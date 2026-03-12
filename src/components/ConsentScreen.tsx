@@ -1,14 +1,18 @@
 'use client';
 
-import { FileText } from 'lucide-react';
+import { FileText, Eraser } from 'lucide-react';
 import { FieldStatus, SectionProgress } from './FieldStatus';
+import { useRef } from 'react';
+import SignatureCanvas from 'react-signature-canvas';
 
 interface ConsentScreenProps {
   consentName: string;
   consentDoc: string;
+  consentSignature: string;
   consentAccepted: boolean;
   onNameChange: (v: string) => void;
   onDocChange: (v: string) => void;
+  onSignatureChange: (v: string) => void;
   onAccept: (v: boolean) => void;
   onNext: () => void;
   errors?: string[];
@@ -18,9 +22,11 @@ interface ConsentScreenProps {
 export function ConsentScreen({
   consentName,
   consentDoc,
+  consentSignature,
   consentAccepted,
   onNameChange,
   onDocChange,
+  onSignatureChange,
   onAccept,
   onNext,
   errors = [],
@@ -28,10 +34,25 @@ export function ConsentScreen({
 }: ConsentScreenProps) {
   const isNameValid = consentName.trim() !== '';
   const isDocValid = consentDoc.trim() !== '';
+  const isSignatureValid = consentSignature.trim() !== '';
   const isCheckboxValid = consentAccepted;
-  const validFieldsCount = [isNameValid, isDocValid, isCheckboxValid].filter(Boolean).length;
-  const totalFields = 3;
+  const validFieldsCount = [isNameValid, isDocValid, isSignatureValid, isCheckboxValid].filter(Boolean).length;
+  const totalFields = 4;
   const canProceed = validFieldsCount === totalFields;
+  const sigCanvas = useRef<SignatureCanvas>(null);
+
+  const handleClearSignature = () => {
+    sigCanvas.current?.clear();
+    onSignatureChange('');
+  };
+
+  const handleSignatureEnd = () => {
+    if (sigCanvas.current?.isEmpty()) {
+       onSignatureChange('');
+    } else {
+       onSignatureChange(sigCanvas.current?.getTrimmedCanvas().toDataURL('image/png') || '');
+    }
+  };
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -90,6 +111,39 @@ export function ConsentScreen({
                 placeholder="Ingrese su número de documento"
               />
             </div>
+          </div>
+
+          <div className="space-y-3">
+            <div className="flex items-center justify-between mb-1">
+              <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200">Firma del participante</label>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleClearSignature}
+                  className="text-xs flex items-center gap-1 text-slate-500 hover:text-red-600 dark:text-slate-400 dark:hover:text-red-400 transition-colors"
+                >
+                  <Eraser className="w-3 h-3" /> Borrar firma
+                </button>
+                <FieldStatus isValid={isSignatureValid} showWhenInvalid={true} />
+              </div>
+            </div>
+            <div className={`border rounded-xl overflow-hidden bg-white dark:bg-slate-700 transition-all ${
+              isSignatureValid 
+                ? 'border-green-400 dark:border-green-600 ring-2 ring-green-500/20' 
+                : 'border-slate-300 dark:border-slate-600'
+            }`}>
+              <SignatureCanvas
+                ref={sigCanvas}
+                onEnd={handleSignatureEnd}
+                penColor="black"
+                canvasProps={{
+                  className: 'w-full h-40 cursor-crosshair sm:h-48'
+                }}
+              />
+            </div>
+            <p className="text-xs text-slate-500 dark:text-slate-400 italic">
+              Use el mouse o su dedo para firmar en el recuadro blanco superior.
+            </p>
           </div>
 
           <div className="bg-slate-50 dark:bg-slate-700/50 rounded-xl p-4 space-y-3">

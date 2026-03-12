@@ -28,7 +28,7 @@ export default async function ResultsPage() {
             target="_blank"
         >
             <Download className="h-4 w-4" />
-            Exportar a Excel
+            Exportar a Excel General
         </Link>
       </div>
 
@@ -51,11 +51,21 @@ export default async function ResultsPage() {
                 <td className="px-6 py-4 whitespace-nowrap text-gray-500">{p.campana.name}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                     {p.surveyResponse ? (
-                        <Link href={`/admin/results/${p.surveyResponse.id}`} className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer">
-                            Completada - Ver Informe
-                        </Link>
+                        <div className="flex gap-2 items-center">
+                          <Link href={`/admin/results/${p.surveyResponse.id}`} className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 hover:bg-blue-200 cursor-pointer">
+                              Ver Informe Web
+                          </Link>
+                          <a 
+                            href={`/api/admin/participant/${p.id}/download-pdf`} 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer"
+                          >
+                            <Download className="h-3 w-3 mr-1" /> PDF Físico
+                          </a>
+                        </div>
                     ) : (
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                        <span className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
                             Pendiente
                         </span>
                     )}

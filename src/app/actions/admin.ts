@@ -39,6 +39,7 @@ export async function createCompany(formData: FormData) {
             data: { name, nit },
         })
         revalidatePath('/admin/companies')
+        revalidatePath('/admin/campaigns')
         return { success: true }
     } catch (error) {
         console.error(error)

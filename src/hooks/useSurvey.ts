@@ -36,6 +36,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
   // ... (keep state)
   const [consentName, setConsentName] = useState('');
   const [consentDoc, setConsentDoc] = useState('');
+  const [consentSignature, setConsentSignature] = useState('');
   const [consentAccepted, setConsentAccepted] = useState(false);
   const [fichaAnswers, setFichaAnswers] = useState<Record<string, string>>({});
   const [intralaboralAnswers, setIntralaboralAnswers] = useState<Record<string, string>>({});
@@ -122,7 +123,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
   };
 
   const handleConsentNext = async () => {
-    if (consentName.trim() && consentDoc.trim() && consentAccepted) {
+    if (consentName.trim() && consentDoc.trim() && consentSignature.trim() && consentAccepted) {
       setIsVerifying(true);
       setErrors([]);
       try {
@@ -242,6 +243,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
         cedula: consentDoc, // Assuming consentDoc is the ID
         consentName,
         consentDoc,
+        consentSignature,
         consentAccepted,
         formType,
         fichaAnswers,
@@ -321,6 +323,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
     phase,
     consentName,
     consentDoc,
+    consentSignature,
     consentAccepted,
     fichaAnswers,
     intralaboralAnswers,
@@ -337,6 +340,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
     getCurrentSections,
     setConsentName,
     setConsentDoc,
+    setConsentSignature,
     setConsentAccepted,
     setFichaAnswers,
     setIntralaboralAnswers,

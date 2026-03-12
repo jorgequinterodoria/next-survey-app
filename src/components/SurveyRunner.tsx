@@ -28,6 +28,7 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
     phase,
     consentName,
     consentDoc,
+    consentSignature,
     consentAccepted,
     fichaAnswers,
     intralaboralAnswers,
@@ -43,6 +44,7 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
     getCurrentSections,
     setConsentName,
     setConsentDoc,
+    setConsentSignature,
     setConsentAccepted,
     setFichaAnswers,
     setIntralaboralAnswers,
@@ -90,9 +92,11 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
           <ConsentScreen
             consentName={consentName}
             consentDoc={consentDoc}
+            consentSignature={consentSignature}
             consentAccepted={consentAccepted}
             onNameChange={setConsentName}
             onDocChange={setConsentDoc}
+            onSignatureChange={setConsentSignature}
             onAccept={setConsentAccepted}
             onNext={handleConsentNext}
             errors={errors}
