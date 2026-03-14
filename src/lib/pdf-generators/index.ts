@@ -1,7 +1,7 @@
 import { PDFDocument } from 'pdf-lib';
 import { generateConsentPDF } from './consentGenerator';
 import { generateFichaPDF } from './fichaGenerator';
-import { generateCuestionarioPDF } from './cuestionarioGenerator';
+import { fillSurveyPDF } from './pdfTemplateProcessor';
 
 export async function generateConsolidatedPDF(participantData: any) {
   // 1. Create a fresh empty PDFDocument to act as our final consolidated file
@@ -34,31 +34,28 @@ export async function generateConsolidatedPDF(participantData: any) {
     // 4. Intralaboral (Form Type A or B logic)
     if (participantData.surveyResponse?.intralaboralData) {
       const isFormA = participantData.surveyResponse?.formType === 'A';
-      const formLabel = isFormA ? 'FORMA A' : 'FORMA B';
-      const intraBytes = await generateCuestionarioPDF(
-        `CUESTIONARIO DE FACTORES DE RIESGO PSICOSOCIAL INTRALABORAL (${formLabel})`,
-        participantData.surveyResponse.intralaboralData,
-        isFormA ? 'intralaboral_A' : 'intralaboral_B'
+      const formType = isFormA ? 'intralaboral_A' : 'intralaboral_B';
+      const intraBytes = await fillSurveyPDF(
+        formType,
+        participantData.surveyResponse.intralaboralData
       );
       await appendPdf(intraBytes);
     }
 
     // 5. Extralaboral
     if (participantData.surveyResponse?.extralaboralData) {
-      const extraBytes = await generateCuestionarioPDF(
-        `CUESTIONARIO PARA LA EVALUACIÓN DE RIESGO PSICOSOCIAL EXTRALABORAL`,
-        participantData.surveyResponse.extralaboralData,
-        'extralaboral'
+      const extraBytes = await fillSurveyPDF(
+        'extralaboral',
+        participantData.surveyResponse.extralaboralData
       );
       await appendPdf(extraBytes);
     }
 
     // 6. Estrés
     if (participantData.surveyResponse?.estresData) {
-      const estresBytes = await generateCuestionarioPDF(
-        `CUESTIONARIO PARA LA EVALUACIÓN DEL ESTRÉS TERCERA VERSIÓN`,
-        participantData.surveyResponse.estresData,
-        'estres'
+      const estresBytes = await fillSurveyPDF(
+        'estres',
+        participantData.surveyResponse.estresData
       );
       await appendPdf(estresBytes);
     }

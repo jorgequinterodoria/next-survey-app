@@ -172,6 +172,11 @@ export async function POST(request: Request) {
             }
         })
 
+        // Revalidar las rutas del administrador para que aparezcan los nuevos datos
+        revalidatePath('/admin/results')
+        revalidatePath('/admin/campaigns')
+        revalidatePath('/admin/dashboard')
+
         return NextResponse.json({ success: true })
 
     } catch (error: any) {
