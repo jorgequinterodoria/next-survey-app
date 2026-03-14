@@ -144,6 +144,7 @@ async function processForm(formConfig: any) {
                     if (qMatch) {
                         // Found the question on this page!
                         if (!map[q.id]) map[q.id] = {};
+                        const qEntry = map[q.id] as { [key: string]: Coordinate };
                         
                         // For each option, we need an X coordinate.
                         // If we found headers on this page, use them.
@@ -157,7 +158,7 @@ async function processForm(formConfig: any) {
                                  // Correction: The checkbox is usually aligned with the column header X
                                  // and the question Y.
                                  // We might need to add an offset.
-                                 map[q.id][opt.value] = {
+                                 qEntry[opt.value] = {
                                      page: pageIndex,
                                      x: columnX[opt.value], // + offset
                                      y: qMatch.y // + offset
