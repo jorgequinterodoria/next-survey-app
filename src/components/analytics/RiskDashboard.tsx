@@ -110,27 +110,59 @@ export default function RiskDashboard({ participants }: RiskDashboardProps) {
 
 
   // Helper para procesar riesgos apilados (100%)
-  const processStackedRisk = (prefix: string) => {
+  const processStackedRisk = (section: string) => {
     const dimensionCounts: Record<string, Record<string, number>> = {};
     
     // Inicializar contadores
     participants.forEach(p => {
         if (!p.results) return;
-        Object.entries(p.results).forEach(([key, val]: [string, any]) => {
-            if (key.startsWith(prefix)) {
-                const dimName = val.dimension;
-                if (!dimensionCounts[dimName]) {
-                    dimensionCounts[dimName] = {
-                        'Sin Riesgo': 0, 'Riesgo Bajo': 0, 'Riesgo Medio': 0, 'Riesgo Alto': 0, 'Riesgo Muy Alto': 0, total: 0
-                    };
+        
+        // New Nested Structure
+        if (p.results[section] && p.results[section].domains) {
+            p.results[section].domains.forEach((domain: any) => {
+                if (domain.dimensions) {
+                    domain.dimensions.forEach((dim: any) => {
+                        const dimName = dim.name;
+                        const level = dim.level || 'Sin Riesgo';
+
+                        if (!dimensionCounts[dimName]) {
+                            dimensionCounts[dimName] = {
+                                'Sin Riesgo': 0, 'Riesgo Bajo': 0, 'Riesgo Medio': 0, 'Riesgo Alto': 0, 'Riesgo Muy Alto': 0, total: 0
+                            };
+                        }
+                        if (dimensionCounts[dimName][level] !== undefined) {
+                            dimensionCounts[dimName][level]++;
+                            dimensionCounts[dimName].total++;
+                        }
+                    });
                 }
-                const level = val.level || 'Sin Riesgo';
-                if (dimensionCounts[dimName][level] !== undefined) {
-                    dimensionCounts[dimName][level]++;
-                    dimensionCounts[dimName].total++;
+            });
+        }
+        // Fallback: Old Flat Structure
+        else {
+             Object.entries(p.results).forEach(([key, val]: [string, any]) => {
+                // Map old prefixes to new section names if needed, or just skip if we are sure data is migrated
+                // Old keys: "Intra - ...", "Extra - ...", "Estrés - ..."
+                let prefix = '';
+                if (section === 'intralaboral') prefix = 'Intra -';
+                if (section === 'extralaboral') prefix = 'Extra -';
+                if (section === 'estres') prefix = 'Estrés -';
+
+                if (prefix && key.startsWith(prefix)) {
+                    const dimName = val.dimension;
+                    if (!dimensionCounts[dimName]) {
+                        dimensionCounts[dimName] = {
+                            'Sin Riesgo': 0, 'Riesgo Bajo': 0, 'Riesgo Medio': 0, 'Riesgo Alto': 0, 'Riesgo Muy Alto': 0, total: 0
+                        };
+                    }
+                    const level = val.level || 'Sin Riesgo';
+                    if (dimensionCounts[dimName][level] !== undefined) {
+                        dimensionCounts[dimName][level]++;
+                        dimensionCounts[dimName].total++;
+                    }
                 }
-            }
-        });
+            });
+        }
     });
 
     // Convertir a porcentajes para gráfico apilado
@@ -143,34 +175,55 @@ export default function RiskDashboard({ participants }: RiskDashboardProps) {
     });
   };
 
-  const intralaboralChartData = useMemo(() => processStackedRisk('Intra -'), [participants]);
+  const intralaboralChartData = useMemo(() => processStackedRisk('intralaboral'), [participants]);
 
   // 6. Resumen General de Riesgo (Comparativo Intra vs Extra vs Estres)
   // Aquí agregamos TODOS los niveles de riesgo encontrados en todas las dimensiones de cada dominio
   const generalRiskData = useMemo(() => {
-      const domains = ['Intra', 'Extra', 'Estrés'];
+      const sections = ['intralaboral', 'extralaboral', 'estres'];
       const data: any[] = [];
 
-      domains.forEach(domain => {
+      sections.forEach(section => {
           const counts = { 'Sin Riesgo': 0, 'Riesgo Bajo': 0, 'Riesgo Medio': 0, 'Riesgo Alto': 0, 'Riesgo Muy Alto': 0, total: 0 };
           
           participants.forEach(p => {
               if (!p.results) return;
-              Object.entries(p.results).forEach(([key, val]: [string, any]) => {
-                  // key ej: "Intra - Liderazgo"
-                  if (key.startsWith(domain)) {
-                      const level = val.level || 'Sin Riesgo';
-                      if (counts[level] !== undefined) {
-                          counts[level]++;
-                          counts.total++;
+
+              // New Nested Structure
+              if (p.results[section] && p.results[section].domains) {
+                  p.results[section].domains.forEach((domain: any) => {
+                      if (domain.dimensions) {
+                          domain.dimensions.forEach((dim: any) => {
+                              const level = dim.level || 'Sin Riesgo';
+                              if (counts[level] !== undefined) {
+                                  counts[level]++;
+                                  counts.total++;
+                              }
+                          });
                       }
-                  }
-              });
+                  });
+              } 
+              // Fallback: Old Flat Structure
+              else {
+                 let prefix = '';
+                 if (section === 'intralaboral') prefix = 'Intra';
+                 if (section === 'extralaboral') prefix = 'Extra';
+                 if (section === 'estres') prefix = 'Estrés';
+
+                 Object.entries(p.results).forEach(([key, val]: [string, any]) => {
+                    if (key.startsWith(prefix)) {
+                        const level = val.level || 'Sin Riesgo';
+                        if (counts[level] !== undefined) {
+                            counts[level]++;
+                            counts.total++;
+                        }
+                    }
+                 });
+              }
           });
 
-          // Normalizar a porcentaje del total de DATOS (no de personas, sino de "evaluaciones de dimensión")
-          // Esto da una "densidad de riesgo" general
-          const row: any = { name: domain === 'Intra' ? 'Intralaboral' : (domain === 'Extra' ? 'Extralaboral' : 'Estrés') };
+          // Normalizar a porcentaje
+          const row: any = { name: section === 'intralaboral' ? 'Intralaboral' : (section === 'extralaboral' ? 'Extralaboral' : 'Estrés') };
           RISK_ORDER.forEach(risk => {
                row[risk] = counts.total > 0 ? parseFloat(((counts[risk] / counts.total) * 100).toFixed(1)) : 0;
           });
