@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
-import { processSurveyAnswers } from '@/lib/survey-calculator'
+import { processSurvey, flattenResults } from '@/lib/psychometrics'
 import {
     fichaQuestions,
     formaASections,
@@ -118,13 +118,13 @@ export async function POST(request: Request) {
         // --- VALIDATION END ---
 
         // 1. Calculate Results
-        const results = processSurveyAnswers(
-            formType,
-            fichaAnswers,
-            intralaboralAnswers,
-            extralaboralAnswers,
-            estresAnswers
+        const detailedResults = processSurvey(
+            formType as 'A' | 'B',
+            intralaboralAnswers || {},
+            extralaboralAnswers || {},
+            estresAnswers || {}
         )
+        const results = flattenResults(detailedResults)
 
         // 2. Check if participant exists for this campaign
         let participant = await prisma.participante.findUnique({

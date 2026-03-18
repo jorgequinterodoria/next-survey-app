@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import { Users, Download } from 'lucide-react'
 import Link from 'next/link'
+import RiskDashboard from '@/components/analytics/RiskDashboard'
 
 export default async function ResultsPage() {
   const participants = await prisma.participante.findMany({
@@ -10,10 +11,24 @@ export default async function ResultsPage() {
         include: { empresa: true }
       },
       surveyResponse: {
-        select: { id: true, createdAt: true }
+        select: { 
+            id: true, 
+            createdAt: true,
+            fichaData: true,
+            results: true
+        }
       }
     }
   })
+
+  // Filter participants who have a survey response for the dashboard
+  const participantsWithData = participants
+    .filter(p => p.surveyResponse)
+    .map(p => ({
+        id: p.id,
+        fichaData: p.surveyResponse!.fichaData,
+        results: p.surveyResponse!.results
+    }));
 
   return (
     <div className="space-y-8">
@@ -22,15 +37,10 @@ export default async function ResultsPage() {
           <Users className="h-6 w-6" />
           Resultados y Participantes
         </h1>
-        <Link 
-            href="/api/admin/export" 
-            className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors text-sm font-medium flex items-center gap-2"
-            target="_blank"
-        >
-            <Download className="h-4 w-4" />
-            Exportar a Excel General
-        </Link>
       </div>
+
+      {/* Dashboard de Análisis */}
+      <RiskDashboard participants={participantsWithData} />
 
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">

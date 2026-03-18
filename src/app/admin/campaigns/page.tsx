@@ -114,11 +114,21 @@ export default async function CampaignsPage() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-gray-500">{campana._count.participantes}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                    <GenerateReportButton
-                        campanaId={campana.id}
-                        campanaName={campana.name}
-                        empresaName={campana.empresa.name}
-                    />
+                    <div className="flex items-center gap-2">
+                        <GenerateReportButton
+                            campanaId={campana.id}
+                            campanaName={campana.name}
+                            empresaName={campana.empresa.name}
+                        />
+                        <Link 
+                            href={`/api/admin/export?campanaId=${campana.id}`} 
+                            className="bg-green-600 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-green-700 transition-colors inline-flex items-center"
+                            target="_blank"
+                            title="Exportar a Excel"
+                        >
+                            Excel
+                        </Link>
+                    </div>
                 </td>
               </tr>
             )})}

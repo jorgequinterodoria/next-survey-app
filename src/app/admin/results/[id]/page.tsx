@@ -1,29 +1,37 @@
 import { prisma } from '@/lib/prisma'
-import { getRiskColor, RiskLevel } from '@/lib/risk-levels'
+import { getRiskColor } from '@/lib/risk-levels'
 import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
-import { DimensionResult } from '@/lib/survey-calculator'
 import PrintButton from './PrintButton'
+import { flattenResults } from '@/lib/psychometrics'
 
 // Helper para renderizar una sección de resultados
 function ResultSection({ title, results }: { title: string, results: Record<string, any> }) {
   if (!results || Object.keys(results).length === 0) return null
 
+  // Filtramos para mostrar solo dimensiones o totales que no sean el "Dominio" general para no duplicar info en la misma grilla,
+  // O podemos mostrar todo ordenado.
+  // En este diseño de cuadritos, mostramos todo lo que se nos pase.
+  
   return (
     <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
       <h3 className="text-lg font-semibold mb-4 border-b pb-2 text-gray-900">{title}</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {Object.values(results).map((res: any) => (
-          <div key={res.dimension} className="border rounded-lg p-4 flex flex-col justify-between">
+        {Object.entries(results).map(([key, res]: [string, any]) => {
+          // Destacar los totales o dominios
+          const isTotal = key.includes('Total') || key.includes('Dominio');
+          
+          return (
+          <div key={key} className={`border rounded-lg p-4 flex flex-col justify-between ${isTotal ? 'bg-blue-50 border-blue-200' : ''}`}>
             <div>
-                <h4 className="text-sm font-medium text-gray-700 mb-1">{res.dimension}</h4>
+                <h4 className={`text-sm mb-1 ${isTotal ? 'font-bold text-blue-900' : 'font-medium text-gray-700'}`}>{res.dimension}</h4>
                 <div className="text-2xl font-bold text-gray-900 mb-2">{res.score} <span className="text-xs text-gray-400 font-normal">/ 100</span></div>
             </div>
             <div className={`text-xs font-semibold px-2 py-1 rounded-full w-fit ${getRiskColor(res.level)}`}>
               {res.level}
             </div>
           </div>
-        ))}
+        )})}
       </div>
     </div>
   )
@@ -49,19 +57,21 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
     return <div className="p-8">Informe no encontrado</div>
   }
 
-  // Parsear resultados guardados
-  const results = (response.results as unknown as Record<string, DimensionResult>) || {}
+  // Los resultados ahora están en formato detallado en la BD (response.results)
+  // Usamos flattenResults para obtener el mismo formato plano que usaba esta vista
+  const detailedResults = response.results as any;
+  const flatResults = detailedResults ? flattenResults(detailedResults) : {};
   
   // Agrupar por dominio (Intra, Extra, Estrés)
-  const intraResults = Object.entries(results)
+  const intraResults = Object.entries(flatResults)
     .filter(([key]) => key.startsWith('Intra'))
     .reduce((obj, [key, val]) => ({ ...obj, [key]: val }), {})
 
-  const extraResults = Object.entries(results)
+  const extraResults = Object.entries(flatResults)
     .filter(([key]) => key.startsWith('Extra'))
     .reduce((obj, [key, val]) => ({ ...obj, [key]: val }), {})
 
-  const stressResults = Object.entries(results)
+  const stressResults = Object.entries(flatResults)
     .filter(([key]) => key.startsWith('Estrés'))
     .reduce((obj, [key, val]) => ({ ...obj, [key]: val }), {})
 
@@ -113,7 +123,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
       </div>
 
       {/* Sections */}
-      {Object.keys(results).length > 0 ? (
+      {Object.keys(flatResults).length > 0 ? (
         <>
             <ResultSection title="Factores Intralaborales" results={intraResults} />
             <ResultSection title="Factores Extralaborales" results={extraResults} />

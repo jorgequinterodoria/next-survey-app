@@ -20,6 +20,7 @@ export async function generateConsolidatedPDF(participantData: any) {
       empresaName: participantData.campana?.empresa?.name || '',
       consentName: participantData.surveyResponse?.consentName || '',
       consentDoc: participantData.surveyResponse?.consentDoc || '',
+      consentCity: (participantData.surveyResponse?.fichaData as any)?.ciudad_trabajo || participantData.campana?.empresa?.city || 'Bogotá',
       consentSignatureBase64: participantData.surveyResponse?.consentSignature || '',
       date: participantData.surveyResponse?.createdAt || new Date(),
     });
