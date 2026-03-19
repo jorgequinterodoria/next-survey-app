@@ -3,6 +3,8 @@ import { Users, Download } from 'lucide-react'
 import Link from 'next/link'
 import RiskDashboard from '@/components/analytics/RiskDashboard'
 
+export const dynamic = 'force-dynamic';
+
 export default async function ResultsPage() {
   const participants = await prisma.participante.findMany({
     orderBy: { createdAt: 'desc' },

@@ -40,10 +40,10 @@ function calculateScore(
     items.forEach(id => {
         let val: string | undefined;
         
-        if (answers[id]) val = answers[id];
+        if (answers[id]) val = String(answers[id]);
         if (!val) {
             const key = Object.keys(answers).find(k => k.endsWith(`_${id}`) || k === `${id}`);
-            if (key) val = answers[key];
+            if (key && answers[key]) val = String(answers[key]);
         }
 
         if (val) {

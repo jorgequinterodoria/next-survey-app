@@ -25,7 +25,7 @@ interface RiskDashboardProps {
   participants: ParticipantData[];
 }
 
-const RISK_COLORS = {
+const RISK_COLORS: Record<string, string> = {
   'Sin Riesgo': '#22c55e', // Green-500
   'Riesgo Bajo': '#eab308', // Yellow-500
   'Riesgo Medio': '#f97316', // Orange-500
@@ -184,7 +184,7 @@ export default function RiskDashboard({ participants }: RiskDashboardProps) {
       const data: any[] = [];
 
       sections.forEach(section => {
-          const counts = { 'Sin Riesgo': 0, 'Riesgo Bajo': 0, 'Riesgo Medio': 0, 'Riesgo Alto': 0, 'Riesgo Muy Alto': 0, total: 0 };
+          const counts: Record<string, number> = { 'Sin Riesgo': 0, 'Riesgo Bajo': 0, 'Riesgo Medio': 0, 'Riesgo Alto': 0, 'Riesgo Muy Alto': 0, total: 0 };
           
           participants.forEach(p => {
               if (!p.results) return;

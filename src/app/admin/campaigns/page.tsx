@@ -4,6 +4,8 @@ import { Megaphone, Link as LinkIcon, ExternalLink } from 'lucide-react'
 import { GenerateReportButton } from '@/components/reports/GenerateReportButton';
 import Link from 'next/link'
 
+export const dynamic = 'force-dynamic';
+
 export default async function CampaignsPage() {
   const [campaigns, companies] = await Promise.all([
     prisma.campana.findMany({

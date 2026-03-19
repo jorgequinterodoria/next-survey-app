@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma'
 import { Users, Building2, Megaphone, ClipboardCheck } from 'lucide-react'
 
+export const dynamic = 'force-dynamic';
+
 async function getStats() {
   const [companies, campaigns, participants, responses] = await Promise.all([
     prisma.empresa.count(),
