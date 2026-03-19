@@ -12,7 +12,7 @@ export async function generateConsentPDF(data: {
   date: Date;
 }): Promise<Uint8Array> {
   const dir = path.join(process.cwd(), 'src', 'templates');
-  const file = '1. CONSENTIMIENTO INFORMADO PARA LA EVALUACIÓN DE RIESGOS PSICOSOCIALES.pdf';
+  const file = '1. CONSENTIMIENTO INFORMADO PARA LA EVALUACION DE RIESGOS PSICOSOCIALES.pdf';
   
   const filePath = path.join(dir, file);
   console.log(`Generating Consent PDF from: ${filePath}`);
