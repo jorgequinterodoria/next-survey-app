@@ -39,6 +39,9 @@ export async function GET(
 
   } catch (error) {
     console.error('Error generating consolidated PDF:', error);
-    return NextResponse.json({ error: 'Excepción interna generando PDF' }, { status: 500 });
+    if (error instanceof Error) {
+        console.error("Details:", error.message, error.stack);
+    }
+    return NextResponse.json({ error: 'Excepción interna generando PDF', details: error instanceof Error ? error.message : String(error) }, { status: 500 });
   }
 }

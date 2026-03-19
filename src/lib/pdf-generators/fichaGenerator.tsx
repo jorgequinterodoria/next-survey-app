@@ -6,7 +6,8 @@ import { fichaQuestions } from '../../data/surveyData';
 export async function generateFichaPDF(participantData: any): Promise<Uint8Array> {
   const fichaData = participantData.surveyResponse?.fichaData || {};
   
-  const templatePath = path.join(process.cwd(), 'src/templates', '4. Ficha-datos-personales.pdf');
+  const templatePath = path.join(process.cwd(), 'src', 'templates', '4. Ficha-datos-personales.pdf');
+  console.log(`Generating Ficha PDF from: ${templatePath}`);
   const pdfBytes = await fs.readFile(templatePath);
   const pdfDoc = await PDFDocument.load(pdfBytes);
   const pages = pdfDoc.getPages();

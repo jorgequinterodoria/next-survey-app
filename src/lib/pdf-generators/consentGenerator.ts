@@ -11,10 +11,13 @@ export async function generateConsentPDF(data: {
   consentSignatureBase64: string;
   date: Date;
 }): Promise<Uint8Array> {
-  const dir = path.join(process.cwd(), 'src/templates');
+  const dir = path.join(process.cwd(), 'src', 'templates');
   const file = '1. CONSENTIMIENTO INFORMADO PARA LA EVALUACIÓN DE RIESGOS PSICOSOCIALES.pdf';
   
-  const pdfBytes = await fs.readFile(path.join(dir, file));
+  const filePath = path.join(dir, file);
+  console.log(`Generating Consent PDF from: ${filePath}`);
+  
+  const pdfBytes = await fs.readFile(filePath);
   const pdfDoc = await PDFDocument.load(pdfBytes);
   const pages = pdfDoc.getPages();
   const firstPage = pages[0]; 

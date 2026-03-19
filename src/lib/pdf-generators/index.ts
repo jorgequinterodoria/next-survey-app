@@ -61,7 +61,12 @@ export async function generateConsolidatedPDF(participantData: any) {
       await appendPdf(estresBytes);
     }
   } catch(e) {
-    console.error("Error assembling consolidated PDF components:", e);
+    console.error("Error assembling consolidated PDF components:");
+    console.error(e);
+    if (e instanceof Error) {
+        console.error("Message:", e.message);
+        console.error("Stack:", e.stack);
+    }
     throw e;
   }
 

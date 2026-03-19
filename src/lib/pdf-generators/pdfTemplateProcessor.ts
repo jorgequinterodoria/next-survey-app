@@ -45,7 +45,10 @@ export async function fillSurveyPDF(
             break;
     }
 
-    const templatePath = path.join(process.cwd(), 'src/templates', filename);
+    const templateFile = filename;
+    const templatePath = path.join(process.cwd(), 'src', 'templates', templateFile);
+    console.log(`Generating Survey PDF from: ${templatePath}`);
+    
     const pdfBytes = await fs.readFile(templatePath);
     const pdfDoc = await PDFDocument.load(pdfBytes);
     const pages = pdfDoc.getPages();
