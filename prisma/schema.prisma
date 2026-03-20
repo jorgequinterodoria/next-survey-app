@@ -55,6 +55,7 @@ model SurveyResponse {
   participante     Participante @relation(fields: [participanteId], references: [id])
   
   // Data fields
+  videoWatched     Boolean      @default(false)
   consentName      String
   consentDoc       String
   consentSignature String

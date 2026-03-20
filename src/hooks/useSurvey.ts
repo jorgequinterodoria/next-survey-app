@@ -13,6 +13,7 @@ import {
 } from '@/data/surveyData';
 
 type Phase =
+  | 'video'
   | 'consent'
   | 'ficha'
   | 'intralaboral'
@@ -32,7 +33,8 @@ function determineFormType(fichaAnswers: Record<string, string>): 'A' | 'B' {
 }
 
 export function useSurvey({ campaignId }: { campaignId: string }) {
-  const [phase, setPhase] = useState<Phase>('consent');
+  const [phase, setPhase] = useState<Phase>('video');
+  const [videoWatched, setVideoWatched] = useState(false);
   // ... (keep state)
   const [consentName, setConsentName] = useState('');
   const [consentDoc, setConsentDoc] = useState('');
@@ -120,6 +122,11 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
       }
     }
     return errs;
+  };
+
+  const handleVideoNext = () => {
+    setVideoWatched(true);
+    setPhase('consent');
   };
 
   const handleConsentNext = async () => {
@@ -241,6 +248,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
       const allData = {
         campaignId,
         cedula: consentDoc, // Assuming consentDoc is the ID
+        videoWatched,
         consentName,
         consentDoc,
         consentSignature,
@@ -321,6 +329,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
 
   return {
     phase,
+    videoWatched,
     consentName,
     consentDoc,
     consentSignature,
@@ -356,5 +365,6 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
     goBackFromEstres,
     getFilterValueForSection,
     getFilterSetterForSection,
+    handleVideoNext,
   };
 }

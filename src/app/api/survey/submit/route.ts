@@ -25,7 +25,8 @@ export async function POST(request: Request) {
             fichaAnswers,
             intralaboralAnswers,
             extralaboralAnswers,
-            estresAnswers
+            estresAnswers,
+            videoWatched
         } = body
 
         // --- VALIDATION START ---
@@ -159,6 +160,7 @@ export async function POST(request: Request) {
         await prisma.surveyResponse.create({
             data: {
                 participanteId: participant.id,
+                videoWatched: videoWatched || false,
                 consentName,
                 consentDoc,
                 consentSignature,

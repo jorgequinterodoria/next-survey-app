@@ -2,6 +2,7 @@
 
 import { useSurvey } from '@/hooks/useSurvey';
 import { ConsentScreen } from '@/components/ConsentScreen'
+import { VideoInstructionScreen } from '@/components/VideoInstructionScreen'
 import { FichaScreen } from '@/components/FichaScreen'
 import { LikertSection } from '@/components/LikertSection'
 import { SuccessScreen } from '@/components/SuccessScreen'
@@ -58,6 +59,7 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
     goBackFromEstres,
     getFilterValueForSection,
     getFilterSetterForSection,
+    handleVideoNext,
   } = useSurvey({ campaignId });
 
   return (
@@ -77,7 +79,7 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
             </p>
           </div>
           <ThemeToggle />
-          {phase !== 'consent' && phase !== 'success' && (
+          {phase !== 'consent' && phase !== 'success' && phase !== 'video' && (
             <span className="text-[10px] bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 font-bold px-2 py-1 rounded-full">
               Forma {formType}
             </span>
@@ -86,7 +88,11 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
       </header>
 
       <main className="px-4 py-6 pb-24">
-        {phase !== 'success' && <ProgressIndicator steps={progressSteps} />}
+        {phase !== 'success' && phase !== 'video' && <ProgressIndicator steps={progressSteps} />}
+
+        {phase === 'video' && (
+          <VideoInstructionScreen onAccept={handleVideoNext} />
+        )}
 
         {phase === 'consent' && (
           <ConsentScreen
