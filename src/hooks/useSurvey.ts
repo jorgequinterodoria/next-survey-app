@@ -13,6 +13,7 @@ import {
 } from '@/data/surveyData';
 
 type Phase =
+  | 'intro'
   | 'video'
   | 'consent'
   | 'ficha'
@@ -33,7 +34,7 @@ function determineFormType(fichaAnswers: Record<string, string>): 'A' | 'B' {
 }
 
 export function useSurvey({ campaignId }: { campaignId: string }) {
-  const [phase, setPhase] = useState<Phase>('video');
+  const [phase, setPhase] = useState<Phase>('intro');
   const [videoWatched, setVideoWatched] = useState(false);
   // ... (keep state)
   const [consentName, setConsentName] = useState('');
@@ -122,6 +123,10 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
       }
     }
     return errs;
+  };
+
+  const handleIntroNext = () => {
+    setPhase('video');
   };
 
   const handleVideoNext = () => {
@@ -365,6 +370,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
     goBackFromEstres,
     getFilterValueForSection,
     getFilterSetterForSection,
+    handleIntroNext,
     handleVideoNext,
   };
 }
