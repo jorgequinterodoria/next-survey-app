@@ -1,6 +1,6 @@
 'use client';
 
-import { FileText, Eraser } from 'lucide-react';
+import { FileText, Eraser, AlertCircle } from 'lucide-react';
 import { FieldStatus, SectionProgress } from './FieldStatus';
 import { useRef } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
@@ -82,6 +82,10 @@ export function ConsentScreen({
                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200">Nombre completo</label>
                 <FieldStatus isValid={isNameValid} showWhenInvalid={true} />
               </div>
+              <div className="flex items-start gap-1.5 text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 p-2 rounded-md mb-2">
+                <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                <p>Escriba sus nombres y apellidos tal cual aparecen en su documento de identidad.</p>
+              </div>
               <input
                 type="text"
                 value={consentName}
@@ -99,6 +103,10 @@ export function ConsentScreen({
                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200">Número de documento</label>
                 <FieldStatus isValid={isDocValid} showWhenInvalid={true} />
               </div>
+              <div className="flex items-start gap-1.5 text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 p-2 rounded-md mb-2">
+                <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                <p>Ingrese únicamente números, sin puntos ni espacios.</p>
+              </div>
               <input
                 type="text"
                 value={consentDoc}
@@ -108,7 +116,7 @@ export function ConsentScreen({
                     ? 'border-green-400 dark:border-green-600 bg-green-50/30 dark:bg-green-900/20' 
                     : 'border-slate-300 dark:border-slate-600'
                 }`}
-                placeholder="Ingrese su número de documento"
+                placeholder="Ej: 1020304050"
               />
             </div>
           </div>
@@ -126,6 +134,10 @@ export function ConsentScreen({
                 </button>
                 <FieldStatus isValid={isSignatureValid} showWhenInvalid={true} />
               </div>
+            </div>
+            <div className="flex items-start gap-1.5 text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 p-2 rounded-md mb-2">
+              <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+              <p>Dibuje su firma con el mouse o el dedo (si está en celular/tablet). Intente que sea lo más parecida a su cédula.</p>
             </div>
             <div className={`border rounded-xl overflow-hidden bg-white dark:bg-slate-700 transition-all ${
               isSignatureValid 

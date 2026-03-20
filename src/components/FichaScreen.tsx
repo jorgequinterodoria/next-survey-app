@@ -77,6 +77,13 @@
                     </label>
                     <FieldStatus isValid={isAnswered} showWhenInvalid={true} />
                   </div>
+                  
+                  {q.helpText && (
+                    <div className="flex items-start gap-1.5 text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 p-2 rounded-md mt-1">
+                      <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                      <p>{q.helpText}</p>
+                    </div>
+                  )}
 
                   {q.subfields ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

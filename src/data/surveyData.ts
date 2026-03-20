@@ -20,12 +20,14 @@ export interface FichaQuestion {
   opciones?: string[];
   subfields?: { label: string; key: string }[];
   coords?: { x: number; y: number; page: number }[];
+  helpText?: string;
 }
 
 export interface ConsentimientoField {
   id: string;
   label: string;
   coords?: { x: number; y: number; page: number }[];
+  helpText?: string;
 }
 
 export const LIKERT_OPTIONS_INTRALABORAL = [
@@ -8912,6 +8914,7 @@ export const fichaQuestions: FichaQuestion[] = [
     "id": 3,
     "texto": "Año de nacimiento",
     "tipo": "number",
+    "helpText": "Solo escriba el año (ej. 1990), no la fecha completa.",
     "coords": [
       {
         "x": 95,
@@ -9005,6 +9008,7 @@ export const fichaQuestions: FichaQuestion[] = [
     "id": 5,
     "texto": "¿Cuál es su ocupación o profesión?",
     "tipo": "text",
+    "helpText": "Escriba su profesión u ocupación principal (ej. Contador, Auxiliar de enfermería, Conductor).",
     "coords": [
       {
         "x": 94,
@@ -9017,6 +9021,7 @@ export const fichaQuestions: FichaQuestion[] = [
     "id": 6,
     "texto": "Lugar de residencia actual",
     "tipo": "text",
+    "helpText": "Solo escriba el nombre de la ciudad o municipio. En el siguiente campo escriba el departamento",
     "subfields": [
       {
         "label": "Ciudad/Municipio",
@@ -9140,6 +9145,7 @@ export const fichaQuestions: FichaQuestion[] = [
     "id": 10,
     "texto": "Lugar donde trabaja actualmente",
     "tipo": "text",
+    "helpText": "Solo escriba el nombre de la ciudad o municipio. En el siguiente campo escriba el departamento",
     "subfields": [
       {
         "label": "Ciudad/Municipio",
@@ -9191,6 +9197,7 @@ export const fichaQuestions: FichaQuestion[] = [
     "id": 13,
     "texto": "Seleccione el tipo de cargo que más se parece al que usted desempeña",
     "tipo": "select",
+    "helpText": "Seleccione el cargo que más se aproxime a sus funciones reales (ej. Si es auxiliar de enfermería, elija 'Auxiliar' y no 'Profesional').",
     "opciones": [
       "Jefatura - tiene personal a cargo",
       "Profesional, analista, técnico, tecnólogo",
@@ -9293,6 +9300,7 @@ export const fichaQuestions: FichaQuestion[] = [
     "id": 17,
     "texto": "Horas diarias de trabajo establecidas por la empresa para su cargo",
     "tipo": "number",
+    "helpText": "Escriba solo el número de horas (ej. 8).",
     "coords": [
       {
         "x": 265,
