@@ -1,23 +1,19 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { PlayCircle, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
-
-const ReactPlayer = dynamic(() => import('react-player'), { ssr: false }) as any;
 
 interface IntroVideoScreenProps {
   onAccept: () => void;
 }
 
 export function IntroVideoScreen({ onAccept }: IntroVideoScreenProps) {
-  const [hasWatched, setHasWatched] = useState(false);
   const [accepted, setAccepted] = useState(false);
 
   return (
     <div className="max-w-4xl mx-auto">
       <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
-        <div className="bg-gradient-to-r from-indigo-600 to-purple-700 px-6 py-5">
+        <div className="bg-linear-to-r from-indigo-600 to-purple-700 px-6 py-5">
           <div className="flex items-center gap-3">
             <PlayCircle className="w-7 h-7 text-white" />
             <h2 className="text-lg font-bold text-white leading-tight">
@@ -30,24 +26,24 @@ export function IntroVideoScreen({ onAccept }: IntroVideoScreenProps) {
         </div>
 
         <div className="p-6 space-y-6">
-          <div className="aspect-video bg-black rounded-xl overflow-hidden shadow-inner relative">
-            <ReactPlayer
-              url="https://youtu.be/KoCdntpPdJ4"
-              width="100%"
-              height="100%"
-              controls={true}
-              onEnded={() => setHasWatched(true)}
-            />
+          <div className="w-full aspect-video rounded-xl overflow-hidden shadow-inner relative bg-black">
+            <iframe
+              className="absolute top-0 left-0 w-full h-full"
+              src="https://www.youtube.com/embed/KoCdntpPdJ4?rel=0&modestbranding=1"
+              title="Presentación de la Batería de Riesgo Psicosocial"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
           </div>
 
-          <div className={`transition-all duration-500 ${hasWatched ? 'opacity-100 translate-y-0' : 'opacity-50 translate-y-2 pointer-events-none'}`}>
+          <div className="transition-all duration-500 opacity-100 translate-y-0">
             <label className="flex items-start gap-3 p-4 border rounded-xl cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
               <input
                 type="checkbox"
                 checked={accepted}
                 onChange={(e) => setAccepted(e.target.checked)}
-                disabled={!hasWatched}
-                className="mt-1 w-5 h-5 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500 disabled:opacity-50"
+                className="mt-1 w-5 h-5 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
               />
               <div>
                 <span className="block text-sm font-semibold text-slate-800 dark:text-slate-200">
