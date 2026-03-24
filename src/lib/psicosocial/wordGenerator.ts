@@ -339,7 +339,7 @@ function buildDemographicsSection(data: ReportData, charts: ReportCharts): (Para
     ),
     heading2('10.2. Análisis de los Resultados'),
     para(
-      `El presente diagnóstico se realizó con ${dem.totalParticipants} colaboradores, a quienes se les asignó la forma de evaluación conforme al perfil discriminado por la batería: Forma A: ${dem.formaA} y Forma B: ${dem.formaB}.`
+      `El presente diagnóstico se realizó con ${dem.totalParticipants} colaboradores, a quienes se les asigno la forma de evaluación conforme a la división de las formas, según el perfil discriminado por la misma batería en Formas A y Formas B, así : Forma A: ${dem.formaA} Y Forma B: ${dem.formaB} .`
     ),
     heading3('10.3.1. Descripción Sociodemográfica de la Población'),
     heading3('Género'),
