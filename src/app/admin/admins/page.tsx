@@ -2,6 +2,8 @@ import { prisma } from '@/lib/prisma'
 import { createAdmin } from '@/app/actions/admin'
 import { ShieldCheck } from 'lucide-react'
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminsPage() {
   const admins = await prisma.admin.findMany({
     orderBy: { createdAt: 'desc' },

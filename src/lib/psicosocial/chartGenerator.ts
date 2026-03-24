@@ -14,6 +14,18 @@ const RISK_COLORS: Record<string, string> = {
   'Riesgo muy alto': '#d73027',
 };
 
+// Excel-like colors for demographic bars
+const DEMOGRAPHIC_COLORS = [
+  '#e6399b', // Magenta/Pink
+  '#5cb8e6', // Light Blue
+  '#3d6cb8', // Darker Blue
+  '#9966cc', // Purple
+  '#e65c73', // Reddish
+  '#003f88', // Deep Blue
+  '#1a9641', // Green
+  '#fdae61', // Orange
+];
+
 const CHART_COLORS = [
   '#003f88', '#0077b6', '#00b4d8', '#48cae4', '#90e0ef',
   '#1a9641', '#a6d96a', '#fdae61', '#d73027', '#7b2d8b',
@@ -87,6 +99,91 @@ export function buildPieSVG(
   ${labels.join('\n  ')}
   ${legend.join('\n  ')}
 </svg>`;
+}
+
+// ─── SVG Vertical Bar Chart (Excel Style) ─────────────────────────────────────
+
+export function buildBarVerticalSVG(
+  data: FrequencyItem[],
+  title = '',
+  width = 600,
+  height = 350,
+  xAxisLabel = '',
+  yAxisLabel = 'Número de empleados'
+): string {
+  const filtered = data; // Keep all data for demographic to match exact layout even if 0
+  if (filtered.length === 0) {
+    return `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg"><text x="${width/2}" y="${height/2}" text-anchor="middle" font-size="14" fill="#666">Sin datos</text></svg>`;
+  }
+
+  const marginTop = 50;
+  const marginBottom = 80;
+  const marginLeft = 60;
+  const marginRight = 20;
+
+  const chartW = width - marginLeft - marginRight;
+  const chartH = height - marginTop - marginBottom;
+
+  const maxVal = Math.max(...filtered.map((d) => d.count), 1); // Avoid div by 0
+  
+  // Calculate bar width based on number of items
+  const numItems = filtered.length;
+  const slotW = chartW / numItems;
+  const barW = Math.min(slotW * 0.6, 60); // Max width of 60px per bar
+  
+  const bars = filtered.map((item, i) => {
+    const barH = (item.count / maxVal) * chartH;
+    const x = marginLeft + (i * slotW) + (slotW - barW) / 2;
+    const y = marginTop + chartH - barH;
+    
+    const color = DEMOGRAPHIC_COLORS[i % DEMOGRAPHIC_COLORS.length];
+    
+    // Label for X Axis (wrap if too long)
+    const label = item.label;
+    const maxChars = Math.floor(slotW / 6); // rough estimate
+    let xLabelSvg = '';
+    
+    if (label.length > maxChars && label.includes(' ')) {
+      const words = label.split(' ');
+      const mid = Math.floor(words.length / 2);
+      const l1 = words.slice(0, mid).join(' ');
+      const l2 = words.slice(mid).join(' ');
+      xLabelSvg = `
+        <text x="${x + barW/2}" y="${marginTop + chartH + 20}" text-anchor="middle" font-size="11" fill="#000">${escapeXml(l1)}</text>
+        <text x="${x + barW/2}" y="${marginTop + chartH + 34}" text-anchor="middle" font-size="11" fill="#000">${escapeXml(l2)}</text>
+      `;
+    } else {
+      const shortLabel = label.length > maxChars * 2 ? label.substring(0, maxChars * 2 - 2) + '…' : label;
+      xLabelSvg = `<text x="${x + barW/2}" y="${marginTop + chartH + 20}" text-anchor="middle" font-size="11" fill="#000">${escapeXml(shortLabel)}</text>`;
+    }
+
+    return `
+      <!-- Bar -->
+      <rect x="${x}" y="${y}" width="${barW}" height="${barH}" fill="${color}" />
+      <!-- Top Value Label -->
+      <text x="${x + barW/2}" y="${y - 8}" text-anchor="middle" font-size="12" font-weight="bold" fill="#000">${item.count}</text>
+      <!-- X Axis Label -->
+      ${xLabelSvg}
+    `;
+  });
+
+  return `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+    <rect width="${width}" height="${height}" fill="white"/>
+    
+    <!-- Title -->
+    ${title ? `<text x="${width / 2}" y="25" text-anchor="middle" font-size="14" font-weight="bold" fill="#000">${escapeXml(title)}</text>` : ''}
+    
+    <!-- Outer Border -->
+    <rect x="${marginLeft}" y="${marginTop}" width="${chartW}" height="${chartH}" fill="none" stroke="#ccc" stroke-width="1"/>
+    
+    <!-- Y Axis Label (Rotated) -->
+    <text x="-${marginTop + chartH/2}" y="20" transform="rotate(-90)" text-anchor="middle" font-size="12" fill="#000">${escapeXml(yAxisLabel)}</text>
+    
+    <!-- X Axis Label Bottom -->
+    ${xAxisLabel ? `<text x="${marginLeft + chartW/2}" y="${height - 15}" text-anchor="middle" font-size="12" fill="#000">${escapeXml(xAxisLabel)}</text>` : ''}
+
+    ${bars.join('\n')}
+  </svg>`;
 }
 
 // ─── SVG Horizontal Bar Chart ─────────────────────────────────────────────────
@@ -266,12 +363,16 @@ export async function generateAllCharts(data: ReportData): Promise<ReportCharts>
   const dem = data.demographics;
   const pieDims = { width: 500, height: 320 };
   const barDims = { width: 550 };
+  const vertBarDims = { width: 500, height: 300 };
 
   async function pie(items: FrequencyItem[]) {
     return svgToPng(buildPieSVG(items, pieDims.width, pieDims.height));
   }
   async function bar(items: FrequencyItem[], title = '') {
     return svgToPng(buildBarHorizontalSVG(items, title, barDims.width));
+  }
+  async function vertBar(items: FrequencyItem[], title = '', xAxisLabel = '') {
+    return svgToPng(buildBarVerticalSVG(items, title, vertBarDims.width, vertBarDims.height, xAxisLabel));
   }
   async function riskBar(rows: RiskTableRow[], title = '') {
     return svgToPng(buildRiskStackedBarSVG(rows, title, 700));
@@ -296,24 +397,24 @@ export async function generateAllCharts(data: ReportData): Promise<ReportCharts>
     estresFormaB, estresFormaBSintomas,
     generalFactores, generalFormaA, generalFormaB,
   ] = await Promise.all([
-    pie(dem.sexo),
-    pie(dem.rangoEdad),
-    bar(dem.nivelEstudios, 'Nivel de estudios'),
-    pie(dem.tipoVivienda),
-    pie(dem.estadoCivil),
-    pie(dem.estrato),
-    bar(dem.personasACargo, 'Personas a cargo'),
-    bar(dem.aniosEmpresa, 'Antigüedad en la empresa'),
-    bar(dem.aniosCargo, 'Antigüedad en el cargo'),
-    pie(dem.tipoCargo),
-    pie(dem.tipoContrato),
-    pie(dem.tipoSalario),
-    bar(dem.ocupacion, 'Ocupación u oficio'),
-    pie(dem.horasDiarias),
-    bar(dem.ciudadResidencia, 'Ciudad de residencia'),
-    pie(dem.deptResidencia),
-    bar(dem.ciudadTrabajo, 'Ciudad donde trabaja'),
-    pie(dem.deptTrabajo),
+    vertBar(dem.sexo, 'Número de empleados por género', 'Género'),
+    vertBar(dem.rangoEdad, 'Número de empleados por rango de edad', 'Rango de edad'),
+    vertBar(dem.nivelEstudios, 'Número de empleados por nivel de estudio', 'Nivel de estudio'),
+    vertBar(dem.tipoVivienda, 'Número de empleados por tipo de vivienda', 'Tipo de vivienda'),
+    vertBar(dem.estadoCivil, 'Número de empleados por estado civil', 'Estado civil'),
+    vertBar(dem.estrato, 'Número de empleados por nivel socioeconómico', 'Nivel socioeconómico'),
+    vertBar(dem.personasACargo, 'Número de empleados por número de personas a cargo', 'Número de personas a cargo'),
+    vertBar(dem.aniosEmpresa, 'Número de empleados por antiguedad en la empresa', 'Antiguedad en la empresa'),
+    vertBar(dem.aniosCargo, 'Número de empleados por antiguedad en el cargo', 'Antiguedad en el cargo'),
+    vertBar(dem.tipoCargo, 'Número de empleados por nivel jerárquico', 'Nivel jerárquico'),
+    vertBar(dem.tipoContrato, 'Número de empleados por tipo de contrato', 'Tipo de contrato'),
+    vertBar(dem.tipoSalario, 'Número de empleados por tipo de salario', 'Tipo de salario'),
+    bar(dem.ocupacion, 'Número de empleados por ocupación'),
+    vertBar(dem.horasDiarias, 'Número de empleados por horas de trabajo', 'Horas diarias de trabajo'),
+    vertBar(dem.ciudadResidencia, 'Número de empleados por ciudad de residencia', 'Ciudad de Residencia'),
+    vertBar(dem.deptResidencia, 'Número de empleados por departamento de residencia', 'Departamento de Residencia'),
+    vertBar(dem.ciudadTrabajo, 'Número de empleados por ciudad de trabajo', 'Ciudad de Trabajo'),
+    vertBar(dem.deptTrabajo, 'Número de empleados por departamento de trabajo', 'Departamento de Trabajo'),
     riskBar(data.intralaboralFormaA, 'Factores intralaborales - Forma A'),
     riskBar(data.intralaboralFormaB, 'Factores intralaborales - Forma B'),
     riskBar(data.extralaboralFormaA, 'Factores extralaborales - Forma A'),
