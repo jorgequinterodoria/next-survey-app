@@ -33,7 +33,7 @@ export default function AdminLayout({
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-md">
+      <aside className="w-50 bg-white shadow-md">
         <div className="flex h-16 items-center border-b px-6">
           <h1 className="text-xl font-bold text-gray-800">Admin Panel</h1>
         </div>
@@ -68,7 +68,7 @@ export default function AdminLayout({
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-8">
+      <main className="flex-1 p-8 overflow-x-hidden">
         {children}
       </main>
     </div>

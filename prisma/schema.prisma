@@ -32,6 +32,16 @@ model Campana {
   participantes Participante[]
   token         String        @unique // For public access URL
   isActive      Boolean       @default(true)
+  
+  // Datos del evaluador
+  evaluadorNombre        String?
+  evaluadorId            String?
+  evaluadorProfesion     String?
+  evaluadorPostgrado     String?
+  evaluadorTarjeta       String?
+  evaluadorLicencia      String?
+  evaluadorLicenciaFecha String?
+
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 }

@@ -104,7 +104,7 @@ export function GenerateReportButton({
         ) : (
           <>
             <DocumentIcon />
-            Generar Informe Word
+            Word
           </>
         )}
       </button>

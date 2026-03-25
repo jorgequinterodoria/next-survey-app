@@ -1,8 +1,9 @@
 import { prisma } from '@/lib/prisma'
-import { createCampaign, toggleCampaignStatus } from '@/app/actions/admin'
+import { toggleCampaignStatus } from '@/app/actions/admin'
 import { Megaphone, Link as LinkIcon, ExternalLink } from 'lucide-react'
 import { GenerateReportButton } from '@/components/reports/GenerateReportButton';
 import Link from 'next/link'
+import CreateCampaignModal from './CreateCampaignModal';
 
 export const dynamic = 'force-dynamic';
 
@@ -27,49 +28,11 @@ export default async function CampaignsPage() {
           <Megaphone className="h-6 w-6" />
           Campañas
         </h1>
-      </div>
-
-      {/* Create Form */}
-      <div className="bg-white p-6 rounded-lg shadow-sm">
-        <h2 className="text-lg font-semibold mb-4 text-gray-900">Nueva Campaña</h2>
-        <form action={async (formData) => {
-          'use server'
-          await createCampaign(formData)
-        }} className="flex gap-4 items-end">
-            <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Empresa</label>
-            <select
-              name="empresaId"
-              required
-              className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
-            >
-                <option value="">Seleccionar empresa...</option>
-                {companies.map(c => (
-                    <option key={c.id} value={c.id}>{c.name}</option>
-                ))}
-            </select>
-          </div>
-          <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 mb-1">Nombre Campaña</label>
-            <input
-              name="name"
-              type="text"
-              required
-              className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Ej: Evaluación 2024"
-            />
-          </div>
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium"
-          >
-            Crear Campaña
-          </button>
-        </form>
+        <CreateCampaignModal companies={companies} />
       </div>
 
       {/* List */}
-      <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+      <div className="bg-white rounded-lg shadow-sm overflow-x-auto w-full">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -83,7 +46,6 @@ export default async function CampaignsPage() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {campaigns.map((campana) => {
-                const link = `${process.env.NEXT_PUBLIC_APP_URL || ''}/?token=${campana.token}`
                 return (
               <tr key={campana.id}>
                 <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{campana.name}</td>

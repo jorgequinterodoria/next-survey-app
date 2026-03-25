@@ -50,6 +50,15 @@ export async function createCompany(formData: FormData) {
 export async function createCampaign(formData: FormData) {
     const name = formData.get('name') as string
     const empresaId = formData.get('empresaId') as string
+    
+    // Evaluator data
+    const evaluadorNombre = formData.get('evaluadorNombre') as string || null
+    const evaluadorId = formData.get('evaluadorId') as string || null
+    const evaluadorProfesion = formData.get('evaluadorProfesion') as string || null
+    const evaluadorPostgrado = formData.get('evaluadorPostgrado') as string || null
+    const evaluadorTarjeta = formData.get('evaluadorTarjeta') as string || null
+    const evaluadorLicencia = formData.get('evaluadorLicencia') as string || null
+    const evaluadorLicenciaFecha = formData.get('evaluadorLicenciaFecha') as string || null
 
     if (!name || !empresaId) return { error: 'Name and Company are required' }
 
@@ -62,6 +71,13 @@ export async function createCampaign(formData: FormData) {
                 name,
                 empresaId,
                 token,
+                evaluadorNombre,
+                evaluadorId,
+                evaluadorProfesion,
+                evaluadorPostgrado,
+                evaluadorTarjeta,
+                evaluadorLicencia,
+                evaluadorLicenciaFecha
             },
         })
         revalidatePath('/admin/campaigns')

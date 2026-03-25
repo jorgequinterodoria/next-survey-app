@@ -2,6 +2,8 @@
 // CHART GENERATOR - SVG charts → PNG Buffer (uses `sharp`)
 // Install: npm install sharp
 // ============================================================
+import fs from 'fs';
+import path from 'path';
 import type { FrequencyItem, RiskTableRow } from './types';
 
 // ─── Color Palette ───────────────────────────────────────────────────────────
@@ -310,7 +312,36 @@ export function buildRiskStackedBarSVG(
 
 // ─── SVG → PNG conversion using sharp ─────────────────────────────────────────
 
+let cachedFontBase64: string | null = null;
+
+function getFontBase64(): string {
+  if (cachedFontBase64 !== null) return cachedFontBase64;
+  try {
+    const fontPath = path.join(process.cwd(), 'public', 'fonts', 'Roboto-Regular.ttf');
+    const fontBuffer = fs.readFileSync(fontPath);
+    cachedFontBase64 = fontBuffer.toString('base64');
+  } catch (e) {
+    console.warn('Could not load Roboto font for charts, falling back to system fonts:', e);
+    cachedFontBase64 = '';
+  }
+  return cachedFontBase64;
+}
+
 export async function svgToPng(svg: string, width?: number, height?: number): Promise<Buffer> {
+  const fontBase64 = getFontBase64();
+  
+  if (fontBase64) {
+    const styleTag = `<style>
+      @font-face {
+        font-family: 'Roboto';
+        src: url(data:font/truetype;charset=utf-8;base64,${fontBase64}) format('truetype');
+      }
+      text { font-family: 'Roboto', sans-serif !important; }
+    </style>`;
+    // Inject the style tag right after the <svg ...> opening tag
+    svg = svg.replace(/(<svg[^>]*>)/i, `$1${styleTag}`);
+  }
+
   // Dynamic import to avoid issues if sharp isn't installed
   const sharp = (await import('sharp')).default;
   const buf = Buffer.from(svg, 'utf-8');
