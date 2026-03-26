@@ -19,7 +19,6 @@ export async function updateSession() {
     const session = cookieStore.get('session')?.value
     if (!session) return
 
-    // Refresh session if needed
     const parsed = await decrypt(session)
     parsed.expires = new Date(Date.now() + 24 * 60 * 60 * 1000)
     const newToken = await encrypt(parsed)

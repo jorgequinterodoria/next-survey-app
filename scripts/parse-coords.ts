@@ -13,8 +13,6 @@ async function parsePDFCoords() {
     const page = pdfData.formImage.Pages[0];
     const texts = page.Texts;
     
-    // Convert to pdf-lib standard roughly: width 612, height 792
-    // pdf2json uses its own coordinate system
     console.log("Found texts:");
     for (const t of texts) {
       const textString = decodeURIComponent(t.R[0].T);

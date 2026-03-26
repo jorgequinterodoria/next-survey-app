@@ -25,18 +25,6 @@ export async function generateConsentPDF(data: {
   const getCoords = (id: string) => {
     const field = consentimientoFields.find(f => f.id === id);
     if (field && field.coords && field.coords.length > 0) {
-      // PdfMapper guarda las coordenadas con el origen (0,0) en la esquina superior izquierda.
-      // pdf-lib usa el origen (0,0) en la esquina inferior izquierda.
-      // Por lo tanto, debemos invertir el eje Y: pdfLibY = pageHeight - mappedY
-      // Además, PdfMapper usa un scaleFactor de 1.5, así que debemos ajustar si es necesario.
-      // Sin embargo, PdfMapper YA guarda las coordenadas divididas por el scaleFactor (puntos PDF).
-      // Lo único que hace PdfMapper es: pdfY = (height - yClick) / scale. 
-      // O sea, PdfMapper guarda la coordenada Y desde abajo (sistema PDF).
-      // Vamos a verificar cómo guarda PdfMapper:
-      // const pdfY = Math.round((pdfSize.height - yClick) / scaleFactor);
-      // Esto significa que 'pdfY' ya está en el sistema de coordenadas de PDF (desde abajo).
-      // Entonces NO necesitamos invertir Y nuevamente.
-      
       return field.coords[0];
     }
     return null;

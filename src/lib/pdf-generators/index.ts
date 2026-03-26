@@ -2,6 +2,7 @@ import { PDFDocument } from 'pdf-lib';
 import { generateConsentPDF } from './consentGenerator';
 import { generateFichaPDF } from './fichaGenerator';
 import { fillSurveyPDF } from './pdfTemplateProcessor';
+import { generateResultsReportPDF } from './resultsReportGenerator';
 
 export async function generateConsolidatedPDF(participantData: any) {
   // 1. Create a fresh empty PDFDocument to act as our final consolidated file
@@ -20,7 +21,7 @@ export async function generateConsolidatedPDF(participantData: any) {
       empresaName: participantData.campana?.empresa?.name || '',
       consentName: participantData.surveyResponse?.consentName || '',
       consentDoc: participantData.surveyResponse?.consentDoc || '',
-      consentCity: (participantData.surveyResponse?.fichaData as any)?.ciudad_trabajo || participantData.campana?.empresa?.city || 'Bogotá',
+      consentCity: (participantData.surveyResponse?.fichaData as any)?.ciudad_trabajo || participantData.campana?.empresa?.city || 'Montería',
       consentSignatureBase64: participantData.surveyResponse?.consentSignature || '',
       date: participantData.surveyResponse?.createdAt || new Date(),
     });
@@ -41,6 +42,10 @@ export async function generateConsolidatedPDF(participantData: any) {
         participantData.surveyResponse.intralaboralData
       );
       await appendPdf(intraBytes);
+      
+      // Adjuntar INFORME DE RESULTADOS INTRALABORAL
+      const intraResultsBytes = await generateResultsReportPDF(participantData, 'intralaboral');
+      await appendPdf(intraResultsBytes);
     }
 
     // 5. Extralaboral
@@ -50,6 +55,10 @@ export async function generateConsolidatedPDF(participantData: any) {
         participantData.surveyResponse.extralaboralData
       );
       await appendPdf(extraBytes);
+
+      // Adjuntar INFORME DE RESULTADOS EXTRALABORAL
+      const extraResultsBytes = await generateResultsReportPDF(participantData, 'extralaboral');
+      await appendPdf(extraResultsBytes);
     }
 
     // 6. Estrés
@@ -59,6 +68,10 @@ export async function generateConsolidatedPDF(participantData: any) {
         participantData.surveyResponse.estresData
       );
       await appendPdf(estresBytes);
+
+      // Adjuntar INFORME DE RESULTADOS ESTRÉS
+      const estresResultsBytes = await generateResultsReportPDF(participantData, 'estres');
+      await appendPdf(estresResultsBytes);
     }
   } catch(e) {
     console.error("Error assembling consolidated PDF components:");

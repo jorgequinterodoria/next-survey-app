@@ -9,14 +9,14 @@ export interface ScoreResult {
 export interface DimensionConfig {
     id: string;
     name: string;
-    items: number[]; // Array of item IDs (e.g., [1, 2, 3])
-    factor: number; // Factor de transformación (K)
+    items: number[];
+    factor: number;
     ranges: {
         sinRiesgo: number;
         bajo: number;
         medio: number;
         alto: number;
-        muyAlto: number; // This is actually redundant if we assume > alto, but good for explicit checking
+        muyAlto: number;
     };
 }
 
@@ -24,7 +24,7 @@ export interface DomainConfig {
     id: string;
     name: string;
     dimensions: DimensionConfig[];
-    totalFactor: number; // Factor for the Domain Total calculation
+    totalFactor: number;
     ranges: {
         sinRiesgo: number;
         bajo: number;
@@ -38,7 +38,7 @@ export interface FormConfig {
     inverseItems: number[];
     domains: DomainConfig[];
     totalConfig: {
-        factor: number; // Factor for the Grand Total calculation (Intralaboral Total)
+        factor: number;
         ranges: {
             sinRiesgo: number;
             bajo: number;

@@ -1,7 +1,3 @@
-// ============================================================
-// WORD GENERATOR - Builds the complete .docx report
-// Install: npm install docx
-// ============================================================
 import {
   Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
   ImageRun, HeadingLevel, AlignmentType, WidthType, BorderStyle,

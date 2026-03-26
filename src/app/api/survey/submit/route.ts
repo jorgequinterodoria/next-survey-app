@@ -171,7 +171,7 @@ export async function POST(request: Request) {
                 extralaboralData: extralaboralAnswers,
                 estresData: estresAnswers,
                 filters: {}, // TODO: Extract filters from fichaAnswers if needed
-                results: results as any // Guardar resultados procesados
+                results: detailedResults as any // Guardar resultados detallados (formato processSurvey)
             }
         })
 

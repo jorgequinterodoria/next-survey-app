@@ -178,8 +178,8 @@ export function processSurvey(
         { ...intraAnswers, ...extraAnswers }, 
         [...allIntraItems, ...CONFIG_EXTRA.domains[0].dimensions.flatMap(d => d.items)], 
         [...configIntra.inverseItems, ...CONFIG_EXTRA.inverseItems], 
-        formType === 'A' ? 616 : 512, // Factor Global Tabla 28
-        formType === 'A' ? GLOBAL_RANGES.A : GLOBAL_RANGES.B // Tabla 34
+        formType === 'A' ? 616 : 512,
+        formType === 'A' ? GLOBAL_RANGES.A : GLOBAL_RANGES.B
     );
 
     return {
@@ -205,8 +205,6 @@ export function flattenResults(detailed: any): Record<string, unknown> {
 
         if (tree.domains && Array.isArray(tree.domains)) {
             tree.domains.forEach((d: any) => {
-                // Domain Score
-                // Added for completeness
                 flat[`${prefix} Dominio - ${d.name}`] = { 
                     dimension: `Dominio: ${d.name}`, 
                     score: d.transformed, 
@@ -226,7 +224,6 @@ export function flattenResults(detailed: any): Record<string, unknown> {
             });
         }
 
-        // Total
         if (tree.total && tree.total.dimension !== undefined || tree.total?.transformed !== undefined) {
              if (tree.total.transformed !== undefined) {
                 flat[`${prefix} Total`] = {

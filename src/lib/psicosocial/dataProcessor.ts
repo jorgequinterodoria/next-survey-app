@@ -1,6 +1,3 @@
-// ============================================================
-// DATA PROCESSOR - Matches actual SurveyResponse JSON structure
-// ============================================================
 import {
   ReportData, DemographicsData, FrequencyItem,
   RiskTableRow, RiskLevel, EstresAggregated,

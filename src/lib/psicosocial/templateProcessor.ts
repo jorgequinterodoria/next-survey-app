@@ -1,13 +1,3 @@
-// ============================================================
-// TEMPLATE PROCESSOR
-// Reads the original .docx template, preserves ALL formatting
-// (headers, footers, styles, highlights, static text) and
-// injects dynamic content: company name, charts, risk tables.
-//
-// npm install jszip
-// Template path: src/templates/informe_psicosocial.docx
-// ============================================================
-
 import JSZip from 'jszip';
 import path from 'path';
 import fs from 'fs';
@@ -29,8 +19,6 @@ const RISK_BG: Record<string, string> = {
   'Riesgo muy alto': 'FF8080',
 };
 
-// ─── Chart cell mapping ────────────────────────────────────────────────────────
-// marker = text inside the template chart placeholder cell
 type ChartKey = keyof ReportCharts;
 
 const CHART_MAP: Array<{ marker: string; key: ChartKey; cx: number; cy: number }> = [
