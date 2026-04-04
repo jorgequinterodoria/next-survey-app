@@ -1,12 +1,6 @@
-// ============================================================
-// CHART GENERATOR - SVG charts → PNG Buffer (uses `sharp`)
-// Install: npm install sharp
-// ============================================================
 import fs from 'fs';
 import path from 'path';
 import type { FrequencyItem, RiskTableRow } from './types';
-
-// ─── Color Palette ───────────────────────────────────────────────────────────
 
 const RISK_COLORS: Record<string, string> = {
   'Sin riesgo o riesgo despreciable': '#1a9641',
@@ -16,24 +10,21 @@ const RISK_COLORS: Record<string, string> = {
   'Riesgo muy alto': '#d73027',
 };
 
-// Excel-like colors for demographic bars
 const DEMOGRAPHIC_COLORS = [
-  '#e6399b', // Magenta/Pink
-  '#5cb8e6', // Light Blue
-  '#3d6cb8', // Darker Blue
-  '#9966cc', // Purple
-  '#e65c73', // Reddish
-  '#003f88', // Deep Blue
-  '#1a9641', // Green
-  '#fdae61', // Orange
+  '#e6399b',
+  '#5cb8e6',
+  '#3d6cb8',
+  '#9966cc',
+  '#e65c73',
+  '#003f88',
+  '#1a9641',
+  '#fdae61',
 ];
 
 const CHART_COLORS = [
   '#003f88', '#0077b6', '#00b4d8', '#48cae4', '#90e0ef',
   '#1a9641', '#a6d96a', '#fdae61', '#d73027', '#7b2d8b',
 ];
-
-// ─── SVG Pie Chart ────────────────────────────────────────────────────────────
 
 export function buildPieSVG(
   data: FrequencyItem[],
@@ -72,7 +63,6 @@ export function buildPieSVG(
       `<path d="M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${largeArc} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z" fill="${color}" stroke="white" stroke-width="1.5"/>`
     );
 
-    // Percentage label inside slice
     if (pct > 0.04) {
       const midAngle = startAngle + angle / 2;
       const lx = cx + (r * 0.65) * Math.cos(midAngle);
@@ -82,7 +72,6 @@ export function buildPieSVG(
       );
     }
 
-    // Legend
     const ly = 20 + i * 22;
     legend.push(
       `<rect x="${cx * 2 + 20}" y="${ly}" width="14" height="14" fill="${color}"/>`
@@ -103,8 +92,6 @@ export function buildPieSVG(
 </svg>`;
 }
 
-// ─── SVG Vertical Bar Chart (Excel Style) ─────────────────────────────────────
-
 export function buildBarVerticalSVG(
   data: FrequencyItem[],
   title = '',
@@ -113,7 +100,7 @@ export function buildBarVerticalSVG(
   xAxisLabel = '',
   yAxisLabel = 'Número de empleados'
 ): string {
-  const filtered = data; // Keep all data for demographic to match exact layout even if 0
+  const filtered = data;
   if (filtered.length === 0) {
     return `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg"><text x="${width/2}" y="${height/2}" text-anchor="middle" font-size="14" fill="#666">Sin datos</text></svg>`;
   }
@@ -126,12 +113,11 @@ export function buildBarVerticalSVG(
   const chartW = width - marginLeft - marginRight;
   const chartH = height - marginTop - marginBottom;
 
-  const maxVal = Math.max(...filtered.map((d) => d.count), 1); // Avoid div by 0
+  const maxVal = Math.max(...filtered.map((d) => d.count), 1);
   
-  // Calculate bar width based on number of items
   const numItems = filtered.length;
   const slotW = chartW / numItems;
-  const barW = Math.min(slotW * 0.6, 60); // Max width of 60px per bar
+  const barW = Math.min(slotW * 0.6, 60);
   
   const bars = filtered.map((item, i) => {
     const barH = (item.count / maxVal) * chartH;
@@ -140,9 +126,8 @@ export function buildBarVerticalSVG(
     
     const color = DEMOGRAPHIC_COLORS[i % DEMOGRAPHIC_COLORS.length];
     
-    // Label for X Axis (wrap if too long)
     const label = item.label;
-    const maxChars = Math.floor(slotW / 6); // rough estimate
+    const maxChars = Math.floor(slotW / 6);
     let xLabelSvg = '';
     
     if (label.length > maxChars && label.includes(' ')) {
@@ -188,8 +173,6 @@ export function buildBarVerticalSVG(
   </svg>`;
 }
 
-// ─── SVG Horizontal Bar Chart ─────────────────────────────────────────────────
-
 export function buildBarHorizontalSVG(
   data: FrequencyItem[],
   title = '',
@@ -228,8 +211,6 @@ export function buildBarHorizontalSVG(
   ${bars.join('')}
 </svg>`;
 }
-
-// ─── SVG Stacked/Grouped Bar Chart for Risk Tables ────────────────────────────
 
 export function buildRiskStackedBarSVG(
   rows: RiskTableRow[],
@@ -287,7 +268,6 @@ export function buildRiskStackedBarSVG(
     ${segments.join('')}`;
   });
 
-  // Legend
   const legendItems = [
     { label: 'Sin riesgo', color: COLORS.sinRiesgo },
     { label: 'Riesgo bajo', color: COLORS.bajo },
@@ -309,8 +289,6 @@ export function buildRiskStackedBarSVG(
   ${legend}
 </svg>`;
 }
-
-// ─── SVG → PNG conversion using sharp ─────────────────────────────────────────
 
 let cachedFontBase64: string | null = null;
 
@@ -338,11 +316,9 @@ export async function svgToPng(svg: string, width?: number, height?: number): Pr
       }
       text { font-family: 'Roboto', sans-serif !important; }
     </style>`;
-    // Inject the style tag right after the <svg ...> opening tag
     svg = svg.replace(/(<svg[^>]*>)/i, `$1${styleTag}`);
   }
 
-  // Dynamic import to avoid issues if sharp isn't installed
   const sharp = (await import('sharp')).default;
   const buf = Buffer.from(svg, 'utf-8');
   let pipeline = sharp(buf);
@@ -351,8 +327,6 @@ export async function svgToPng(svg: string, width?: number, height?: number): Pr
   }
   return pipeline.png().toBuffer();
 }
-
-// ─── Generate all charts for the report ──────────────────────────────────────
 
 import type { ReportData } from './types';
 
@@ -409,7 +383,6 @@ export async function generateAllCharts(data: ReportData): Promise<ReportCharts>
     return svgToPng(buildRiskStackedBarSVG(rows, title, 700));
   }
 
-  // Estrés sintomas grouped
   const estresGeneralSintomasSVG = buildBarHorizontalSVG(
     [
       ...mapEstresLabel(data.estresGeneral.sintomasFisiologicos, 'Fisiológicos'),
@@ -472,8 +445,6 @@ export async function generateAllCharts(data: ReportData): Promise<ReportCharts>
     generalFactores, generalFormaA, generalFormaB,
   };
 }
-
-// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function escapeXml(str: string): string {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

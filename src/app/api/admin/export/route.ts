@@ -9,8 +9,9 @@ type ResultRow = {
     Tipo: string
     Variable: string
     Valor: string | number
-    Interpretacion: string
-    Forma: string
+    Interpretación: string
+    'DatosGen.Forma': string
+    Cargo: string
 }
 
 const LIKERT_TEXT_MAP: Record<string, string> = {
@@ -118,35 +119,30 @@ export async function GET(req: NextRequest) {
         responses.forEach(r => {
             const idEncuesta = `ENC_${r.id.substring(0, 4)}_${r.formType === 'A' ? 'ia' : 'ib'}`;
             const results = r.results as any; // Assuming it follows the structure from our engine
+            const ficha = (r.fichaData as unknown as Record<string, string>) || {};
+            const cargo = ficha['ficha_12'] || ficha['cargo'] || 'No especificado';
 
             if (!results) return;
 
+            const addRow = (tipo: string, variable: string, valor: string | number, interpretacion: string) => {
+                analysisData.push({
+                    id_encuesta: idEncuesta,
+                    Tipo: tipo,
+                    Variable: variable,
+                    Valor: valor,
+                    Interpretación: interpretacion,
+                    'DatosGen.Forma': r.formType,
+                    Cargo: cargo
+                });
+            };
+
             // --- INTRALABORAL ---
-            const configIntra = r.formType === 'A' ? CONFIG_A : CONFIG_B;
-            
             // Dimensiones Intralaborales
             if (results.intralaboral?.domains) {
                 results.intralaboral.domains.forEach((d: any) => {
-                    // Dominio
-                    analysisData.push({
-                        id_encuesta: idEncuesta,
-                        Tipo: 'Dominio',
-                        Variable: d.name,
-                        Valor: d.transformed,
-                        Interpretacion: d.level,
-                        Forma: r.formType
-                    });
-
-                    // Dimensiones
+                    addRow('Dominio', d.name, d.transformed, d.level);
                     d.dimensions.forEach((dim: any) => {
-                        analysisData.push({
-                            id_encuesta: idEncuesta,
-                            Tipo: 'Dimensión',
-                            Variable: dim.name,
-                            Valor: dim.transformed,
-                            Interpretacion: dim.level,
-                            Forma: r.formType
-                        });
+                        addRow('Dimensión', dim.name, dim.transformed, dim.level);
                     });
                 });
             }
@@ -155,81 +151,33 @@ export async function GET(req: NextRequest) {
             if (results.extralaboral?.domains) {
                 results.extralaboral.domains.forEach((d: any) => {
                     d.dimensions.forEach((dim: any) => {
-                        analysisData.push({
-                            id_encuesta: idEncuesta,
-                            Tipo: 'Extralaboral',
-                            Variable: dim.name,
-                            Valor: dim.transformed,
-                            Interpretacion: dim.level,
-                            Forma: r.formType
-                        });
+                        addRow('Extralaboral', dim.name, dim.transformed, dim.level);
                     });
                 });
             }
 
             // --- TOTALES ---
             if (results.extralaboral?.total) {
-                analysisData.push({
-                    id_encuesta: idEncuesta,
-                    Tipo: 'Total cuestionario',
-                    Variable: 'Factores Extralaborales',
-                    Valor: results.extralaboral.total.transformed,
-                    Interpretacion: results.extralaboral.total.level,
-                    Forma: r.formType
-                });
+                addRow('Total cuestionario', 'Factores Extralaborales', results.extralaboral.total.transformed, results.extralaboral.total.level);
             }
-            
             if (results.intralaboral?.total) {
-                analysisData.push({
-                    id_encuesta: idEncuesta,
-                    Tipo: 'Total cuestionario',
-                    Variable: 'Factores Intralaborales',
-                    Valor: results.intralaboral.total.transformed,
-                    Interpretacion: results.intralaboral.total.level,
-                    Forma: r.formType
-                });
+                addRow('Total cuestionario', 'Factores Intralaborales', results.intralaboral.total.transformed, results.intralaboral.total.level);
             }
-
-            // Total General (Intra + Extra) 
             if (results.global) {
-                 analysisData.push({
-                    id_encuesta: idEncuesta,
-                    Tipo: 'Total cuestionario',
-                    Variable: 'Factores Intralaborales + Extralaborales',
-                    Valor: results.global.transformed,
-                    Interpretacion: results.global.level,
-                    Forma: r.formType
-                });
+                addRow('Total cuestionario', 'Factores Intralaborales + Extralaborales', results.global.transformed, results.global.level);
             }
-
-            // TODO: Total General (Intra + Extra) requiere lógica adicional si se quiere calcular
-            // Por ahora agregamos Estrés
             if (results.estres?.total) {
-                analysisData.push({
-                    id_encuesta: idEncuesta,
-                    Tipo: 'Total cuestionario',
-                    Variable: 'Nivel de Estrés',
-                    Valor: results.estres.total.transformed,
-                    Interpretacion: results.estres.total.level,
-                    Forma: r.formType
-                });
+                addRow('Total cuestionario', 'Nivel de Estrés', results.estres.total.transformed, results.estres.total.level);
             }
 
             // --- ESTRES DETALLADO (Items) ---
-            // Aquí necesitamos las respuestas crudas de estrés
             const estresAnswers = r.estresData as Record<string, string>;
             if (estresAnswers) {
                 CONFIG_ESTRES.domains[0].dimensions.forEach(dim => {
                     dim.items.forEach(itemId => {
-                        // Buscar respuesta
                         let answerVal = estresAnswers[`estres_${itemId}`] || estresAnswers[itemId.toString()];
                         if (answerVal) {
-                             // Obtener puntos (0-4)
-                             // Mapear respuesta texto a mayúsculas
                              const text = LIKERT_TEXT_MAP[answerVal] || answerVal.toUpperCase();
-                             // Puntos: la lógica ya está en el engine, pero aquí solo mostramos el texto y puntos
-                             // Replicamos lógica simple para mostrar el valor numérico (0-4)
-                             // Estrés es Directo: Siempre=4... Nunca=0
                              let points = 0;
                              if (answerVal === 'siempre') points = 4;
                              else if (answerVal === 'casi_siempre') points = 3;
@@ -237,19 +185,11 @@ export async function GET(req: NextRequest) {
                              else if (answerVal === 'casi_nunca') points = 1;
                              else if (answerVal === 'nunca') points = 0;
 
-                             analysisData.push({
-                                id_encuesta: idEncuesta,
-                                Tipo: `Estrés: ${dim.name}`,
-                                Variable: (STRESS_QUESTIONS as any)[itemId] || `Pregunta ${itemId}`,
-                                Valor: points,
-                                Interpretacion: text,
-                                Forma: r.formType
-                            });
+                             addRow(`Estrés: ${dim.name}`, (STRESS_QUESTIONS as any)[itemId] || `Pregunta ${itemId}`, points, text);
                         }
                     });
                 });
             }
-
         });
 
 
