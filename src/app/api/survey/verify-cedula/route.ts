@@ -1,17 +1,22 @@
 import { prisma } from '@/lib/prisma'
 import { NextResponse } from 'next/server'
+import { z } from 'zod'
+
+const BodySchema = z.object({
+  campaignId: z.string().min(1),
+  cedula: z.string().min(1),
+})
+
+function normalizeCedula(value: string): string {
+  return value.trim().replace(/[^\d]/g, '')
+}
 
 export async function POST(request: Request) {
     try {
-        const body = await request.json()
-        const { campaignId, cedula } = body
-
-        if (!campaignId || !cedula) {
-            return NextResponse.json(
-                { error: 'campaignId and cedula are required' },
-                { status: 400 }
-            )
-        }
+        const body = BodySchema.parse(await request.json())
+        const campaignId = body.campaignId
+        const cedula = normalizeCedula(body.cedula)
+        if (!cedula) return NextResponse.json({ error: 'cedula inválida' }, { status: 400 })
 
         // 1. Buscamos si existe la relación participante-campaña
         const participant = await prisma.participante.findUnique({
@@ -20,12 +25,22 @@ export async function POST(request: Request) {
                     cedula,
                     campanaId: campaignId
                 }
-            }
+            },
+            select: { id: true, cuestionarioAsignado: true }
         })
 
         if (!participant) {
-            // El participante no existe para esta campaña, por ende no la ha completado
-            return NextResponse.json({ hasCompleted: false })
+            return NextResponse.json({ hasCompleted: false, isRegistered: false })
+        }
+
+        if (participant.cuestionarioAsignado === 'NO_APLICA') {
+            return NextResponse.json({
+                hasCompleted: false,
+                isRegistered: true,
+                cuestionarioAsignado: participant.cuestionarioAsignado,
+                notEligible: true,
+                reason: 'NO_APLICA'
+            })
         }
 
         // 2. Si existe, verificamos si ya tiene una respuesta guardada
@@ -34,11 +49,19 @@ export async function POST(request: Request) {
         })
 
         if (existingResponse) {
-            return NextResponse.json({ hasCompleted: true })
+            return NextResponse.json({
+                hasCompleted: true,
+                isRegistered: true,
+                cuestionarioAsignado: participant.cuestionarioAsignado ?? null
+            })
         }
 
         // Existe el participante pero no tiene respuesta (quizás se creó pero no finalizó)
-        return NextResponse.json({ hasCompleted: false })
+        return NextResponse.json({
+            hasCompleted: false,
+            isRegistered: true,
+            cuestionarioAsignado: participant.cuestionarioAsignado ?? null
+        })
 
     } catch (error: any) {
         console.error('Verify cedula error:', error)

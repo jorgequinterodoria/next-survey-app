@@ -4,6 +4,7 @@ import { Megaphone, Link as LinkIcon, ExternalLink } from 'lucide-react'
 import { GenerateReportButton } from '@/components/reports/GenerateReportButton';
 import Link from 'next/link'
 import CreateCampaignModal from './CreateCampaignModal';
+import ImportExcelModal from './ImportExcelModal';
 
 export const dynamic = 'force-dynamic';
 
@@ -84,6 +85,14 @@ export default async function CampaignsPage() {
                             campanaName={campana.name}
                             empresaName={campana.empresa.name}
                         />
+                        <ImportExcelModal campanaId={campana.id} />
+                        <Link
+                          href={`/admin/campaigns/${campana.id}/participants`}
+                          className="bg-white border border-slate-300 text-slate-700 px-3 py-1.5 rounded text-xs font-medium hover:bg-slate-50 transition-colors inline-flex items-center"
+                          title="Ver listado de habilitados"
+                        >
+                          Ver listado
+                        </Link>
                         <Link 
                             href={`/api/admin/export?campanaId=${campana.id}`} 
                             className="bg-green-600 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-green-700 transition-colors inline-flex items-center"

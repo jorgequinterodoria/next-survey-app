@@ -22,17 +22,6 @@ type Phase =
   | 'estres'
   | 'success';
 
-function determineFormType(fichaAnswers: Record<string, string>): 'A' | 'B' {
-  const tipoCargo = fichaAnswers['ficha_13'] || '';
-  if (
-    tipoCargo.includes('Jefatura') ||
-    tipoCargo.includes('Profesional')
-  ) {
-    return 'A';
-  }
-  return 'B';
-}
-
 export function useSurvey({ campaignId }: { campaignId: string }) {
   const [phase, setPhase] = useState<Phase>('intro');
   const [videoWatched, setVideoWatched] = useState(false);
@@ -50,6 +39,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
   const [errors, setErrors] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
+  const [notEligibleMessage, setNotEligibleMessage] = useState<string | null>(null);
 
   // Filter states for conditional sections
   const [filterClientes, setFilterClientes] = useState<string | null>(null);
@@ -159,7 +149,14 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
 
         if (data.hasCompleted) {
           setErrors(['Ya has completado la encuesta para esta campaña.']);
+        } else if (data.notEligible) {
+          setNotEligibleMessage('Aún no cuenta con la antigüedad suficiente para realizar la encuesta.');
+        } else if (data.isRegistered === false) {
+          setErrors(['No se encuentra habilitado para esta campaña.']);
         } else {
+          if (data.cuestionarioAsignado === 'A' || data.cuestionarioAsignado === 'B') {
+            setFormType(data.cuestionarioAsignado);
+          }
           setPhase('ficha');
         }
       } catch (error: any) {
@@ -178,8 +175,6 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
       scrollToTop();
       return;
     }
-    const ft = determineFormType(fichaAnswers);
-    setFormType(ft);
     setPhase('intralaboral');
     setCurrentSectionIndex(0);
     setErrors([]);
@@ -348,6 +343,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
     errors,
     isSubmitting,
     isVerifying,
+    notEligibleMessage,
     filterClientes,
     filterJefatura,
     progressSteps,
@@ -372,5 +368,6 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
     getFilterSetterForSection,
     handleIntroNext,
     handleVideoNext,
+    closeNotEligible: () => setNotEligibleMessage(null),
   };
 }

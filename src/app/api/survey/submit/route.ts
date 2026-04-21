@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma'
 import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { processSurvey, flattenResults } from '@/lib/psychometrics'
+import { z } from 'zod'
 import {
     fichaQuestions,
     formaASections,
@@ -10,24 +11,75 @@ import {
     estresQuestions
 } from '@/data/surveyData'
 
+const BodySchema = z.object({
+    campaignId: z.string().min(1),
+    cedula: z.string().min(1),
+    email: z.string().email().optional().nullable(),
+    consentName: z.string().min(1),
+    consentDoc: z.string().min(1),
+    consentSignature: z.string().min(1),
+    consentAccepted: z.boolean(),
+    formType: z.string().optional(),
+    fichaAnswers: z.record(z.string(), z.any()),
+    intralaboralAnswers: z.record(z.string(), z.any()),
+    extralaboralAnswers: z.record(z.string(), z.any()),
+    estresAnswers: z.record(z.string(), z.any()),
+    videoWatched: z.boolean().optional(),
+})
+
+function normalizeCedula(value: string): string {
+    return value.trim().replace(/[^\d]/g, '')
+}
+
 export async function POST(request: Request) {
     try {
-        const body = await request.json()
-        const {
-            campaignId,
-            cedula,
-            email,
-            consentName,
-            consentDoc,
-            consentSignature,
-            consentAccepted,
-            formType,
-            fichaAnswers,
-            intralaboralAnswers,
-            extralaboralAnswers,
-            estresAnswers,
-            videoWatched
-        } = body
+        const body = BodySchema.parse(await request.json())
+        const campaignId = body.campaignId
+        const cedula = normalizeCedula(body.cedula)
+        const email = body.email ?? null
+        const consentName = body.consentName
+        const consentDoc = body.consentDoc
+        const consentSignature = body.consentSignature
+        const consentAccepted = body.consentAccepted
+        const fichaAnswers = body.fichaAnswers
+        const intralaboralAnswers = body.intralaboralAnswers
+        const extralaboralAnswers = body.extralaboralAnswers
+        const estresAnswers = body.estresAnswers
+        const videoWatched = body.videoWatched || false
+
+        if (!cedula) {
+            return NextResponse.json({ error: 'Cédula inválida' }, { status: 400 })
+        }
+
+        const participant = await prisma.participante.findUnique({
+            where: {
+                cedula_campanaId: {
+                    cedula,
+                    campanaId: campaignId
+                }
+            },
+            select: {
+                id: true,
+                email: true,
+                cuestionarioAsignado: true
+            }
+        })
+
+        if (!participant) {
+            return NextResponse.json(
+                { error: 'No se encuentra habilitado para esta campaña.' },
+                { status: 403 }
+            )
+        }
+
+        if (participant.cuestionarioAsignado === 'NO_APLICA') {
+            return NextResponse.json(
+                { error: 'Aún no cuenta con la antigüedad suficiente para realizar la encuesta.' },
+                { status: 403 }
+            )
+        }
+
+        const effectiveFormType = (participant.cuestionarioAsignado || 'B') as 'A' | 'B'
 
         // --- VALIDATION START ---
         const missingErrors: string[] = []
@@ -59,7 +111,7 @@ export async function POST(request: Request) {
 
         // 3. Validate Intralaboral
         if (intralaboralAnswers) {
-            const sections = formType === 'A' ? formaASections : formaBSections
+            const sections = effectiveFormType === 'A' ? formaASections : formaBSections
             sections.forEach((section) => {
                 // Logic for filtered sections (Clientes, Jefatura):
                 // If the section has a filter, we assume it's skipped if NO questions are answered.
@@ -120,39 +172,25 @@ export async function POST(request: Request) {
 
         // 1. Calculate Results
         const detailedResults = processSurvey(
-            formType as 'A' | 'B',
+            effectiveFormType,
             intralaboralAnswers || {},
             extralaboralAnswers || {},
             estresAnswers || {}
         )
         const results = flattenResults(detailedResults)
 
-        // 2. Check if participant exists for this campaign
-        let participant = await prisma.participante.findUnique({
-            where: {
-                cedula_campanaId: {
-                    cedula,
-                    campanaId: campaignId
-                }
-            }
+        // 2. Check if they already have a response
+        const existingResponse = await prisma.surveyResponse.findUnique({
+            where: { participanteId: participant.id }
         })
+        if (existingResponse) {
+            return NextResponse.json({ error: 'Ya has completado esta encuesta.' }, { status: 409 })
+        }
 
-        if (participant) {
-            // Check if they already have a response
-            const existingResponse = await prisma.surveyResponse.findUnique({
-                where: { participanteId: participant.id }
-            })
-            if (existingResponse) {
-                return NextResponse.json({ error: 'Ya has completado esta encuesta.' }, { status: 409 })
-            }
-        } else {
-            // Create participant
-            participant = await prisma.participante.create({
-                data: {
-                    cedula,
-                    campanaId: campaignId,
-                    email: email || null
-                }
+        if (!participant.email && email) {
+            await prisma.participante.update({
+                where: { id: participant.id },
+                data: { email }
             })
         }
 
@@ -160,12 +198,12 @@ export async function POST(request: Request) {
         await prisma.surveyResponse.create({
             data: {
                 participanteId: participant.id,
-                videoWatched: videoWatched || false,
+                videoWatched,
                 consentName,
                 consentDoc,
                 consentSignature,
                 consentAccepted,
-                formType,
+                formType: effectiveFormType,
                 fichaData: fichaAnswers,
                 intralaboralData: intralaboralAnswers,
                 extralaboralData: extralaboralAnswers,

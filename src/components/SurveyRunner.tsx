@@ -41,6 +41,7 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
     errors,
     isSubmitting,
     isVerifying,
+    notEligibleMessage,
     filterClientes,
     progressSteps,
     getCurrentSections,
@@ -62,10 +63,33 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
     getFilterSetterForSection,
     handleIntroNext,
     handleVideoNext,
+    closeNotEligible,
   } = useSurvey({ campaignId });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+      {notEligibleMessage && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-4">
+          <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 w-full max-w-md overflow-hidden">
+            <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700">
+              <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">No aplica</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Verificación de elegibilidad</p>
+            </div>
+            <div className="p-6">
+              <p className="text-sm text-slate-700 dark:text-slate-200">{notEligibleMessage}</p>
+              <div className="flex justify-end mt-6">
+                <button
+                  type="button"
+                  onClick={closeNotEligible}
+                  className="px-4 py-2 text-sm font-semibold rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                >
+                  Entendido
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 sticky top-0 z-50 shadow-sm">
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3">
           <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center shadow-md">
