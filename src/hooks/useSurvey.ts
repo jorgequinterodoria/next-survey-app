@@ -16,6 +16,7 @@ type Phase =
   | 'intro'
   | 'video'
   | 'consent'
+  | 'compliance'
   | 'ficha'
   | 'intralaboral'
   | 'extralaboral'
@@ -121,6 +122,10 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
 
   const handleVideoNext = () => {
     setVideoWatched(true);
+    setPhase('compliance');
+  };
+
+  const handleComplianceNext = () => {
     setPhase('consent');
   };
 
@@ -368,6 +373,7 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
     getFilterSetterForSection,
     handleIntroNext,
     handleVideoNext,
+    handleComplianceNext,
     closeNotEligible: () => setNotEligibleMessage(null),
   };
 }

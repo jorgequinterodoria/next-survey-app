@@ -32,18 +32,6 @@ export function ThemeToggle() {
       >
         <Moon className="w-4 h-4" />
       </button>
-      <button
-        onClick={() => setTheme('system')}
-        className={`p-2 rounded-md transition-all ${
-          theme === 'system'
-            ? 'bg-white dark:bg-slate-700 shadow-sm text-blue-500'
-            : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
-        }`}
-        title="Usar preferencia del sistema"
-        aria-label="Usar preferencia del sistema"
-      >
-        <Monitor className="w-4 h-4" />
-      </button>
     </div>
   );
 }
