@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderToStream } from '@react-pdf/renderer';
-import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { Document, Page, Text, View, StyleSheet, Image as PdfImage } from '@react-pdf/renderer';
 import { processSurvey } from '../psychometrics';
 
 const styles = StyleSheet.create({
@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
   interpretacionTitle: { fontSize: 11, fontWeight: 'bold', marginTop: 15, marginBottom: 5, fontFamily: 'Helvetica-Bold' },
   interpretacionText: { fontSize: 9, marginBottom: 4, textAlign: 'justify' },
   observacionesBox: { minHeight: 60, borderWidth: 1, borderColor: '#000', borderStyle: 'solid', marginTop: 5, marginBottom: 15, padding: 8 },
-  signatureLine: { borderTop: 1, borderColor: '#000', borderStyle: 'solid', width: 200, marginTop: 40, paddingTop: 5, textAlign: 'center' },
+  signatureImage: { width: 200, height: 70, objectFit: 'contain', alignSelf: 'center', marginTop: 14, marginBottom: 6 },
+  signatureLine: { borderTopWidth: 1, borderTopColor: '#000', width: 200, marginTop: 24, paddingTop: 5, textAlign: 'center', alignSelf: 'center' },
 });
 
 // Helper for generic 2-column info tables
@@ -379,6 +380,9 @@ const ResultsDocument = ({ type, title, participantData, results, formType }: an
             <View style={{ marginTop: 20 }}>
                 <Text style={styles.tableCellBold}>Fecha de elaboración del informe: ______________________</Text>
                 
+                {evaluador?.evaluadorFirma ? (
+                  <PdfImage style={styles.signatureImage} src={evaluador.evaluadorFirma} />
+                ) : null}
                 <Text style={styles.signatureLine}>Firma del evaluador</Text>
             </View>
         </View>

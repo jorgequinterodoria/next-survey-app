@@ -4,6 +4,7 @@ import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import { randomBytes } from 'crypto'
 import bcrypt from 'bcryptjs'
+import { z } from 'zod'
 
 export async function createAdmin(formData: FormData) {
     const email = formData.get('email') as string
@@ -98,5 +99,90 @@ export async function toggleCampaignStatus(id: string, isActive: boolean) {
         return { success: true }
     } catch (error) {
         return { error: 'Failed to update status' }
+    }
+}
+
+const updateCampaignSchema = z.object({
+    id: z.string().min(1),
+    name: z.string().min(1),
+    evaluadorNombre: z.string().nullable(),
+    evaluadorId: z.string().nullable(),
+    evaluadorProfesion: z.string().nullable(),
+    evaluadorPostgrado: z.string().nullable(),
+    evaluadorTarjeta: z.string().nullable(),
+    evaluadorLicencia: z.string().nullable(),
+    evaluadorLicenciaFecha: z.string().nullable(),
+    removeFirma: z.boolean(),
+})
+
+function toNullIfBlank(value: FormDataEntryValue | null): string | null {
+    if (typeof value !== 'string') return null
+    const trimmed = value.trim()
+    return trimmed.length ? trimmed : null
+}
+
+export async function updateCampaign(formData: FormData) {
+    const id = formData.get('id') as string
+    const name = formData.get('name') as string
+
+    const evaluadorNombre = toNullIfBlank(formData.get('evaluadorNombre'))
+    const evaluadorId = toNullIfBlank(formData.get('evaluadorId'))
+    const evaluadorProfesion = toNullIfBlank(formData.get('evaluadorProfesion'))
+    const evaluadorPostgrado = toNullIfBlank(formData.get('evaluadorPostgrado'))
+    const evaluadorTarjeta = toNullIfBlank(formData.get('evaluadorTarjeta'))
+    const evaluadorLicencia = toNullIfBlank(formData.get('evaluadorLicencia'))
+    const evaluadorLicenciaFecha = toNullIfBlank(formData.get('evaluadorLicenciaFecha'))
+    const removeFirma = formData.get('removeFirma') === '1'
+
+    const parsed = updateCampaignSchema.safeParse({
+        id,
+        name,
+        evaluadorNombre,
+        evaluadorId,
+        evaluadorProfesion,
+        evaluadorPostgrado,
+        evaluadorTarjeta,
+        evaluadorLicencia,
+        evaluadorLicenciaFecha,
+        removeFirma,
+    })
+
+    if (!parsed.success) return { error: 'Datos inválidos para actualizar campaña' }
+
+    const firmaFile = formData.get('evaluadorFirmaFile')
+
+    let evaluadorFirma: string | null | undefined = undefined
+    if (removeFirma) {
+        evaluadorFirma = null
+    } else if (firmaFile instanceof File && firmaFile.size > 0) {
+        const isImage = typeof firmaFile.type === 'string' && firmaFile.type.startsWith('image/')
+        if (!isImage) return { error: 'La firma debe ser una imagen' }
+        if (firmaFile.size > 2 * 1024 * 1024) return { error: 'La firma supera el tamaño máximo permitido (2MB)' }
+
+        const bytes = await firmaFile.arrayBuffer()
+        const base64 = Buffer.from(bytes).toString('base64')
+        evaluadorFirma = `data:${firmaFile.type || 'image/png'};base64,${base64}`
+    }
+
+    try {
+        await prisma.campana.update({
+            where: { id: parsed.data.id },
+            data: {
+                name: parsed.data.name,
+                evaluadorNombre: parsed.data.evaluadorNombre,
+                evaluadorId: parsed.data.evaluadorId,
+                evaluadorProfesion: parsed.data.evaluadorProfesion,
+                evaluadorPostgrado: parsed.data.evaluadorPostgrado,
+                evaluadorTarjeta: parsed.data.evaluadorTarjeta,
+                evaluadorLicencia: parsed.data.evaluadorLicencia,
+                evaluadorLicenciaFecha: parsed.data.evaluadorLicenciaFecha,
+                ...(evaluadorFirma !== undefined ? { evaluadorFirma } : {}),
+            },
+        })
+        revalidatePath('/admin/campaigns')
+        return { success: true }
+    } catch (error) {
+        console.error(error)
+        return { error: 'Failed to update campaign' }
     }
 }

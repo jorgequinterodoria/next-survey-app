@@ -1,10 +1,8 @@
 import { prisma } from '@/lib/prisma'
-import { toggleCampaignStatus } from '@/app/actions/admin'
-import { Megaphone, Link as LinkIcon, ExternalLink } from 'lucide-react'
-import { GenerateReportButton } from '@/components/reports/GenerateReportButton';
+import { Megaphone, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import CreateCampaignModal from './CreateCampaignModal';
-import ImportExcelModal from './ImportExcelModal';
+import { CampaignActionsDropdown } from './CampaignActionsDropdown';
 
 export const dynamic = 'force-dynamic';
 
@@ -33,7 +31,7 @@ export default async function CampaignsPage() {
       </div>
 
       {/* List */}
-      <div className="bg-white rounded-lg shadow-sm overflow-x-auto w-full">
+      <div className="bg-white rounded-lg shadow-sm overflow-x-auto overflow-y-visible w-full">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -47,6 +45,8 @@ export default async function CampaignsPage() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {campaigns.map((campana) => {
+                const evaluadorFirmaRaw = (campana as unknown as Record<string, unknown>).evaluadorFirma;
+                const evaluadorFirma = typeof evaluadorFirmaRaw === 'string' ? evaluadorFirmaRaw : null;
                 return (
               <tr key={campana.id}>
                 <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{campana.name}</td>
@@ -61,47 +61,33 @@ export default async function CampaignsPage() {
                     </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                    <form action={async () => {
-                        'use server'
-                        await toggleCampaignStatus(campana.id, !campana.isActive)
-                    }}>
-                        <button 
-                            type="submit"
-                            className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full cursor-pointer transition-colors ${
-                                campana.isActive 
-                                    ? 'bg-green-100 text-green-800 hover:bg-green-200' 
-                                    : 'bg-red-100 text-red-800 hover:bg-red-200'
-                            }`}
-                        >
-                            {campana.isActive ? 'Activa' : 'Inactiva'}
-                        </button>
-                    </form>
+                    <span
+                      className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                        campana.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                      }`}
+                    >
+                      {campana.isActive ? 'Activa' : 'Inactiva'}
+                    </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-gray-500">{campana._count.participantes}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center gap-2">
-                        <GenerateReportButton
-                            campanaId={campana.id}
-                            campanaName={campana.name}
-                            empresaName={campana.empresa.name}
-                        />
-                        <ImportExcelModal campanaId={campana.id} />
-                        <Link
-                          href={`/admin/campaigns/${campana.id}/participants`}
-                          className="bg-white border border-slate-300 text-slate-700 px-3 py-1.5 rounded text-xs font-medium hover:bg-slate-50 transition-colors inline-flex items-center"
-                          title="Ver listado de habilitados"
-                        >
-                          Ver listado
-                        </Link>
-                        <Link 
-                            href={`/api/admin/export?campanaId=${campana.id}`} 
-                            className="bg-green-600 text-white px-3 py-1.5 rounded text-xs font-medium hover:bg-green-700 transition-colors inline-flex items-center"
-                            target="_blank"
-                            title="Exportar a Excel"
-                        >
-                            Excel
-                        </Link>
-                    </div>
+                  <CampaignActionsDropdown
+                    campaign={{
+                      id: campana.id,
+                      name: campana.name,
+                      token: campana.token,
+                      isActive: campana.isActive,
+                      empresaName: campana.empresa.name,
+                      evaluadorNombre: campana.evaluadorNombre,
+                      evaluadorId: campana.evaluadorId,
+                      evaluadorProfesion: campana.evaluadorProfesion,
+                      evaluadorPostgrado: campana.evaluadorPostgrado,
+                      evaluadorTarjeta: campana.evaluadorTarjeta,
+                      evaluadorLicencia: campana.evaluadorLicencia,
+                      evaluadorLicenciaFecha: campana.evaluadorLicenciaFecha,
+                      evaluadorFirma,
+                    }}
+                  />
                 </td>
               </tr>
             )})}

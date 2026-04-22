@@ -1,0 +1,1 @@
+ALTER TABLE "Campana" ADD COLUMN IF NOT EXISTS "evaluadorFirma" TEXT;

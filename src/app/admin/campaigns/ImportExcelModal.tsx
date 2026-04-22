@@ -15,7 +15,13 @@ type ImportResult = {
   rejected: Array<{ row: number; reason: string }>;
 };
 
-export default function ImportExcelModal({ campanaId }: { campanaId: string }) {
+export default function ImportExcelModal({
+  campanaId,
+  triggerVariant = 'button',
+}: {
+  campanaId: string;
+  triggerVariant?: 'button' | 'menu';
+}) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -96,15 +102,27 @@ export default function ImportExcelModal({ campanaId }: { campanaId: string }) {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setIsOpen(true)}
-        className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-3 py-1.5 rounded text-xs font-semibold hover:from-blue-700 hover:to-indigo-800 transition-colors inline-flex items-center gap-2 shadow-sm"
-        title="Cargar listado de habilitados (Excel)"
-      >
-        <Upload className="h-4 w-4" />
-        Cargar listado
-      </button>
+      {triggerVariant === 'menu' ? (
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          className="w-full px-3 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2"
+          title="Cargar listado de habilitados (Excel)"
+        >
+          <Upload className="h-4 w-4" />
+          Cargar listado
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-3 py-1.5 rounded text-xs font-semibold hover:from-blue-700 hover:to-indigo-800 transition-colors inline-flex items-center gap-2 shadow-sm"
+          title="Cargar listado de habilitados (Excel)"
+        >
+          <Upload className="h-4 w-4" />
+          Cargar listado
+        </button>
+      )}
 
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">

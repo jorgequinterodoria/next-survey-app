@@ -47,6 +47,7 @@ model Campana {
   evaluadorTarjeta       String?
   evaluadorLicencia      String?
   evaluadorLicenciaFecha String?
+  evaluadorFirma         String?       @db.Text
 
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
