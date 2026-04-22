@@ -23,7 +23,7 @@ export function ProgressIndicator({ steps }: ProgressIndicatorProps) {
                     step.completed
                       ? 'bg-green-500 text-white'
                       : step.active
-                      ? 'bg-blue-500 text-white'
+                      ? 'bg-[#dc9222] text-white'
                       : 'bg-slate-200 text-slate-500'
                   }`}
                 >
@@ -31,7 +31,7 @@ export function ProgressIndicator({ steps }: ProgressIndicatorProps) {
                 </div>
                 <span
                   className={`mt-1 text-xs font-medium text-center max-w-20 ${
-                    step.active ? 'text-blue-600' : 'text-slate-500'
+                    step.active ? 'text-[#dc9222]' : 'text-slate-500'
                   }`}
                 >
                   {step.label}

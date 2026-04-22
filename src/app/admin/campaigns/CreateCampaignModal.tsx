@@ -21,7 +21,7 @@ export default function CreateCampaignModal({ companies }: { companies: { id: st
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center gap-2 text-sm font-medium"
+        className="bg-[#dc9222] text-white px-4 py-2 rounded-md hover:bg-[#c7831f] transition-colors flex items-center gap-2 text-sm font-medium"
       >
         <Plus className="h-4 w-4" />
         Nueva Campaña
@@ -44,7 +44,7 @@ export default function CreateCampaignModal({ companies }: { companies: { id: st
                   <select
                     name="empresaId"
                     required
-                    className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                   >
                     <option value="">Seleccionar empresa...</option>
                     {companies.map(c => (
@@ -59,7 +59,7 @@ export default function CreateCampaignModal({ companies }: { companies: { id: st
                     name="name"
                     type="text"
                     required
-                    className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     placeholder="Ej: Evaluación 2024"
                   />
                 </div>
@@ -73,7 +73,7 @@ export default function CreateCampaignModal({ companies }: { companies: { id: st
                     <input
                       name="evaluadorNombre"
                       type="text"
-                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -81,7 +81,7 @@ export default function CreateCampaignModal({ companies }: { companies: { id: st
                     <input
                       name="evaluadorId"
                       type="text"
-                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -89,7 +89,7 @@ export default function CreateCampaignModal({ companies }: { companies: { id: st
                     <input
                       name="evaluadorProfesion"
                       type="text"
-                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -97,7 +97,7 @@ export default function CreateCampaignModal({ companies }: { companies: { id: st
                     <input
                       name="evaluadorPostgrado"
                       type="text"
-                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -105,7 +105,7 @@ export default function CreateCampaignModal({ companies }: { companies: { id: st
                     <input
                       name="evaluadorTarjeta"
                       type="text"
-                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -113,7 +113,7 @@ export default function CreateCampaignModal({ companies }: { companies: { id: st
                     <input
                       name="evaluadorLicencia"
                       type="text"
-                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -121,7 +121,7 @@ export default function CreateCampaignModal({ companies }: { companies: { id: st
                     <input
                       name="evaluadorLicenciaFecha"
                       type="date"
-                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                 </div>
@@ -138,7 +138,7 @@ export default function CreateCampaignModal({ companies }: { companies: { id: st
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
+                  className="px-4 py-2 text-sm font-medium text-white bg-[#dc9222] rounded-md hover:bg-[#c7831f] transition-colors disabled:opacity-50"
                 >
                   {isSubmitting ? 'Creando...' : 'Crear Campaña'}
                 </button>

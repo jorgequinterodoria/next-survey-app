@@ -21,7 +21,7 @@ function ComplianceModal({ open, onClose }: { open: boolean; onClose: () => void
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 px-4">
       <div className="bg-white dark:bg-slate-800 w-full max-w-3xl max-h-[85vh] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden flex flex-col">
-        <div className="bg-gradient-to-r from-indigo-600 to-purple-700 px-6 py-5 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-[#dc9222] to-[#f39205] px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center">
               <Scale className="w-6 h-6 text-white" />
@@ -56,7 +56,7 @@ function ComplianceModal({ open, onClose }: { open: boolean; onClose: () => void
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-sm font-semibold rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
+            className="px-4 py-2 text-sm font-semibold rounded-xl bg-[#dc9222] text-white hover:bg-[#c7831f] transition-colors"
           >
             Entendido
           </button>
@@ -76,8 +76,8 @@ export function ComplianceFooter() {
       <div className="fixed bottom-0 left-0 right-0 z-40">
         <div className="bg-white/95 dark:bg-slate-900/90 backdrop-blur border-t border-slate-200 dark:border-slate-700">
           <div className="max-w-2xl mx-auto px-4 py-3 flex items-start gap-3">
-            <div className="mt-0.5 w-8 h-8 rounded-xl bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center flex-shrink-0">
-              <Scale className="w-4 h-4 text-indigo-700 dark:text-indigo-300" />
+            <div className="mt-0.5 w-8 h-8 rounded-xl bg-[#dc9222]/15 dark:bg-[#dc9222]/15 flex items-center justify-center flex-shrink-0">
+              <Scale className="w-4 h-4 text-[#dc9222] dark:text-[#f3c27b]" />
             </div>
             <div className="min-w-0 flex-1">
               <div className="text-xs font-bold text-slate-900 dark:text-slate-100">Compliance</div>
@@ -88,7 +88,7 @@ export function ComplianceFooter() {
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="text-xs font-semibold text-indigo-700 dark:text-indigo-300 hover:underline flex-shrink-0"
+              className="text-xs font-semibold text-[#dc9222] dark:text-[#f3c27b] hover:underline flex-shrink-0"
             >
               Ver más
             </button>

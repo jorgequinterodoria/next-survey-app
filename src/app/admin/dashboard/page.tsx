@@ -17,10 +17,10 @@ export default async function DashboardPage() {
   const stats = await getStats()
 
   const cards = [
-    { label: 'Empresas', value: stats.companies, icon: Building2, color: 'bg-blue-500' },
-    { label: 'Campañas', value: stats.campaigns, icon: Megaphone, color: 'bg-green-500' },
-    { label: 'Participantes', value: stats.participants, icon: Users, color: 'bg-purple-500' },
-    { label: 'Respuestas', value: stats.responses, icon: ClipboardCheck, color: 'bg-orange-500' },
+    { label: 'Empresas', value: stats.companies, icon: Building2, color: 'bg-[#7c7b7b]' },
+    { label: 'Campañas', value: stats.campaigns, icon: Megaphone, color: 'bg-[#dc9222]' },
+    { label: 'Participantes', value: stats.participants, icon: Users, color: 'bg-[#6a6a6a]' },
+    { label: 'Respuestas', value: stats.responses, icon: ClipboardCheck, color: 'bg-[#f39205]' },
   ]
 
   return (

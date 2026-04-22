@@ -72,8 +72,8 @@ export function GenerateReportButton({
   const baseClasses = 'inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
 
   const stateClasses: Record<Status, string> = {
-    idle: 'bg-blue-700 text-white hover:bg-blue-800 focus:ring-blue-500 cursor-pointer',
-    loading: 'bg-blue-400 text-white cursor-not-allowed',
+    idle: 'bg-[#dc9222] text-white hover:bg-[#c7831f] focus:ring-[#dc9222]/40 cursor-pointer',
+    loading: 'bg-[#dc9222]/70 text-white cursor-not-allowed',
     success: 'bg-green-600 text-white',
     error: 'bg-red-600 text-white hover:bg-red-700 cursor-pointer',
   };

@@ -55,7 +55,7 @@ export default async function CampaignsPage() {
                     <div className="flex items-center gap-2">
                         <code className="bg-gray-100 px-2 py-1 rounded text-xs">{campana.token}</code>
                         {/* Copy button could be precise here, but simplifying */}
-                        <Link href={`/?token=${campana.token}`} target="_blank" className="text-blue-600 hover:text-blue-800">
+                        <Link href={`/?token=${campana.token}`} target="_blank" className="text-[#dc9222] hover:text-[#c7831f]">
                             <ExternalLink className="h-4 w-4" />
                         </Link>
                     </div>

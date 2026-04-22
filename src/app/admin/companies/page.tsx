@@ -32,7 +32,7 @@ export default async function CompaniesPage() {
               name="name"
               type="text"
               required
-              className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
               placeholder="Ej: Acme Corp"
             />
           </div>
@@ -41,13 +41,13 @@ export default async function CompaniesPage() {
             <input
               name="nit"
               type="text"
-              className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
               placeholder="Ej: 900.123.456"
             />
           </div>
           <button
             type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium"
+            className="bg-[#dc9222] text-white px-4 py-2 rounded-md hover:bg-[#c7831f] transition-colors text-sm font-medium"
           >
             Crear Empresa
           </button>

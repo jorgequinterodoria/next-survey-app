@@ -104,7 +104,7 @@ export function EditCampaignModal({ campaign }: { campaign: CampaignForEdit }) {
                     type="text"
                     required
                     defaultValue={campaign.name}
-                    className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                   />
                 </div>
               </div>
@@ -119,7 +119,7 @@ export function EditCampaignModal({ campaign }: { campaign: CampaignForEdit }) {
                       name="evaluadorNombre"
                       type="text"
                       defaultValue={campaign.evaluadorNombre || ''}
-                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -128,7 +128,7 @@ export function EditCampaignModal({ campaign }: { campaign: CampaignForEdit }) {
                       name="evaluadorId"
                       type="text"
                       defaultValue={campaign.evaluadorId || ''}
-                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -137,7 +137,7 @@ export function EditCampaignModal({ campaign }: { campaign: CampaignForEdit }) {
                       name="evaluadorProfesion"
                       type="text"
                       defaultValue={campaign.evaluadorProfesion || ''}
-                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -146,7 +146,7 @@ export function EditCampaignModal({ campaign }: { campaign: CampaignForEdit }) {
                       name="evaluadorPostgrado"
                       type="text"
                       defaultValue={campaign.evaluadorPostgrado || ''}
-                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -155,7 +155,7 @@ export function EditCampaignModal({ campaign }: { campaign: CampaignForEdit }) {
                       name="evaluadorTarjeta"
                       type="text"
                       defaultValue={campaign.evaluadorTarjeta || ''}
-                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -164,7 +164,7 @@ export function EditCampaignModal({ campaign }: { campaign: CampaignForEdit }) {
                       name="evaluadorLicencia"
                       type="text"
                       defaultValue={campaign.evaluadorLicencia || ''}
-                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                   <div className="space-y-2">
@@ -173,7 +173,7 @@ export function EditCampaignModal({ campaign }: { campaign: CampaignForEdit }) {
                       name="evaluadorLicenciaFecha"
                       type="date"
                       defaultValue={campaign.evaluadorLicenciaFecha || ''}
-                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-[#dc9222] focus:border-[#dc9222]"
                     />
                   </div>
                 </div>
@@ -245,7 +245,7 @@ export function EditCampaignModal({ campaign }: { campaign: CampaignForEdit }) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50"
+                  className="px-4 py-2 text-sm font-semibold text-white bg-[#dc9222] rounded-md hover:bg-[#c7831f] transition-colors disabled:opacity-50"
                 >
                   {isSubmitting ? 'Guardando...' : 'Guardar cambios'}
                 </button>

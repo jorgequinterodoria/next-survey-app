@@ -67,7 +67,7 @@ export function ReportNotesEditor({
           type="button"
           onClick={handleSave}
           disabled={status === 'saving'}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-md text-sm font-semibold bg-[#dc9222] text-white hover:bg-[#c7831f] disabled:opacity-50"
         >
           <Save className="h-4 w-4" />
           {status === 'saving' ? 'Guardando...' : status === 'saved' ? 'Guardado' : 'Guardar'}
@@ -83,7 +83,7 @@ export function ReportNotesEditor({
             value={observaciones}
             onChange={(e) => setObservaciones(e.target.value)}
             rows={4}
-            className="w-full rounded-md border border-slate-300 p-3 text-sm text-slate-900 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full rounded-md border border-slate-300 p-3 text-sm text-slate-900 focus:ring-[#dc9222]/25 focus:border-[#dc9222]"
             placeholder="Escribe aquí las observaciones..."
           />
         </div>
@@ -94,7 +94,7 @@ export function ReportNotesEditor({
             value={recomendaciones}
             onChange={(e) => setRecomendaciones(e.target.value)}
             rows={4}
-            className="w-full rounded-md border border-slate-300 p-3 text-sm text-slate-900 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full rounded-md border border-slate-300 p-3 text-sm text-slate-900 focus:ring-[#dc9222]/25 focus:border-[#dc9222]"
             placeholder="Escribe aquí las recomendaciones..."
           />
         </div>
@@ -106,7 +106,7 @@ export function ReportNotesEditor({
               value={fechaElaboracion}
               onChange={(e) => setFechaElaboracion(e.target.value)}
               type="date"
-              className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full rounded-md border border-slate-300 p-2 text-sm text-slate-900 focus:ring-[#dc9222]/25 focus:border-[#dc9222]"
             />
           </div>
           {status === 'error' && error && (

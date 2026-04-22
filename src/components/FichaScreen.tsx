@@ -79,7 +79,7 @@
                   </div>
                   
                   {q.helpText && (
-                    <div className="flex items-start gap-1.5 text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 p-2 rounded-md mt-1">
+                    <div className="flex items-start gap-1.5 text-xs text-[#dc9222] dark:text-[#dc9222] bg-[#dc9222]/10 dark:bg-[#dc9222]/15 p-2 rounded-md mt-1">
                       <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
                       <p>{q.helpText}</p>
                     </div>

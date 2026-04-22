@@ -9,9 +9,9 @@
   --card-foreground: #171717;
   --border: #e2e8f0;
   --input: #e2e8f0;
-  --ring: #3b82f6;
-  --muted: #64748b;
-  --muted-foreground: #64748b;
+  --ring: #dc9222;
+  --muted: #7c7b7b;
+  --muted-foreground: #7c7b7b;
 }
 
 .dark {
@@ -21,9 +21,9 @@
   --card-foreground: #f8fafc;
   --border: #334155;
   --input: #334155;
-  --ring: #60a5fa;
-  --muted: #94a3b8;
-  --muted-foreground: #94a3b8;
+  --ring: #dc9222;
+  --muted: #b9b9b9;
+  --muted-foreground: #b9b9b9;
 }
 
 @theme inline {

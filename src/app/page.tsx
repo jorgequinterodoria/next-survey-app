@@ -41,7 +41,7 @@ function HomeContent() {
   if (loading) {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
-            <div className="animate-pulse text-blue-600">Cargando encuesta...</div>
+            <div className="animate-pulse text-[#dc9222]">Cargando encuesta...</div>
         </div>
     )
   }

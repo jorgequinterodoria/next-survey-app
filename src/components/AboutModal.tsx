@@ -30,7 +30,7 @@ function AboutDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 px-4">
       <div className="bg-white dark:bg-slate-800 w-full max-w-3xl max-h-[85vh] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden flex flex-col">
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-5 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-[#dc9222] to-[#f39205] px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center">
               <Scale className="w-6 h-6 text-white" />
@@ -159,7 +159,7 @@ function AboutDialog({ open, onClose }: { open: boolean; onClose: () => void }) 
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-sm font-semibold rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition-colors"
+              className="px-4 py-2 text-sm font-semibold rounded-xl bg-[#dc9222] text-white hover:bg-[#c7831f] transition-colors"
           >
             Cerrar
           </button>
@@ -180,7 +180,7 @@ export function AboutModalButton() {
         className="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
         aria-label="Acerca de"
       >
-        <HelpCircle className="w-4 h-4 text-indigo-700 dark:text-indigo-300" />
+        <HelpCircle className="w-4 h-4 text-[#dc9222] dark:text-[#f3c27b]" />
         <span className="text-xs font-bold">Acerca de</span>
       </button>
 
@@ -188,4 +188,3 @@ export function AboutModalButton() {
     </>
   );
 }
-

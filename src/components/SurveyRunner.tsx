@@ -72,7 +72,7 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
   } = useSurvey({ campaignId });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/40 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-white via-[#dc9222]/5 to-[#7c7b7b]/10 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       {notEligibleMessage && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-4">
           <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 w-full max-w-md overflow-hidden">
@@ -86,7 +86,7 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
                 <button
                   type="button"
                   onClick={closeNotEligible}
-                  className="px-4 py-2 text-sm font-semibold rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                  className="px-4 py-2 text-sm font-semibold rounded-xl bg-[#dc9222] text-white hover:bg-[#c7831f] transition-colors"
                 >
                   Entendido
                 </button>

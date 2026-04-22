@@ -66,7 +66,7 @@ export default function CampaignParticipantsClient({ campanaId }: { campanaId: s
         <h1 className="text-xl font-semibold text-gray-900">Listado de habilitados</h1>
         <Link
           href="/admin/campaigns"
-          className="text-sm text-blue-600 hover:text-blue-800"
+          className="text-sm text-[#dc9222] hover:text-[#c7831f]"
         >
           Volver a campañas
         </Link>
@@ -164,4 +164,3 @@ export default function CampaignParticipantsClient({ campanaId }: { campanaId: s
     </div>
   );
 }
-

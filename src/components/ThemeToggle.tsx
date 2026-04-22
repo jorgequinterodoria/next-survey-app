@@ -12,7 +12,7 @@ export function ThemeToggle() {
         onClick={() => setTheme('light')}
         className={`p-2 rounded-md transition-all ${
           resolvedTheme === 'light' && theme !== 'system'
-            ? 'bg-white dark:bg-slate-700 shadow-sm text-amber-500'
+            ? 'bg-white dark:bg-slate-700 shadow-sm text-[#dc9222]'
             : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
         }`}
         title="Modo claro"
@@ -24,7 +24,7 @@ export function ThemeToggle() {
         onClick={() => setTheme('dark')}
         className={`p-2 rounded-md transition-all ${
           resolvedTheme === 'dark' && theme !== 'system'
-            ? 'bg-white dark:bg-slate-700 shadow-sm text-indigo-400'
+            ? 'bg-white dark:bg-slate-700 shadow-sm text-[#dc9222]'
             : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
         }`}
         title="Modo oscuro"

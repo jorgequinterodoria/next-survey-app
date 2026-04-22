@@ -57,14 +57,14 @@ export function ConsentScreen({
   return (
     <div className="max-w-2xl mx-auto">
       <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-5">
+        <div className="bg-gradient-to-r from-[#dc9222] to-[#f39205] px-6 py-5">
           <div className="flex items-center gap-3">
             <FileText className="w-7 h-7 text-white" />
             <h2 className="text-lg font-bold text-white leading-tight">
               Consentimiento Informado para la Evaluación de Riesgos Psicosociales
             </h2>
           </div>
-          <p className="text-blue-100 text-xs mt-2">
+          <p className="text-white/85 text-xs mt-2">
             En cumplimiento a la Resolución 2764 de 2022 y la Ley 1090 de 2006
           </p>
         </div>
@@ -82,7 +82,7 @@ export function ConsentScreen({
                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200">Nombre completo</label>
                 <FieldStatus isValid={isNameValid} showWhenInvalid={true} />
               </div>
-              <div className="flex items-start gap-1.5 text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 p-2 rounded-md mb-2">
+              <div className="flex items-start gap-1.5 text-xs text-[#dc9222] dark:text-[#dc9222] bg-[#dc9222]/10 dark:bg-[#dc9222]/15 p-2 rounded-md mb-2">
                 <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
                 <p>Escriba sus nombres y apellidos tal cual aparecen en su documento de identidad.</p>
               </div>
@@ -90,7 +90,7 @@ export function ConsentScreen({
                 type="text"
                 value={consentName}
                 onChange={(e) => onNameChange(e.target.value)}
-                className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-700 placeholder-slate-400 dark:placeholder-slate-500 ${
+                className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-[#dc9222]/25 focus:border-[#dc9222] transition-all text-sm text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-700 placeholder-slate-400 dark:placeholder-slate-500 ${
                   isNameValid 
                     ? 'border-green-400 dark:border-green-600 bg-green-50/30 dark:bg-green-900/20' 
                     : 'border-slate-300 dark:border-slate-600'
@@ -103,7 +103,7 @@ export function ConsentScreen({
                 <label className="block text-sm font-semibold text-slate-700 dark:text-slate-200">Número de documento</label>
                 <FieldStatus isValid={isDocValid} showWhenInvalid={true} />
               </div>
-              <div className="flex items-start gap-1.5 text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 p-2 rounded-md mb-2">
+              <div className="flex items-start gap-1.5 text-xs text-[#dc9222] dark:text-[#dc9222] bg-[#dc9222]/10 dark:bg-[#dc9222]/15 p-2 rounded-md mb-2">
                 <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
                 <p>Ingrese únicamente números, sin puntos ni espacios.</p>
               </div>
@@ -111,7 +111,7 @@ export function ConsentScreen({
                 type="text"
                 value={consentDoc}
                 onChange={(e) => onDocChange(e.target.value)}
-                className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-sm text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-700 placeholder-slate-400 dark:placeholder-slate-500 ${
+                className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-[#dc9222]/25 focus:border-[#dc9222] transition-all text-sm text-slate-800 dark:text-slate-100 bg-white dark:bg-slate-700 placeholder-slate-400 dark:placeholder-slate-500 ${
                   isDocValid 
                     ? 'border-green-400 dark:border-green-600 bg-green-50/30 dark:bg-green-900/20' 
                     : 'border-slate-300 dark:border-slate-600'
@@ -135,7 +135,7 @@ export function ConsentScreen({
                 <FieldStatus isValid={isSignatureValid} showWhenInvalid={true} />
               </div>
             </div>
-            <div className="flex items-start gap-1.5 text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 p-2 rounded-md mb-2">
+            <div className="flex items-start gap-1.5 text-xs text-[#dc9222] dark:text-[#dc9222] bg-[#dc9222]/10 dark:bg-[#dc9222]/15 p-2 rounded-md mb-2">
               <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
               <p>Dibuje su firma con el mouse o el dedo (si está en celular/tablet). Intente que sea lo más parecida a su cédula.</p>
             </div>
@@ -183,7 +183,7 @@ export function ConsentScreen({
               type="checkbox"
               checked={consentAccepted}
               onChange={(e) => onAccept(e.target.checked)}
-              className="mt-0.5 w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
+              className="mt-0.5 w-4 h-4 text-[#dc9222] border-slate-300 rounded focus:ring-[#dc9222]/30"
             />
             <span className="text-sm text-slate-700 dark:text-slate-200 group-hover:text-slate-800 dark:group-hover:text-slate-100 flex-1">
               Acepto los términos y condiciones del consentimiento informado y autorizo el tratamiento de mis datos personales
@@ -196,7 +196,7 @@ export function ConsentScreen({
             disabled={!canProceed || isVerifying}
             className={`w-full py-3 rounded-xl font-semibold text-sm transition-all flex items-center justify-center gap-2 ${
               canProceed && !isVerifying
-                ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200 dark:shadow-blue-900/30'
+                ? 'bg-[#dc9222] text-white hover:bg-[#c7831f] shadow-lg shadow-[#dc9222]/20 dark:shadow-[#dc9222]/10'
                 : 'bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed'
             }`}
           >

@@ -40,8 +40,8 @@
            </p>
          </div>
 
-         <div className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 border border-blue-200 dark:border-blue-800">
-           <p className="text-xs text-blue-700 dark:text-blue-300">
+         <div className="bg-[#dc9222]/10 dark:bg-[#dc9222]/15 rounded-xl p-4 border border-[#dc9222]/25 dark:border-[#dc9222]/30">
+           <p className="text-xs text-[#8a5400] dark:text-[#f3c27b]">
              <span className="font-semibold">Recuerde:</span> La información suministrada es
              absolutamente confidencial según la Ley 1090 de 2006. El resultado del diagnóstico
              generará un plan de recomendaciones e intervenciones para su bienestar.

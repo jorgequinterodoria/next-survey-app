@@ -12,14 +12,14 @@ export function VideoInstructionScreen({ onAccept }: VideoInstructionScreenProps
   return (
     <div className="max-w-3xl mx-auto">
       <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
-        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-5">
+        <div className="bg-gradient-to-r from-[#dc9222] to-[#f39205] px-6 py-5">
           <div className="flex items-center gap-3">
             <PlayCircle className="w-7 h-7 text-white" />
             <h2 className="text-lg font-bold text-white leading-tight">
               Instrucciones Previas a la Evaluación
             </h2>
           </div>
-          <p className="text-blue-100 text-xs mt-2">
+          <p className="text-white/85 text-xs mt-2">
             Por favor, observe el siguiente video explicativo antes de iniciar su encuesta.
           </p>
         </div>
@@ -44,7 +44,7 @@ export function VideoInstructionScreen({ onAccept }: VideoInstructionScreenProps
                 checked={accepted}
                 onChange={(e) => setAccepted(e.target.checked)}
                 disabled={!hasWatched}
-                className="mt-1 w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 disabled:opacity-50"
+                className="mt-1 w-5 h-5 text-[#dc9222] rounded border-slate-300 focus:ring-[#dc9222]/30 disabled:opacity-50"
               />
               <div>
                 <span className="block text-sm font-semibold text-slate-800 dark:text-slate-200">
@@ -59,7 +59,7 @@ export function VideoInstructionScreen({ onAccept }: VideoInstructionScreenProps
             <button
               onClick={onAccept}
               disabled={!accepted}
-              className="mt-6 w-full py-3.5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 dark:disabled:bg-slate-700 disabled:text-slate-500 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2"
+              className="mt-6 w-full py-3.5 bg-[#dc9222] hover:bg-[#c7831f] disabled:bg-slate-300 dark:disabled:bg-slate-700 disabled:text-slate-500 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2"
             >
               Continuar al Consentimiento Informado
               <CheckCircle className="w-5 h-5" />

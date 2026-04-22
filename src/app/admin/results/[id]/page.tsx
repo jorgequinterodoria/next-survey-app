@@ -25,9 +25,9 @@ function ResultSection({ title, results }: { title: string, results: Record<stri
           const isTotal = key.includes('Total') || key.includes('Dominio');
           
           return (
-          <div key={key} className={`border rounded-lg p-4 flex flex-col justify-between ${isTotal ? 'bg-blue-50 border-blue-200' : ''}`}>
+          <div key={key} className={`border rounded-lg p-4 flex flex-col justify-between ${isTotal ? 'bg-[#dc9222]/10 border-[#dc9222]/25' : ''}`}>
             <div>
-                <h4 className={`text-sm mb-1 ${isTotal ? 'font-bold text-blue-900' : 'font-medium text-gray-700'}`}>{res.dimension}</h4>
+                <h4 className={`text-sm mb-1 ${isTotal ? 'font-bold text-[#8a5400]' : 'font-medium text-gray-700'}`}>{res.dimension}</h4>
                 <div className="text-2xl font-bold text-gray-900 mb-2">{res.score} <span className="text-xs text-gray-400 font-normal">/ 100</span></div>
             </div>
             <div className={`text-xs font-semibold px-2 py-1 rounded-full w-fit ${getRiskColor(res.level)}`}>
@@ -113,7 +113,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
       </div>
 
       {/* Report Header */}
-      <div className="bg-white rounded-lg shadow-sm p-8 border-t-4 border-blue-600">
+      <div className="bg-white rounded-lg shadow-sm p-8 border-t-4 border-[#dc9222]">
         <div className="flex justify-between items-start mb-6">
             <div>
                 <h1 className="text-2xl font-bold text-gray-900">Informe de Riesgo Psicosocial</h1>

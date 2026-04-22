@@ -64,20 +64,20 @@ export default async function ResultsPage() {
                 <td className="px-6 py-4 whitespace-nowrap">
                     {p.surveyResponse ? (
                         <div className="flex gap-2 items-center">
-                          <Link href={`/admin/results/${p.surveyResponse.id}`} className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800 hover:bg-blue-200 cursor-pointer">
+                          <Link href={`/admin/results/${p.surveyResponse.id}`} className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-[#dc9222]/15 text-[#8a5400] hover:bg-[#dc9222]/25 cursor-pointer">
                               Ver Informe Web
                           </Link>
                           <a 
                             href={`/api/admin/participant/${p.id}/download-pdf`} 
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 hover:bg-green-200 cursor-pointer"
+                            className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-[#7c7b7b]/15 text-[#4b4b4b] hover:bg-[#7c7b7b]/25 cursor-pointer"
                           >
                             <Download className="h-3 w-3 mr-1" /> PDF Físico
                           </a>
                         </div>
                     ) : (
-                        <span className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                        <span className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-[#dc9222]/15 text-[#8a5400]">
                             Pendiente
                         </span>
                     )}

@@ -13,14 +13,14 @@ export function IntroVideoScreen({ onAccept }: IntroVideoScreenProps) {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
-        <div className="bg-linear-to-r from-indigo-600 to-purple-700 px-6 py-5">
+        <div className="bg-linear-to-r from-[#dc9222] to-[#f39205] px-6 py-5">
           <div className="flex items-center gap-3">
             <PlayCircle className="w-7 h-7 text-white" />
             <h2 className="text-lg font-bold text-white leading-tight">
               Presentación de la Batería de Riesgo Psicosocial
             </h2>
           </div>
-          <p className="text-indigo-100 text-xs mt-2">
+          <p className="text-white/85 text-xs mt-2">
             Por favor, observe este video introductorio antes de continuar.
           </p>
         </div>
@@ -43,7 +43,7 @@ export function IntroVideoScreen({ onAccept }: IntroVideoScreenProps) {
                 type="checkbox"
                 checked={accepted}
                 onChange={(e) => setAccepted(e.target.checked)}
-                className="mt-1 w-5 h-5 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
+                className="mt-1 w-5 h-5 text-[#dc9222] rounded border-slate-300 focus:ring-[#dc9222]/30"
               />
               <div>
                 <span className="block text-sm font-semibold text-slate-800 dark:text-slate-200">
@@ -58,7 +58,7 @@ export function IntroVideoScreen({ onAccept }: IntroVideoScreenProps) {
             <button
               onClick={onAccept}
               disabled={!accepted}
-              className="mt-6 w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 dark:disabled:bg-slate-700 disabled:text-slate-500 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2"
+              className="mt-6 w-full py-3.5 bg-[#dc9222] hover:bg-[#c7831f] disabled:bg-slate-300 dark:disabled:bg-slate-700 disabled:text-slate-500 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2"
             >
               Continuar
               <CheckCircle className="w-5 h-5" />

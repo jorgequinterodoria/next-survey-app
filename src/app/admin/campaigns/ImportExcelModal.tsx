@@ -116,7 +116,7 @@ export default function ImportExcelModal({
         <button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-3 py-1.5 rounded text-xs font-semibold hover:from-blue-700 hover:to-indigo-800 transition-colors inline-flex items-center gap-2 shadow-sm"
+          className="bg-gradient-to-r from-[#dc9222] to-[#f39205] text-white px-3 py-1.5 rounded text-xs font-semibold hover:from-[#c7831f] hover:to-[#dc9222] transition-colors inline-flex items-center gap-2 shadow-sm"
           title="Cargar listado de habilitados (Excel)"
         >
           <Upload className="h-4 w-4" />
@@ -127,7 +127,7 @@ export default function ImportExcelModal({
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-slate-200">
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-700 px-6 py-5 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-[#dc9222] to-[#f39205] px-6 py-5 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center">
                   <FileSpreadsheet className="h-6 w-6 text-white" />
@@ -169,19 +169,19 @@ export default function ImportExcelModal({
                 onDrop={onDrop}
                 className={`rounded-2xl border-2 border-dashed p-6 transition-colors ${
                   isDragging
-                    ? 'border-blue-500 bg-blue-50'
+                    ? 'border-[#dc9222] bg-[#dc9222]/10'
                     : file
-                      ? 'border-green-400 bg-green-50/40'
+                      ? 'border-[#7c7b7b] bg-[#7c7b7b]/10'
                       : 'border-slate-300 bg-slate-50'
                 }`}
               >
                 <div className="flex flex-col items-center text-center gap-2">
                   <div
                     className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
-                      isDragging ? 'bg-blue-100' : file ? 'bg-green-100' : 'bg-white'
+                      isDragging ? 'bg-[#dc9222]/15' : file ? 'bg-[#7c7b7b]/15' : 'bg-white'
                     }`}
                   >
-                    <Upload className={`${file ? 'text-green-700' : 'text-blue-700'} h-6 w-6`} />
+                    <Upload className={`${file ? 'text-[#4b4b4b]' : 'text-[#dc9222]'} h-6 w-6`} />
                   </div>
                   <div className="text-sm font-semibold text-slate-900">
                     Arrastra y suelta el Excel aquí
@@ -194,7 +194,7 @@ export default function ImportExcelModal({
                     <button
                       type="button"
                       onClick={() => inputRef.current?.click()}
-                      className="px-4 py-2 text-sm font-semibold rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                      className="px-4 py-2 text-sm font-semibold rounded-xl bg-[#dc9222] text-white hover:bg-[#c7831f] transition-colors"
                     >
                       Seleccionar archivo
                     </button>
@@ -218,7 +218,7 @@ export default function ImportExcelModal({
                   />
 
                   {file && (
-                    <div className="mt-3 w-full rounded-xl border border-green-200 bg-white px-4 py-3 text-left">
+                    <div className="mt-3 w-full rounded-xl border border-[#7c7b7b]/25 bg-white px-4 py-3 text-left">
                       <div className="text-xs text-slate-500">Archivo seleccionado</div>
                       <div className="text-sm font-semibold text-slate-900 truncate">{file.name}</div>
                     </div>
@@ -292,7 +292,7 @@ export default function ImportExcelModal({
                   type="button"
                   onClick={handleUpload}
                   disabled={!file || isSubmitting}
-                  className="px-4 py-2 text-sm font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50"
+                  className="px-4 py-2 text-sm font-semibold text-white bg-[#dc9222] rounded-xl hover:bg-[#c7831f] transition-colors disabled:opacity-50"
                 >
                   {isSubmitting ? 'Importando...' : 'Importar'}
                 </button>
