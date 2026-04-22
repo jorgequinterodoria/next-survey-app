@@ -26,7 +26,13 @@ export async function POST(request: Request) {
                     campanaId: campaignId
                 }
             },
-            select: { id: true, cuestionarioAsignado: true }
+            select: {
+                id: true,
+                cuestionarioAsignado: true,
+                cargoExcel: true,
+                antiguedadMesesExcel: true,
+                nivelOcupacionalExcel: true,
+            }
         })
 
         if (!participant) {
@@ -52,7 +58,12 @@ export async function POST(request: Request) {
             return NextResponse.json({
                 hasCompleted: true,
                 isRegistered: true,
-                cuestionarioAsignado: participant.cuestionarioAsignado ?? null
+                cuestionarioAsignado: participant.cuestionarioAsignado ?? null,
+                prefill: {
+                    cargo: participant.cargoExcel ?? null,
+                    antiguedadMeses: participant.antiguedadMesesExcel ?? null,
+                    nivelOcupacional: participant.nivelOcupacionalExcel ?? null,
+                }
             })
         }
 
@@ -60,7 +71,12 @@ export async function POST(request: Request) {
         return NextResponse.json({
             hasCompleted: false,
             isRegistered: true,
-            cuestionarioAsignado: participant.cuestionarioAsignado ?? null
+            cuestionarioAsignado: participant.cuestionarioAsignado ?? null,
+            prefill: {
+                cargo: participant.cargoExcel ?? null,
+                antiguedadMeses: participant.antiguedadMesesExcel ?? null,
+                nivelOcupacional: participant.nivelOcupacionalExcel ?? null,
+            }
         })
 
     } catch (error: any) {

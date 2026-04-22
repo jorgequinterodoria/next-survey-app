@@ -152,6 +152,29 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
 
         const data = await response.json();
 
+        const prefill = (data?.prefill && typeof data.prefill === 'object') ? data.prefill : null;
+
+        const normalizeText = (value: string) =>
+          value
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/\s+/g, ' ')
+            .trim()
+            .toLowerCase();
+
+        const mapNivelOcupacionalToFicha13 = (nivel: string): string | null => {
+          const q13 = fichaQuestions.find((q) => q.id === 13);
+          const opts = (q13 && 'opciones' in q13 ? (q13.opciones as string[] | undefined) : undefined) ?? [];
+          if (!opts.length) return null;
+
+          const n = normalizeText(nivel);
+          if (n.includes('directivo') || n.includes('jefatura') || n.includes('coordin')) return opts[0] ?? null;
+          if (n.includes('profesional') || n.includes('tecnico') || n.includes('tecnologo') || n.includes('analista')) return opts[1] ?? null;
+          if (n.includes('auxiliar') || n.includes('asistente') || n.includes('asistencial')) return opts[2] ?? null;
+          if (n.includes('operario') || n.includes('operador') || n.includes('ayudante') || n.includes('servicios generales')) return opts[3] ?? null;
+          return null;
+        };
+
         if (data.hasCompleted) {
           setErrors(['Ya has completado la encuesta para esta campaña.']);
         } else if (data.notEligible) {
@@ -161,6 +184,36 @@ export function useSurvey({ campaignId }: { campaignId: string }) {
         } else {
           if (data.cuestionarioAsignado === 'A' || data.cuestionarioAsignado === 'B') {
             setFormType(data.cuestionarioAsignado);
+          }
+          if (prefill) {
+            setFichaAnswers((prev) => {
+              const next = { ...prev };
+
+              const pf = prefill as Record<string, unknown>;
+              const cargo = typeof pf.cargo === 'string' ? String(pf.cargo).trim() : '';
+              if (cargo && !next['ficha_12']) next['ficha_12'] = cargo;
+
+              const antiguedadMesesRaw = pf.antiguedadMeses;
+              const antiguedadMeses =
+                typeof antiguedadMesesRaw === 'number' && Number.isFinite(antiguedadMesesRaw)
+                  ? Math.max(0, Math.floor(antiguedadMesesRaw))
+                  : null;
+              if (antiguedadMeses !== null && !next['ficha_11']) {
+                if (antiguedadMeses < 12) {
+                  next['ficha_11'] = 'Menos de 1 año';
+                } else {
+                  next['ficha_11'] = String(Math.floor(antiguedadMeses / 12));
+                }
+              }
+
+              const nivel = typeof pf.nivelOcupacional === 'string' ? String(pf.nivelOcupacional).trim() : '';
+              if (nivel && !next['ficha_13']) {
+                const mapped = mapNivelOcupacionalToFicha13(nivel);
+                if (mapped) next['ficha_13'] = mapped;
+              }
+
+              return next;
+            });
           }
           setPhase('ficha');
         }

@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import * as xlsx from 'xlsx';
 import { z } from 'zod';
 import { prisma } from '@/lib/prisma';
-import type { CuestionarioAsignado } from '@prisma/client';
 
 const ParamsSchema = z.object({
   campanaId: z.string().min(1),
@@ -13,6 +12,8 @@ const ImportRowSchema = z.object({
   cedula: z.string().min(1),
   area: z.string().optional(),
   cargo: z.string().optional(),
+  antiguedadMeses: z.number().int().nonnegative().optional(),
+  nivelOcupacional: z.string().optional(),
   cuestionarioAsignado: z.enum(['A', 'B', 'NO_APLICA']),
 });
 
@@ -26,13 +27,23 @@ function normalizeHeader(h: string): string {
   return h.replace(/\s+/g, ' ').trim().toLowerCase();
 }
 
-function parseCuestionarioAsignado(value: unknown): CuestionarioAsignado | null {
+function parseCuestionarioAsignado(value: unknown): 'A' | 'B' | 'NO_APLICA' | null {
   if (value === null || value === undefined) return null;
   const v = String(value).replace(/\s+/g, ' ').trim().toUpperCase();
   if (v === 'A') return 'A';
   if (v === 'B') return 'B';
   if (v === 'NO APLICA' || v === 'NO_APLICA' || v === 'NO APLICAR') return 'NO_APLICA';
   return null;
+}
+
+function parseAntiguedadMeses(value: unknown): number | undefined {
+  if (value === null || value === undefined) return undefined;
+  if (typeof value === 'number' && Number.isFinite(value)) return Math.max(0, Math.floor(value));
+  const raw = String(value).trim();
+  if (!raw) return undefined;
+  const n = parseInt(raw.replace(/[^\d]/g, ''), 10);
+  if (Number.isNaN(n)) return undefined;
+  return Math.max(0, n);
 }
 
 export async function POST(req: Request, context: { params: Promise<{ campanaId: string }> }) {
@@ -78,6 +89,14 @@ export async function POST(req: Request, context: { params: Promise<{ campanaId:
     const colCedula = colByHeader('IDENTIFICACIÓN');
     const colArea = colByHeader('ÁREA / CENTRO DE TRABAJO') ?? colByHeader('AREA / CENTRO DE TRABAJO');
     const colCargo = colByHeader('CARGO');
+    const colAntiguedadMeses =
+      colByHeader('MESES DE ANTIGÜEDAD (AUTO)') ??
+      colByHeader('MESES DE ANTIGUEDAD (AUTO)') ??
+      colByHeader('MESES DE ANTIGÜEDAD') ??
+      colByHeader('MESES DE ANTIGUEDAD');
+    const colNivelOcupacional =
+      colByHeader('NIVEL OCUPACIONAL / CLASIFICACIÓN') ??
+      colByHeader('NIVEL OCUPACIONAL / CLASIFICACION');
     const colCuest = colByHeader('TIPO DE CUESTIONARIO (AUTO)') ?? colByHeader('TIPO DE CUESTIONARIO');
     const colEstado = colByHeader('ESTADO ACTUAL');
 
@@ -111,8 +130,6 @@ export async function POST(req: Request, context: { params: Promise<{ campanaId:
       const nombre = getCell(colNombre);
       const cedulaRaw = getCell(colCedula);
       const cuestionarioRaw = getCell(colCuest);
-      const estado = String(getCell(colEstado) ?? '').trim().toUpperCase();
-
       const cedula = normalizeCedula(cedulaRaw);
       const nombresApellidos = String(nombre ?? '').trim();
       const cuestionarioAsignado = parseCuestionarioAsignado(cuestionarioRaw);
@@ -140,8 +157,10 @@ export async function POST(req: Request, context: { params: Promise<{ campanaId:
 
       const area = String(getCell(colArea) ?? '').trim() || undefined;
       const cargo = String(getCell(colCargo) ?? '').trim() || undefined;
+      const antiguedadMeses = parseAntiguedadMeses(getCell(colAntiguedadMeses));
+      const nivelOcupacional = String(getCell(colNivelOcupacional) ?? '').trim() || undefined;
 
-      const candidate = { nombresApellidos, cedula, area, cargo, cuestionarioAsignado };
+      const candidate = { nombresApellidos, cedula, area, cargo, antiguedadMeses, nivelOcupacional, cuestionarioAsignado };
       const parsed = ImportRowSchema.safeParse(candidate);
       if (!parsed.success) {
         rejected.push({ row: r + 1, reason: 'Fila inválida' });
@@ -161,33 +180,31 @@ export async function POST(req: Request, context: { params: Promise<{ campanaId:
     const toCreate = parsedRows.filter((r) => !existingSet.has(r.cedula));
     const toUpdate = parsedRows.filter((r) => existingSet.has(r.cedula));
 
-    await prisma.$transaction(async (tx) => {
-      if (toCreate.length) {
-        await tx.participante.createMany({
-          data: toCreate.map((r) => ({
-            campanaId,
-            cedula: r.cedula,
-            nombresApellidos: r.nombresApellidos,
-            areaExcel: r.area,
-            cargoExcel: r.cargo,
-            cuestionarioAsignado: r.cuestionarioAsignado,
-          })),
-          skipDuplicates: true,
-        });
-      }
-
-      for (const r of toUpdate) {
-        await tx.participante.update({
-          where: { cedula_campanaId: { cedula: r.cedula, campanaId } },
-          data: {
-            nombresApellidos: r.nombresApellidos,
-            areaExcel: r.area,
-            cargoExcel: r.cargo,
-            cuestionarioAsignado: r.cuestionarioAsignado,
-          },
-        });
-      }
-    });
+    // Evita transacciones interactivas largas (en dev pueden expirar y causar: "Transaction not found")
+    // Upsert por fila: garantiza create/update y mantiene idempotencia sin depender de una transacción viva.
+    for (const r of parsedRows) {
+      await prisma.participante.upsert({
+        where: { cedula_campanaId: { cedula: r.cedula, campanaId } },
+        create: ({
+          campanaId,
+          cedula: r.cedula,
+          nombresApellidos: r.nombresApellidos,
+          areaExcel: r.area,
+          cargoExcel: r.cargo,
+          antiguedadMesesExcel: r.antiguedadMeses,
+          nivelOcupacionalExcel: r.nivelOcupacional,
+          cuestionarioAsignado: r.cuestionarioAsignado,
+        } as unknown) as Parameters<typeof prisma.participante.upsert>[0]['create'],
+        update: ({
+          nombresApellidos: r.nombresApellidos,
+          areaExcel: r.area,
+          cargoExcel: r.cargo,
+          antiguedadMesesExcel: r.antiguedadMeses,
+          nivelOcupacionalExcel: r.nivelOcupacional,
+          cuestionarioAsignado: r.cuestionarioAsignado,
+        } as unknown) as Parameters<typeof prisma.participante.upsert>[0]['update'],
+      });
+    }
 
     return NextResponse.json({
       success: true,

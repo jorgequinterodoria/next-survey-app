@@ -3,29 +3,41 @@ import { Users, Building2, Megaphone, ClipboardCheck } from 'lucide-react'
 
 export const dynamic = 'force-dynamic';
 
-async function getStats() {
-  const [companies, campaigns, participants, responses] = await Promise.all([
-    prisma.empresa.count(),
-    prisma.campana.count(),
-    prisma.participante.count(),
-    prisma.surveyResponse.count(),
-  ])
-  return { companies, campaigns, participants, responses }
+async function getStatsSafe() {
+  try {
+    const [companies, campaigns, participants, responses] = await Promise.all([
+      prisma.empresa.count(),
+      prisma.campana.count(),
+      prisma.participante.count(),
+      prisma.surveyResponse.count(),
+    ])
+    return { stats: { companies, campaigns, participants, responses }, error: null as string | null }
+  } catch (e) {
+    const message = e instanceof Error ? e.message : 'Error desconocido'
+    return { stats: null as null | { companies: number; campaigns: number; participants: number; responses: number }, error: message }
+  }
 }
 
 export default async function DashboardPage() {
-  const stats = await getStats()
+  const { stats, error } = await getStatsSafe()
 
   const cards = [
-    { label: 'Empresas', value: stats.companies, icon: Building2, color: 'bg-[#7c7b7b]' },
-    { label: 'Campañas', value: stats.campaigns, icon: Megaphone, color: 'bg-[#dc9222]' },
-    { label: 'Participantes', value: stats.participants, icon: Users, color: 'bg-[#6a6a6a]' },
-    { label: 'Respuestas', value: stats.responses, icon: ClipboardCheck, color: 'bg-[#f39205]' },
+    { label: 'Empresas', value: stats?.companies ?? '—', icon: Building2, color: 'bg-[#7c7b7b]' },
+    { label: 'Campañas', value: stats?.campaigns ?? '—', icon: Megaphone, color: 'bg-[#dc9222]' },
+    { label: 'Participantes', value: stats?.participants ?? '—', icon: Users, color: 'bg-[#6a6a6a]' },
+    { label: 'Respuestas', value: stats?.responses ?? '—', icon: ClipboardCheck, color: 'bg-[#f39205]' },
   ]
 
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Dashboard General</h1>
+
+      {error && (
+        <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-amber-900">
+          <div className="text-sm font-semibold">Base de datos no disponible</div>
+          <div className="text-xs mt-1 break-words">{error}</div>
+        </div>
+      )}
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {cards.map((card) => {

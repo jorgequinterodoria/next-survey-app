@@ -59,6 +59,8 @@ model Participante {
   nombresApellidos String?
   cargoExcel       String?
   areaExcel        String?
+  antiguedadMesesExcel Int?
+  nivelOcupacionalExcel String?
   cuestionarioAsignado CuestionarioAsignado?
   email          String?
   campanaId      String
