@@ -5,6 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { randomBytes } from 'crypto'
 import bcrypt from 'bcryptjs'
 import { z } from 'zod'
+import { Prisma } from '@prisma/client'
 
 export async function createAdmin(formData: FormData) {
     const email = formData.get('email') as string
@@ -184,5 +185,63 @@ export async function updateCampaign(formData: FormData) {
     } catch (error) {
         console.error(error)
         return { error: 'Failed to update campaign' }
+    }
+}
+
+const updateReportMetaSchema = z.object({
+    surveyResponseId: z.string().min(1),
+    block: z.enum(['intralaboral', 'extralaboral', 'estres']),
+    observaciones: z.string().max(5000).nullable(),
+    recomendaciones: z.string().max(5000).nullable(),
+    fechaElaboracion: z.string().nullable(),
+})
+
+export async function updateSurveyReportMeta(formData: FormData) {
+    const surveyResponseId = formData.get('surveyResponseId') as string
+    const block = formData.get('block') as 'intralaboral' | 'extralaboral' | 'estres'
+    const observaciones = toNullIfBlank(formData.get('observaciones'))
+    const recomendaciones = toNullIfBlank(formData.get('recomendaciones'))
+    const fechaElaboracion = toNullIfBlank(formData.get('fechaElaboracion'))
+
+    const parsed = updateReportMetaSchema.safeParse({
+        surveyResponseId,
+        block,
+        observaciones,
+        recomendaciones,
+        fechaElaboracion,
+    })
+    if (!parsed.success) return { error: 'Datos inválidos para el informe' }
+
+    try {
+        const rows = await prisma.$queryRaw<Array<{ reportMeta: unknown }>>`
+            SELECT "reportMeta" as "reportMeta"
+            FROM "SurveyResponse"
+            WHERE id = ${parsed.data.surveyResponseId}
+            LIMIT 1
+        `
+
+        const currentMeta = rows?.[0]?.reportMeta
+        const base = (currentMeta && typeof currentMeta === 'object') ? (currentMeta as Prisma.JsonObject) : {}
+
+        const next: Prisma.JsonObject = {
+            ...base,
+            [parsed.data.block]: {
+                observaciones: parsed.data.observaciones,
+                recomendaciones: parsed.data.recomendaciones,
+                fechaElaboracion: parsed.data.fechaElaboracion,
+            },
+        }
+
+        await prisma.$executeRaw`
+            UPDATE "SurveyResponse"
+            SET "reportMeta" = ${JSON.stringify(next)}::jsonb
+            WHERE id = ${parsed.data.surveyResponseId}
+        `
+
+        revalidatePath(`/admin/results/${parsed.data.surveyResponseId}`)
+        return { success: true }
+    } catch (error) {
+        console.error(error)
+        return { error: 'Failed to update report fields' }
     }
 }

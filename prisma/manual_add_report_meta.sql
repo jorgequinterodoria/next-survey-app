@@ -1,0 +1,1 @@
+ALTER TABLE "SurveyResponse" ADD COLUMN IF NOT EXISTS "reportMeta" JSONB;

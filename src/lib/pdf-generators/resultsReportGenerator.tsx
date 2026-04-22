@@ -228,6 +228,15 @@ const ResultsDocument = ({ type, title, participantData, results, formType }: an
   const createdAt = surveyResponse.createdAt || participantData.createdAt;
   const evaluador = campana;
   const empresaName = campana?.empresa?.name || ' ';
+  const reportMeta = surveyResponse.reportMeta;
+  let reportBlock: Record<string, unknown> = {};
+  if (reportMeta && typeof reportMeta === 'object') {
+    const maybe = (reportMeta as Record<string, unknown>)[type];
+    if (maybe && typeof maybe === 'object') reportBlock = maybe as Record<string, unknown>;
+  }
+  const observaciones = typeof reportBlock.observaciones === 'string' ? reportBlock.observaciones : '';
+  const recomendaciones = typeof reportBlock.recomendaciones === 'string' ? reportBlock.recomendaciones : '';
+  const fechaElaboracion = typeof reportBlock.fechaElaboracion === 'string' ? reportBlock.fechaElaboracion : '';
 
   // Get raw values handling the {answer, label} object format OR flat string format
   const getFichaValue = (key: string) => {
@@ -372,13 +381,15 @@ const ResultsDocument = ({ type, title, participantData, results, formType }: an
 
         <View wrap={false} style={{ marginTop: 20 }}>
             <Text style={styles.sectionTitle}>OBSERVACIONES Y COMENTARIOS DEL EVALUADOR</Text>
-            <View style={styles.observacionesBox}><Text> </Text></View>
+            <View style={styles.observacionesBox}><Text>{observaciones || ' '}</Text></View>
             
             <Text style={styles.sectionTitle}>RECOMENDACIONES PARTICULARES</Text>
-            <View style={styles.observacionesBox}><Text> </Text></View>
+            <View style={styles.observacionesBox}><Text>{recomendaciones || ' '}</Text></View>
 
             <View style={{ marginTop: 20 }}>
-                <Text style={styles.tableCellBold}>Fecha de elaboración del informe: ______________________</Text>
+                <Text style={styles.tableCellBold}>
+                  Fecha de elaboración del informe: {fechaElaboracion || '______________________'}
+                </Text>
                 
                 {evaluador?.evaluadorFirma ? (
                   <PdfImage style={styles.signatureImage} src={evaluador.evaluadorFirma} />

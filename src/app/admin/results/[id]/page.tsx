@@ -4,6 +4,9 @@ import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import PrintButton from './PrintButton'
 import { flattenResults } from '@/lib/psychometrics'
+import { ReportNotesEditor } from './ReportNotesEditor'
+
+export const dynamic = 'force-dynamic';
 
 // Helper para renderizar una sección de resultados
 function ResultSection({ title, results }: { title: string, results: Record<string, any> }) {
@@ -61,6 +64,7 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
   // Usamos flattenResults para obtener el mismo formato plano que usaba esta vista
   const detailedResults = response.results as any;
   const flatResults = detailedResults ? flattenResults(detailedResults) : {};
+  const hasResults = Object.keys(flatResults).length > 0;
   
   // Agrupar por dominio (Intra, Extra, Estrés)
   const intraResults = Object.entries(flatResults)
@@ -76,6 +80,26 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
     .reduce((obj, [key, val]) => ({ ...obj, [key]: val }), {})
 
   const ficha = (response.fichaData as unknown as Record<string, string>) || {}
+  const reportMeta = response.reportMeta as unknown
+
+  const getReportBlock = (block: 'intralaboral' | 'extralaboral' | 'estres') => {
+    if (!reportMeta || typeof reportMeta !== 'object') {
+      return { observaciones: '', recomendaciones: '', fechaElaboracion: '' }
+    }
+    const b = (reportMeta as Record<string, unknown>)[block]
+    if (!b || typeof b !== 'object') {
+      return { observaciones: '', recomendaciones: '', fechaElaboracion: '' }
+    }
+    const obj = b as Record<string, unknown>
+    return {
+      observaciones: typeof obj.observaciones === 'string' ? obj.observaciones : '',
+      recomendaciones: typeof obj.recomendaciones === 'string' ? obj.recomendaciones : '',
+      fechaElaboracion: typeof obj.fechaElaboracion === 'string' ? obj.fechaElaboracion : '',
+    }
+  }
+  const intraBlock = getReportBlock('intralaboral')
+  const extraBlock = getReportBlock('extralaboral')
+  const estresBlock = getReportBlock('estres')
 
   return (
     <div className="space-y-6">
@@ -123,17 +147,38 @@ export default async function ReportPage({ params }: { params: Promise<{ id: str
       </div>
 
       {/* Sections */}
-      {Object.keys(flatResults).length > 0 ? (
-        <>
-            <ResultSection title="Factores Intralaborales" results={intraResults} />
-            <ResultSection title="Factores Extralaborales" results={extraResults} />
-            <ResultSection title="Evaluación de Estrés" results={stressResults} />
-        </>
-      ) : (
+      {!hasResults && (
         <div className="bg-yellow-50 p-6 rounded-lg text-center text-yellow-800">
             Este informe no tiene resultados calculados. Es posible que sea una respuesta antigua antes de la actualización del sistema.
         </div>
       )}
+
+      <ResultSection title="Factores Intralaborales" results={intraResults} />
+      <ReportNotesEditor
+        surveyResponseId={response.id}
+        block="intralaboral"
+        initialObservaciones={intraBlock.observaciones}
+        initialRecomendaciones={intraBlock.recomendaciones}
+        initialFechaElaboracion={intraBlock.fechaElaboracion}
+      />
+
+      <ResultSection title="Factores Extralaborales" results={extraResults} />
+      <ReportNotesEditor
+        surveyResponseId={response.id}
+        block="extralaboral"
+        initialObservaciones={extraBlock.observaciones}
+        initialRecomendaciones={extraBlock.recomendaciones}
+        initialFechaElaboracion={extraBlock.fechaElaboracion}
+      />
+
+      <ResultSection title="Evaluación de Estrés" results={stressResults} />
+      <ReportNotesEditor
+        surveyResponseId={response.id}
+        block="estres"
+        initialObservaciones={estresBlock.observaciones}
+        initialRecomendaciones={estresBlock.recomendaciones}
+        initialFechaElaboracion={estresBlock.fechaElaboracion}
+      />
     </div>
   )
 }

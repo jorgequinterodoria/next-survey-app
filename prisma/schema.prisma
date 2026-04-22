@@ -88,6 +88,7 @@ model SurveyResponse {
   estresData       Json
   filters          Json // Demographics/Filters snapshot
   results          Json? // Processed scores and risk levels
+  reportMeta       Json? // Observaciones/Recomendaciones/Fecha por bloque (intralaboral/extralaboral/estres)
   
   createdAt        DateTime     @default(now())
   updatedAt        DateTime     @updatedAt
