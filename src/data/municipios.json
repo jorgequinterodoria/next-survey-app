@@ -1,0 +1,4494 @@
+[
+  {
+    "muni": "Abejorral",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Abrego",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Abriaquí",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Acacias",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Acandí",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Acevedo",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Achí",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Agrado",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Agua de Dios",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Aguachica",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Aguada",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Aguadas",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Aguazul",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Agustín Codazzi",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Aipe",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Albán",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Albán",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Albania",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "Albania",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "Albania",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Alcalá",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Aldana",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Alejandría",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Algarrobo",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Algeciras",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Almaguer",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Almeida",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Alpujarra",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Altamira",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Alto Baudo",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Altos del Rosario",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Alvarado",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Amagá",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Amalfi",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Ambalema",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Anapoima",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Ancuyá",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Andalucía",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Andes",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Angelópolis",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Angostura",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Anolaima",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Anorí",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Anserma",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Ansermanuevo",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Anza",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Anzoátegui",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Apartadó",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Apía",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "Apulo",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Aquitania",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Aracataca",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Aranzazu",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Aratoca",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Arauca",
+    "depto": "Arauca"
+  },
+  {
+    "muni": "Arauquita",
+    "depto": "Arauca"
+  },
+  {
+    "muni": "Arbeláez",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Arboleda",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Arboledas",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Arboletes",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Arcabuco",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Arenal",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Argelia",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Argelia",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Argelia",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Ariguaní",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Arjona",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Armenia",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Armenia",
+    "depto": "Quindío"
+  },
+  {
+    "muni": "Armero",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Arroyohondo",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Astrea",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Ataco",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Atrato",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Ayapel",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Bagadó",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Bahía Solano",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Bajo Baudó",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Balboa",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Balboa",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "Baranoa",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Baraya",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Barbacoas",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Barbosa",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Barbosa",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Barichara",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Barranca de Upía",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Barrancabermeja",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Barrancas",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "Barranco de Loba",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Barranco Minas",
+    "depto": "Guainía"
+  },
+  {
+    "muni": "Barranquilla",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Becerril",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Belalcázar",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Belén",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Belén",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Belén de Bajira",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Belén de Los Andaquies",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "Belén de Umbría",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "Bello",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Belmira",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Beltrán",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Berbeo",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Betania",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Betéitiva",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Betulia",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Betulia",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Bituima",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Boavita",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Bochalema",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Bogotá D.C.",
+    "depto": "Bogotá"
+  },
+  {
+    "muni": "Bojacá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Bojaya",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Bolívar",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Bolívar",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Bolívar",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Bosconia",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Boyacá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Briceño",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Briceño",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Bucaramanga",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Bucarasica",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Buena Vista",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Buenaventura",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Buenavista",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Buenavista",
+    "depto": "Quindío"
+  },
+  {
+    "muni": "Buenavista",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Buenos Aires",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Buesaco",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Bugalagrande",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Buriticá",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Busbanzá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Cabrera",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Cabrera",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Cabuyaro",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Cacahual",
+    "depto": "Guainía"
+  },
+  {
+    "muni": "Cáceres",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Cachipay",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Cachirá",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Cácota",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Caicedo",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Caicedonia",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Caimito",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Cajamarca",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Cajibío",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Cajicá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Calamar",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Calamar",
+    "depto": "Guaviare"
+  },
+  {
+    "muni": "Calarcá",
+    "depto": "Quindío"
+  },
+  {
+    "muni": "Caldas",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Caldas",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Caldono",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Cali",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "California",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Calima",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Caloto",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Campamento",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Campo de La Cruz",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Campoalegre",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Campohermoso",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Canalete",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Cañasgordas",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Candelaria",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Candelaria",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Cantagallo",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Caparrapí",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Capitanejo",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Caqueza",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Caracolí",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Caramanta",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Carcasí",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Carepa",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Carmen de Apicala",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Carmen de Carupa",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Carmen del Darien",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Carolina",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Cartagena",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Cartagena del Chairá",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "Cartago",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Carurú",
+    "depto": "Vaupés"
+  },
+  {
+    "muni": "Casabianca",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Castilla la Nueva",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Caucasia",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Cepitá",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Cereté",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Cerinza",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Cerrito",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Cerro San Antonio",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Cértegui",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Chachagüí",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Chaguaní",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Chalán",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Chámeza",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Chaparral",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Charalá",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Charta",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Chía",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Chigorodó",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Chimá",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Chimá",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Chimichagua",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Chinácota",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Chinavita",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Chinchiná",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Chinú",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Chipaque",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Chipatá",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Chiquinquirá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Chíquiza",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Chiriguaná",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Chiscas",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Chita",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Chitagá",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Chitaraque",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Chivatá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Chivolo",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Chivor",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Choachí",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Chocontá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Cicuco",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Ciénaga",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Ciénaga de Oro",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Ciénega",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Cimitarra",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Circasia",
+    "depto": "Quindío"
+  },
+  {
+    "muni": "Cisneros",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Ciudad Bolívar",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Clemencia",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Cocorná",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Coello",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Cogua",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Colombia",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Colón",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Colón",
+    "depto": "Putumayo"
+  },
+  {
+    "muni": "Coloso",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Cómbita",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Concepción",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Concepción",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Concordia",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Concordia",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Condoto",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Confines",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Consaca",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Contadero",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Contratación",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Convención",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Copacabana",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Coper",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Córdoba",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Córdoba",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Córdoba",
+    "depto": "Quindío"
+  },
+  {
+    "muni": "Corinto",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Coromoro",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Corozal",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Corrales",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Cota",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Cotorra",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Covarachía",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Coveñas",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Coyaima",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Cravo Norte",
+    "depto": "Arauca"
+  },
+  {
+    "muni": "Cuaspud",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Cubará",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Cubarral",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Cucaita",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Cucunubá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Cúcuta",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Cucutilla",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Cuítiva",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Cumaral",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Cumaribo",
+    "depto": "Vichada"
+  },
+  {
+    "muni": "Cumbal",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Cumbitara",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Cunday",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Curillo",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "Curití",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Curumaní",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Dabeiba",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Dagua",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Dibula",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "Distracción",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "Dolores",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Don Matías",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Dosquebradas",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "Duitama",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Durania",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Ebéjico",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "El Águila",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "El Bagre",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "El Banco",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "El Cairo",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "El Calvario",
+    "depto": "Meta"
+  },
+  {
+    "muni": "El Cantón del San Pablo",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "El Carmen",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "El Carmen de Atrato",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "El Carmen de Bolívar",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "El Carmen de Chucurí",
+    "depto": "Santander"
+  },
+  {
+    "muni": "El Carmen de Viboral",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "El Castillo",
+    "depto": "Meta"
+  },
+  {
+    "muni": "El Cerrito",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "El Charco",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "El Cocuy",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "El Colegio",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "El Copey",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "El Doncello",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "El Dorado",
+    "depto": "Meta"
+  },
+  {
+    "muni": "El Dovio",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "El Encanto",
+    "depto": "Amazonas"
+  },
+  {
+    "muni": "El Espino",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "El Guacamayo",
+    "depto": "Santander"
+  },
+  {
+    "muni": "El Guamo",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "El Litoral del San Juan",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "El Molino",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "El Paso",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "El Paujil",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "El Peñol",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "El Peñón",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "El Peñón",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "El Peñón",
+    "depto": "Santander"
+  },
+  {
+    "muni": "El Piñon",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "El Playón",
+    "depto": "Santander"
+  },
+  {
+    "muni": "El Retén",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "El Retorno",
+    "depto": "Guaviare"
+  },
+  {
+    "muni": "El Roble",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "El Rosal",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "El Rosario",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "El Santuario",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "El Tablón de Gómez",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "El Tambo",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "El Tambo",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "El Tarra",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "El Zulia",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Elías",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Encino",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Enciso",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Entrerrios",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Envigado",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Espinal",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Facatativá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Falan",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Filadelfia",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Filandia",
+    "depto": "Quindío"
+  },
+  {
+    "muni": "Firavitoba",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Flandes",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Florencia",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "Florencia",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Floresta",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Florián",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Florida",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Floridablanca",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Fomeque",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Fonseca",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "Fortul",
+    "depto": "Arauca"
+  },
+  {
+    "muni": "Fosca",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Francisco Pizarro",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Fredonia",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Fresno",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Frontino",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Fuente de Oro",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Fundación",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Funes",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Funza",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Fúquene",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Fusagasugá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Gachala",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Gachancipá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Gachantivá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Gachetá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Galán",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Galapa",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Galeras",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Gama",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Gamarra",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Gambita",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Gameza",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Garagoa",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Garzón",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Génova",
+    "depto": "Quindío"
+  },
+  {
+    "muni": "Gigante",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Ginebra",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Giraldo",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Girardot",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Girardota",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Girón",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Gómez Plata",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "González",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Gramalote",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Granada",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Granada",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Granada",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Guaca",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Guacamayas",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Guacarí",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Guachené",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Guachetá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Guachucal",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Guadalajara de Buga",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Guadalupe",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Guadalupe",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Guadalupe",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Guaduas",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Guaitarilla",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Gualmatán",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Guamal",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Guamal",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Guamo",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Guapi",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Guapotá",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Guaranda",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Guarne",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Guasca",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Guatapé",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Guataquí",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Guatavita",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Guateque",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Guática",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "Guavatá",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Guayabal de Siquima",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Guayabetal",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Guayatá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Güepsa",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Güicán",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Gutiérrez",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Hacarí",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Hatillo de Loba",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Hato",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Hato Corozal",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Hatonuevo",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "Heliconia",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Herrán",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Herveo",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Hispania",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Hobo",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Honda",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Ibagué",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Icononzo",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Iles",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Imués",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Inírida",
+    "depto": "Guainía"
+  },
+  {
+    "muni": "Inzá",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Ipiales",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Iquira",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Isnos",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Istmina",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Itagui",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Ituango",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Iza",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Jambaló",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Jamundí",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Jardín",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Jenesano",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Jericó",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Jericó",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Jerusalén",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Jesús María",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Jordán",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Juan de Acosta",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Junín",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Juradó",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "La Apartada",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "La Argentina",
+    "depto": "Huila"
+  },
+  {
+    "muni": "La Belleza",
+    "depto": "Santander"
+  },
+  {
+    "muni": "La Calera",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "La Capilla",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "La Ceja",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "La Celia",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "La Chorrera",
+    "depto": "Amazonas"
+  },
+  {
+    "muni": "La Cruz",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "La Cumbre",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "La Dorada",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "La Esperanza",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "La Estrella",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "La Florida",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "La Gloria",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "La Guadalupe",
+    "depto": "Guainía"
+  },
+  {
+    "muni": "La Jagua de Ibirico",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "La Jagua del Pilar",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "La Llanada",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "La Macarena",
+    "depto": "Meta"
+  },
+  {
+    "muni": "La Merced",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "La Mesa",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "La Montañita",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "La Palma",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "La Paz",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "La Paz",
+    "depto": "Santander"
+  },
+  {
+    "muni": "La Pedrera",
+    "depto": "Amazonas"
+  },
+  {
+    "muni": "La Peña",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "La Pintada",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "La Plata",
+    "depto": "Huila"
+  },
+  {
+    "muni": "La Playa",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "La Primavera",
+    "depto": "Vichada"
+  },
+  {
+    "muni": "La Salina",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "La Sierra",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "La Tebaida",
+    "depto": "Quindío"
+  },
+  {
+    "muni": "La Tola",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "La Unión",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "La Unión",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "La Unión",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "La Unión",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "La Uvita",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "La Vega",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "La Vega",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "La Victoria",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "La Victoria",
+    "depto": "Amazonas"
+  },
+  {
+    "muni": "La Victoria",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "La Virginia",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "Labateca",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Labranzagrande",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Landázuri",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Lebríja",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Leguízamo",
+    "depto": "Putumayo"
+  },
+  {
+    "muni": "Leiva",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Lejanías",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Lenguazaque",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Lérida",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Leticia",
+    "depto": "Amazonas"
+  },
+  {
+    "muni": "Líbano",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Liborina",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Linares",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Lloró",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "López",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Lorica",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Los Andes",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Los Córdobas",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Los Palmitos",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Los Patios",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Los Santos",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Lourdes",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Luruaco",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Macanal",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Macaravita",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Maceo",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Macheta",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Madrid",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Magangué",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Magüí",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Mahates",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Maicao",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "Majagual",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Málaga",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Malambo",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Mallama",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Manatí",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Manaure",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Manaure",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "Maní",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Manizales",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Manta",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Manzanares",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Mapiripán",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Mapiripana",
+    "depto": "Guainía"
+  },
+  {
+    "muni": "Margarita",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "María la Baja",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Marinilla",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Maripí",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Mariquita",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Marmato",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Marquetalia",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Marsella",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "Marulanda",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Matanza",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Medellín",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Medina",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Medio Atrato",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Medio Baudó",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Medio San Juan",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Melgar",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Mercaderes",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Mesetas",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Milán",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "Miraflores",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Miraflores",
+    "depto": "Guaviare"
+  },
+  {
+    "muni": "Miranda",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Miriti Paraná",
+    "depto": "Amazonas"
+  },
+  {
+    "muni": "Mistrató",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "Mitú",
+    "depto": "Vaupés"
+  },
+  {
+    "muni": "Mocoa",
+    "depto": "Putumayo"
+  },
+  {
+    "muni": "Mogotes",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Molagavita",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Momil",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Mompós",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Mongua",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Monguí",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Moniquirá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Moñitos",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Montebello",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Montecristo",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Montelíbano",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Montenegro",
+    "depto": "Quindío"
+  },
+  {
+    "muni": "Montería",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Monterrey",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Morales",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Morales",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Morelia",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "Morichal",
+    "depto": "Guainía"
+  },
+  {
+    "muni": "Morroa",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Mosquera",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Mosquera",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Motavita",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Murillo",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Murindó",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Mutatá",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Mutiscua",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Muzo",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Nariño",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Nariño",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Nariño",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Nátaga",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Natagaima",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Nechí",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Necoclí",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Neira",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Neiva",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Nemocón",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Nilo",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Nimaima",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Nobsa",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Nocaima",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Norcasia",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Norosí",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Nóvita",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Nueva Granada",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Nuevo Colón",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Nunchía",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Nuquí",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Obando",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Ocamonte",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Ocaña",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Oiba",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Oicatá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Olaya",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Olaya Herrera",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Onzaga",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Oporapa",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Orito",
+    "depto": "Putumayo"
+  },
+  {
+    "muni": "Orocué",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Ortega",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Ospina",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Otanche",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Ovejas",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Pachavita",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Pacho",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Pacoa",
+    "depto": "Vaupés"
+  },
+  {
+    "muni": "Pácora",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Padilla",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Páez",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Páez",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Paicol",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Pailitas",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Paime",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Paipa",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Pajarito",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Palermo",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Palestina",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Palestina",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Palmar",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Palmar de Varela",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Palmas del Socorro",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Palmira",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Palmito",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Palocabildo",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Pamplona",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Pamplonita",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Pana Pana",
+    "depto": "Guainía"
+  },
+  {
+    "muni": "Pandi",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Panqueba",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Papunahua",
+    "depto": "Vaupés"
+  },
+  {
+    "muni": "Páramo",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Paratebueno",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Pasca",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Pasto",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Patía",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Pauna",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Paya",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Paz de Ariporo",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Paz de Río",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Pedraza",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Pelaya",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Peñol",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Pensilvania",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Peque",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Pereira",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "Pesca",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Piamonte",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Piedecuesta",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Piedras",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Piendamó",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Pijao",
+    "depto": "Quindío"
+  },
+  {
+    "muni": "Pijiño del Carmen",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Pinchote",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Pinillos",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Piojó",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Pisba",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Pital",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Pitalito",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Pivijay",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Planadas",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Planeta Rica",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Plato",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Policarpa",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Polonuevo",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Ponedera",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Popayán",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Pore",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Potosí",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Pradera",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Prado",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Providencia",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Providencia",
+    "depto": "San Andrés y Providencia"
+  },
+  {
+    "muni": "Pueblo Bello",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Pueblo Nuevo",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Pueblo Rico",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "Pueblo Viejo",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Pueblorrico",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Puente Nacional",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Puerres",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Puerto Alegría",
+    "depto": "Amazonas"
+  },
+  {
+    "muni": "Puerto Arica",
+    "depto": "Amazonas"
+  },
+  {
+    "muni": "Puerto Asís",
+    "depto": "Putumayo"
+  },
+  {
+    "muni": "Puerto Berrío",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Puerto Boyacá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Puerto Caicedo",
+    "depto": "Putumayo"
+  },
+  {
+    "muni": "Puerto Carreño",
+    "depto": "Vichada"
+  },
+  {
+    "muni": "Puerto Colombia",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Puerto Colombia",
+    "depto": "Guainía"
+  },
+  {
+    "muni": "Puerto Concordia",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Puerto Escondido",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Puerto Gaitán",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Puerto Guzmán",
+    "depto": "Putumayo"
+  },
+  {
+    "muni": "Puerto Libertador",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Puerto Lleras",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Puerto López",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Puerto Nare",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Puerto Nariño",
+    "depto": "Amazonas"
+  },
+  {
+    "muni": "Puerto Parra",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Puerto Rico",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "Puerto Rico",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Puerto Rondón",
+    "depto": "Arauca"
+  },
+  {
+    "muni": "Puerto Salgar",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Puerto Santander",
+    "depto": "Amazonas"
+  },
+  {
+    "muni": "Puerto Santander",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Puerto Tejada",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Puerto Triunfo",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Puerto Wilches",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Pulí",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Pupiales",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Puracé",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Purificación",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Purísima",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Quebradanegra",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Quetame",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Quibdó",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Quimbaya",
+    "depto": "Quindío"
+  },
+  {
+    "muni": "Quinchía",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "Quípama",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Quipile",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Ragonvalia",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Ramiriquí",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Ráquira",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Recetor",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Regidor",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Remedios",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Remolino",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Repelón",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Restrepo",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Restrepo",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Retiro",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Ricaurte",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Ricaurte",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Rio Blanco",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Río de Oro",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Río Iro",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Río Quito",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Río Viejo",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Riofrío",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Riohacha",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "Rionegro",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Rionegro",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Riosucio",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Riosucio",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Risaralda",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Rivera",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Roberto Payán",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Roldanillo",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Roncesvalles",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Rondón",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Rosas",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Rovira",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Sabana de Torres",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Sabanagrande",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Sabanalarga",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Sabanalarga",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Sabanalarga",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Sabanas de San Angel",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Sabaneta",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Saboyá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Sácama",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Sáchica",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Sahagún",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Saladoblanco",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Salamina",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Salamina",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Salazar",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Saldaña",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Salento",
+    "depto": "Quindío"
+  },
+  {
+    "muni": "Salgar",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Samacá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Samaná",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Samaniego",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Sampués",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "San Agustín",
+    "depto": "Huila"
+  },
+  {
+    "muni": "San Alberto",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "San Andrés",
+    "depto": "San Andrés y Providencia"
+  },
+  {
+    "muni": "San Andrés",
+    "depto": "Santander"
+  },
+  {
+    "muni": "San Andrés de Cuerquía",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "San Andrés de Tumaco",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "San Andrés Sotavento",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "San Antero",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "San Antonio",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "San Antonio del Tequendama",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "San Benito",
+    "depto": "Santander"
+  },
+  {
+    "muni": "San Benito Abad",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "San Bernardo",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "San Bernardo",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "San Bernardo del Viento",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "San Calixto",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "San Carlos",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "San Carlos",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "San Carlos de Guaroa",
+    "depto": "Meta"
+  },
+  {
+    "muni": "San Cayetano",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "San Cayetano",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "San Cristóbal",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "San Diego",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "San Eduardo",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "San Estanislao",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "San Felipe",
+    "depto": "Guainía"
+  },
+  {
+    "muni": "San Fernando",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "San Francisco",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "San Francisco",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "San Francisco",
+    "depto": "Putumayo"
+  },
+  {
+    "muni": "San Gil",
+    "depto": "Santander"
+  },
+  {
+    "muni": "San Jacinto",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "San Jacinto del Cauca",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "San Jerónimo",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "San Joaquín",
+    "depto": "Santander"
+  },
+  {
+    "muni": "San José",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "San José de La Montaña",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "San José de Miranda",
+    "depto": "Santander"
+  },
+  {
+    "muni": "San José de Pare",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "San José de Uré",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "San José del Fragua",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "San José del Guaviare",
+    "depto": "Guaviare"
+  },
+  {
+    "muni": "San José del Palmar",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "San Juan de Arama",
+    "depto": "Meta"
+  },
+  {
+    "muni": "San Juan de Betulia",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "San Juan de Río Seco",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "San Juan de Urabá",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "San Juan del Cesar",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "San Juan Nepomuceno",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "San Juanito",
+    "depto": "Meta"
+  },
+  {
+    "muni": "San Lorenzo",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "San Luis",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "San Luis",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "San Luis de Gaceno",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "San Luis de Gaceno",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "San Luis de Sincé",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "San Marcos",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "San Martín",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "San Martín",
+    "depto": "Meta"
+  },
+  {
+    "muni": "San Martín de Loba",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "San Mateo",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "San Miguel",
+    "depto": "Putumayo"
+  },
+  {
+    "muni": "San Miguel",
+    "depto": "Santander"
+  },
+  {
+    "muni": "San Miguel de Sema",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "San Onofre",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "San Pablo",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "San Pablo de Borbur",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "San Pablo de Borbur",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "San Pedro",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "San Pedro",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "San Pedro",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "San Pedro de Cartago",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "San Pedro de Uraba",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "San Pelayo",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "San Rafael",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "San Roque",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "San Sebastián",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "San Sebastián de Buenavista",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "San Vicente",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "San Vicente de Chucurí",
+    "depto": "Santander"
+  },
+  {
+    "muni": "San Vicente del Caguán",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "San Zenón",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Sandoná",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Santa Ana",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Santa Bárbara",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Santa Bárbara",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Santa Bárbara",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Santa Bárbara de Pinto",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Santa Catalina",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Santa Helena del Opón",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Santa Isabel",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Santa Lucía",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Santa María",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Santa María",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Santa Marta",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Santa Rosa",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Santa Rosa",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Santa Rosa de Cabal",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "Santa Rosa de Osos",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Santa Rosa de Viterbo",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Santa Rosa del Sur",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Santa Rosalía",
+    "depto": "Vichada"
+  },
+  {
+    "muni": "Santa Sofía",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Santacruz",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Santafé de Antioquia",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Santana",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Santander de Quilichao",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Santiago",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Santiago",
+    "depto": "Putumayo"
+  },
+  {
+    "muni": "Santiago de Tolú",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Santo Domingo",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Santo Tomás",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Santuario",
+    "depto": "Risaralda"
+  },
+  {
+    "muni": "Sapuyes",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Saravena",
+    "depto": "Arauca"
+  },
+  {
+    "muni": "Sardinata",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Sasaima",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Sativanorte",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Sativasur",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Segovia",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Sesquilé",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Sevilla",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Siachoque",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Sibaté",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Sibundoy",
+    "depto": "Putumayo"
+  },
+  {
+    "muni": "Silos",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Silvania",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Silvia",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Simacota",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Simijaca",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Simití",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Sincelejo",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Sipí",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Sitionuevo",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Soacha",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Soatá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Socha",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Socorro",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Socotá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Sogamoso",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Solano",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "Soledad",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Solita",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "Somondoco",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Sonsón",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Sopetrán",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Soplaviento",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Sopó",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Sora",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Soracá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Sotaquirá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Sotara",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Suaita",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Suan",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Suárez",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Suárez",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Suaza",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Subachoque",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Sucre",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Sucre",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Sucre",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Suesca",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Supatá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Supía",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Suratá",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Susa",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Susacón",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Sutamarchán",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Sutatausa",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Sutatenza",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Tabio",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Tadó",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Talaigua Nuevo",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Tamalameque",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Támara",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Tame",
+    "depto": "Arauca"
+  },
+  {
+    "muni": "Támesis",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Taminango",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Tangua",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Taraira",
+    "depto": "Vaupés"
+  },
+  {
+    "muni": "Tarapacá",
+    "depto": "Amazonas"
+  },
+  {
+    "muni": "Tarazá",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Tarqui",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Tarso",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Tasco",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Tauramena",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Tausa",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Tello",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Tena",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Tenerife",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Tenjo",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Tenza",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Teorama",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Teruel",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Tesalia",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Tibacuy",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Tibaná",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Tibasosa",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Tibirita",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Tibú",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Tierralta",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Timaná",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Timbío",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Timbiquí",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Tinjacá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Tipacoque",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Tiquisio",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Titiribí",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Toca",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Tocaima",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Tocancipá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Togüí",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Toledo",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Toledo",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Tolú Viejo",
+    "depto": "Sucre"
+  },
+  {
+    "muni": "Tona",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Tópaga",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Topaipí",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Toribio",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Toro",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Tota",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Totoró",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Trinidad",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Trujillo",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Tubará",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Tuchín",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Tuluá",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Tunja",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Tununguá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Túquerres",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Turbaco",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Turbaná",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Turbo",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Turmequé",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Tuta",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Tutazá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Ubalá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Ubaque",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Ulloa",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Umbita",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Une",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Unguía",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Unión Panamericana",
+    "depto": "Chocó"
+  },
+  {
+    "muni": "Uramita",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Uribe",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Uribia",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "Urrao",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Urumita",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "Usiacurí",
+    "depto": "Atlántico"
+  },
+  {
+    "muni": "Útica",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Valdivia",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Valencia",
+    "depto": "Córdoba"
+  },
+  {
+    "muni": "Valle de Guamez",
+    "depto": "Putumayo"
+  },
+  {
+    "muni": "Valle de San José",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Valle de San Juan",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Valledupar",
+    "depto": "Cesar"
+  },
+  {
+    "muni": "Valparaíso",
+    "depto": "Caquetá"
+  },
+  {
+    "muni": "Valparaíso",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Vegachí",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Vélez",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Venadillo",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Venecia",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Venecia",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Ventaquemada",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Vergara",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Versalles",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Vetas",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Vianí",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Victoria",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Vigía del Fuerte",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Vijes",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Villa Caro",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Villa de Leyva",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Villa de San Diego de Ubate",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Villa del Rosario",
+    "depto": "Norte de Santander"
+  },
+  {
+    "muni": "Villa Rica",
+    "depto": "Cauca"
+  },
+  {
+    "muni": "Villagarzón",
+    "depto": "Putumayo"
+  },
+  {
+    "muni": "Villagómez",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Villahermosa",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Villamaría",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Villanueva",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Villanueva",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Villanueva",
+    "depto": "La Guajira"
+  },
+  {
+    "muni": "Villanueva",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Villapinzón",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Villarrica",
+    "depto": "Tolima"
+  },
+  {
+    "muni": "Villavicencio",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Villavieja",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Villeta",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Viotá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Viracachá",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Vista Hermosa",
+    "depto": "Meta"
+  },
+  {
+    "muni": "Viterbo",
+    "depto": "Caldas"
+  },
+  {
+    "muni": "Yacopí",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Yacuanquer",
+    "depto": "Nariño"
+  },
+  {
+    "muni": "Yaguará",
+    "depto": "Huila"
+  },
+  {
+    "muni": "Yalí",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Yarumal",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Yavaraté",
+    "depto": "Vaupés"
+  },
+  {
+    "muni": "Yolombó",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Yondó",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Yopal",
+    "depto": "Casanare"
+  },
+  {
+    "muni": "Yotoco",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Yumbo",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Zambrano",
+    "depto": "Bolívar"
+  },
+  {
+    "muni": "Zapatoca",
+    "depto": "Santander"
+  },
+  {
+    "muni": "Zapayán",
+    "depto": "Magdalena"
+  },
+  {
+    "muni": "Zaragoza",
+    "depto": "Antioquia"
+  },
+  {
+    "muni": "Zarzal",
+    "depto": "Valle del Cauca"
+  },
+  {
+    "muni": "Zetaquira",
+    "depto": "Boyacá"
+  },
+  {
+    "muni": "Zipacón",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Zipaquirá",
+    "depto": "Cundinamarca"
+  },
+  {
+    "muni": "Zona Bananera",
+    "depto": "Magdalena"
+  }
+]
