@@ -31,7 +31,10 @@ export async function GET(
     }
 
     const participants = await prisma.participante.findMany({
-      where: { campanaId },
+      where: {
+        campanaId,
+        cuestionarioAsignado: { in: ['A', 'B'] },
+      },
       orderBy: { createdAt: 'asc' },
       select: {
         cedula: true,
