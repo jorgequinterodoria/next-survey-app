@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
+import { Download } from 'lucide-react';
 
 type ParticipantRow = {
   id: string;
@@ -21,6 +22,7 @@ export default function CampaignParticipantsClient({ campanaId }: { campanaId: s
   const [filterEstado, setFilterEstado] = useState<'ALL' | 'PENDING' | 'COMPLETED'>('ALL');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [exporting, setExporting] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -60,10 +62,44 @@ export default function CampaignParticipantsClient({ campanaId }: { campanaId: s
     });
   }, [rows, query, filterForma, filterEstado]);
 
+  const handleExportPDF = useCallback(async () => {
+    setExporting(true);
+    try {
+      const res = await fetch(`/api/admin/campaigns/${campanaId}/participants/export-pdf`);
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(data?.error || 'Error al generar el PDF');
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Listado_Participantes.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      alert(e instanceof Error ? e.message : 'Error al exportar el PDF');
+    } finally {
+      setExporting(false);
+    }
+  }, [campanaId]);
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-gray-900">Listado de habilitados</h1>
+        <div className="flex items-center gap-3">
+          <h1 className="text-xl font-semibold text-gray-900">Listado de habilitados</h1>
+          <button
+            onClick={handleExportPDF}
+            disabled={exporting || loading || rows.length === 0}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-[#dc9222] text-[#dc9222] hover:bg-[#dc9222] hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <Download className="h-3.5 w-3.5" />
+            {exporting ? 'Generando...' : 'Exportar PDF'}
+          </button>
+        </div>
         <Link
           href="/admin/campaigns"
           className="text-sm text-[#dc9222] hover:text-[#c7831f]"

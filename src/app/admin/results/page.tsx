@@ -74,8 +74,10 @@ export default async function ResultsPage({
     const total = participants.length;
     const completed = participantsWithData.length;
     const pending = total - completed;
-    const formaA = participants.filter((p) => p.surveyResponse?.formType === 'A').length;
-    const formaB = participants.filter((p) => p.surveyResponse?.formType === 'B').length;
+    const completedA = participants.filter((p) => p.surveyResponse?.formType === 'A').length;
+    const completedB = participants.filter((p) => p.surveyResponse?.formType === 'B').length;
+    const pendingA = participants.filter((p) => !p.surveyResponse && p.cuestionarioAsignado === 'A').length;
+    const pendingB = participants.filter((p) => !p.surveyResponse && p.cuestionarioAsignado === 'B').length;
 
     return (
       <div className="space-y-8">
@@ -111,11 +113,25 @@ export default async function ResultsPage({
           </div>
           <div className="bg-white rounded-xl shadow-sm p-4 border border-slate-100">
             <div className="text-xs text-slate-500">Forma A</div>
-            <div className="text-2xl font-bold text-slate-900">{formaA}</div>
+            <div className="flex items-baseline gap-2">
+              <div className="text-2xl font-bold text-slate-900">{completedA}</div>
+              <div className="text-xs text-slate-400">completados</div>
+            </div>
+            <div className="flex items-baseline gap-2 mt-0.5">
+              <div className="text-lg font-semibold text-amber-600">{pendingA}</div>
+              <div className="text-xs text-amber-500">pendientes</div>
+            </div>
           </div>
           <div className="bg-white rounded-xl shadow-sm p-4 border border-slate-100">
             <div className="text-xs text-slate-500">Forma B</div>
-            <div className="text-2xl font-bold text-slate-900">{formaB}</div>
+            <div className="flex items-baseline gap-2">
+              <div className="text-2xl font-bold text-slate-900">{completedB}</div>
+              <div className="text-xs text-slate-400">completados</div>
+            </div>
+            <div className="flex items-baseline gap-2 mt-0.5">
+              <div className="text-lg font-semibold text-amber-600">{pendingB}</div>
+              <div className="text-xs text-amber-500">pendientes</div>
+            </div>
           </div>
         </div>
 
