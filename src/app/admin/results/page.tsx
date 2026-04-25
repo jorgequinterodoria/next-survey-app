@@ -74,6 +74,7 @@ export default async function ResultsPage({
     const total = participants.length;
     const completed = participantsWithData.length;
     const pending = total - completed;
+    const habilitados = participants.filter((p) => p.cuestionarioAsignado === 'A' || p.cuestionarioAsignado === 'B').length;
     const completedA = participants.filter((p) => p.surveyResponse?.formType === 'A').length;
     const completedB = participants.filter((p) => p.surveyResponse?.formType === 'B').length;
     const pendingA = participants.filter((p) => !p.surveyResponse && p.cuestionarioAsignado === 'A').length;
@@ -102,6 +103,10 @@ export default async function ResultsPage({
           <div className="bg-white rounded-xl shadow-sm p-4 border border-slate-100">
             <div className="text-xs text-slate-500">Registrados</div>
             <div className="text-2xl font-bold text-slate-900">{total}</div>
+            <div className="flex items-baseline gap-1.5 mt-0.5">
+              <div className="text-lg font-semibold text-indigo-600">{habilitados}</div>
+              <div className="text-xs text-indigo-400">habilitados</div>
+            </div>
           </div>
           <div className="bg-white rounded-xl shadow-sm p-4 border border-slate-100">
             <div className="text-xs text-slate-500">Completados</div>
