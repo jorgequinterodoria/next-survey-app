@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import { Users, Download } from 'lucide-react'
+import { Users, Download, FileText, Clock } from 'lucide-react'
 import Link from 'next/link'
 import RiskDashboard from '@/components/analytics/RiskDashboard'
 import { CampaignPicker } from './CampaignPicker'
@@ -27,8 +27,8 @@ export default async function ResultsPage({
       return (
         <div className="space-y-6">
           <div className="flex flex-col gap-3">
-            <h1 className="text-2xl font-bold flex items-center gap-2">
-              <Users className="h-6 w-6" />
+            <h1 className="text-xl md:text-2xl font-bold flex items-center gap-2">
+              <Users className="h-5 w-5 md:h-6 md:w-6" />
               Resultados
             </h1>
             <p className="text-sm text-slate-600">
@@ -81,11 +81,11 @@ export default async function ResultsPage({
     const pendingB = participants.filter((p) => !p.surveyResponse && p.cuestionarioAsignado === 'B').length;
 
     return (
-      <div className="space-y-8">
+      <div className="space-y-6 md:space-y-8">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <h1 className="text-2xl font-bold flex items-center gap-2">
-              <Users className="h-6 w-6" />
+            <h1 className="text-xl md:text-2xl font-bold flex items-center gap-2">
+              <Users className="h-5 w-5 md:h-6 md:w-6" />
               Resultados
             </h1>
             <p className="text-sm text-slate-600">
@@ -99,50 +99,51 @@ export default async function ResultsPage({
           />
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          <div className="bg-white rounded-xl shadow-sm p-4 border border-slate-100">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-4">
+          <div className="bg-white rounded-xl shadow-sm p-3 md:p-4 border border-slate-100">
             <div className="text-xs text-slate-500">Registrados</div>
-            <div className="text-2xl font-bold text-slate-900">{total}</div>
+            <div className="text-xl md:text-2xl font-bold text-slate-900">{total}</div>
             <div className="flex items-baseline gap-1.5 mt-0.5">
-              <div className="text-lg font-semibold text-indigo-600">{habilitados}</div>
-              <div className="text-xs text-indigo-400">habilitados</div>
+              <div className="text-base md:text-lg font-semibold text-indigo-600">{habilitados}</div>
+              <div className="text-[10px] md:text-xs text-indigo-400">habilitados</div>
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-4 border border-slate-100">
+          <div className="bg-white rounded-xl shadow-sm p-3 md:p-4 border border-slate-100">
             <div className="text-xs text-slate-500">Completados</div>
-            <div className="text-2xl font-bold text-slate-900">{completed}</div>
+            <div className="text-xl md:text-2xl font-bold text-slate-900">{completed}</div>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-4 border border-slate-100">
+          <div className="bg-white rounded-xl shadow-sm p-3 md:p-4 border border-slate-100">
             <div className="text-xs text-slate-500">Pendientes</div>
-            <div className="text-2xl font-bold text-slate-900">{pending}</div>
+            <div className="text-xl md:text-2xl font-bold text-slate-900">{pending}</div>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-4 border border-slate-100">
+          <div className="bg-white rounded-xl shadow-sm p-3 md:p-4 border border-slate-100">
             <div className="text-xs text-slate-500">Forma A</div>
             <div className="flex items-baseline gap-2">
-              <div className="text-2xl font-bold text-slate-900">{completedA}</div>
-              <div className="text-xs text-slate-400">completados</div>
+              <div className="text-xl md:text-2xl font-bold text-slate-900">{completedA}</div>
+              <div className="text-[10px] md:text-xs text-slate-400">completados</div>
             </div>
             <div className="flex items-baseline gap-2 mt-0.5">
-              <div className="text-lg font-semibold text-amber-600">{pendingA}</div>
-              <div className="text-xs text-amber-500">pendientes</div>
+              <div className="text-base md:text-lg font-semibold text-amber-600">{pendingA}</div>
+              <div className="text-[10px] md:text-xs text-amber-500">pendientes</div>
             </div>
           </div>
-          <div className="bg-white rounded-xl shadow-sm p-4 border border-slate-100">
+          <div className="col-span-2 md:col-span-1 bg-white rounded-xl shadow-sm p-3 md:p-4 border border-slate-100">
             <div className="text-xs text-slate-500">Forma B</div>
             <div className="flex items-baseline gap-2">
-              <div className="text-2xl font-bold text-slate-900">{completedB}</div>
-              <div className="text-xs text-slate-400">completados</div>
+              <div className="text-xl md:text-2xl font-bold text-slate-900">{completedB}</div>
+              <div className="text-[10px] md:text-xs text-slate-400">completados</div>
             </div>
             <div className="flex items-baseline gap-2 mt-0.5">
-              <div className="text-lg font-semibold text-amber-600">{pendingB}</div>
-              <div className="text-xs text-amber-500">pendientes</div>
+              <div className="text-base md:text-lg font-semibold text-amber-600">{pendingB}</div>
+              <div className="text-[10px] md:text-xs text-amber-500">pendientes</div>
             </div>
           </div>
         </div>
 
         <RiskDashboard participants={participantsWithData} />
 
-        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+        {/* Desktop Table */}
+        <div className="hidden md:block bg-white rounded-lg shadow-sm overflow-hidden">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
@@ -192,14 +193,68 @@ export default async function ResultsPage({
             </tbody>
           </table>
         </div>
+
+        {/* Mobile Cards */}
+        <div className="md:hidden space-y-3">
+          {participants.length === 0 && (
+            <div className="bg-white rounded-xl shadow-sm p-6 text-center text-gray-500">
+              No hay participantes registrados para esta campaña.
+            </div>
+          )}
+          {participants.map((p) => (
+            <div key={p.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 space-y-3">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <div className="bg-gray-100 p-1.5 rounded-lg">
+                    <FileText className="h-4 w-4 text-gray-500" />
+                  </div>
+                  <span className="font-semibold text-gray-900 text-sm">{p.cedula}</span>
+                </div>
+                {p.surveyResponse ? (
+                  <span className="shrink-0 px-2 py-1 text-[10px] font-bold rounded-full bg-green-100 text-green-800 uppercase tracking-wide">
+                    Completado
+                  </span>
+                ) : (
+                  <span className="shrink-0 px-2 py-1 text-[10px] font-bold rounded-full bg-amber-100 text-amber-800 uppercase tracking-wide">
+                    Pendiente
+                  </span>
+                )}
+              </div>
+
+              <div className="flex items-center gap-1.5 text-xs text-gray-400">
+                <Clock className="h-3 w-3" />
+                {p.createdAt.toLocaleDateString()}
+              </div>
+
+              {p.surveyResponse && (
+                <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-100">
+                  <Link
+                    href={`/admin/results/${p.surveyResponse.id}`}
+                    className="flex-1 min-w-0 text-center px-3 py-2 text-xs font-semibold rounded-lg bg-[#dc9222]/10 text-[#8a5400] hover:bg-[#dc9222]/20 transition-colors"
+                  >
+                    Ver Informe Web
+                  </Link>
+                  <a
+                    href={`/api/admin/participant/${p.id}/download-pdf`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 min-w-0 text-center px-3 py-2 text-xs font-semibold rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors flex items-center justify-center gap-1"
+                  >
+                    <Download className="h-3 w-3" /> PDF Físico
+                  </a>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     );
   } catch (e) {
     const message = e instanceof Error ? e.message : 'Error desconocido';
     return (
       <div className="space-y-3">
-        <h1 className="text-2xl font-bold flex items-center gap-2">
-          <Users className="h-6 w-6" />
+        <h1 className="text-xl md:text-2xl font-bold flex items-center gap-2">
+          <Users className="h-5 w-5 md:h-6 md:w-6" />
           Resultados
         </h1>
         <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-amber-900">

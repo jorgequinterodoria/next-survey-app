@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { createAdmin } from '@/app/actions/admin'
-import { ShieldCheck } from 'lucide-react'
+import { ShieldCheck, Calendar, Mail } from 'lucide-react'
 
 export const dynamic = 'force-dynamic';
 
@@ -10,21 +10,21 @@ export default async function AdminsPage() {
   })
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 md:space-y-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold flex items-center gap-2 text-gray-900">
-          <ShieldCheck className="h-6 w-6" />
+        <h1 className="text-xl md:text-2xl font-bold flex items-center gap-2 text-gray-900">
+          <ShieldCheck className="h-5 w-5 md:h-6 md:w-6" />
           Administradores
         </h1>
       </div>
 
       {/* Create Form */}
-      <div className="bg-white p-6 rounded-lg shadow-sm">
+      <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm">
         <h2 className="text-lg font-semibold mb-4 text-gray-900">Nuevo Administrador</h2>
         <form action={async (formData) => {
           'use server'
           await createAdmin(formData)
-        }} className="flex gap-4 items-end">
+        }} className="flex flex-col sm:flex-row gap-3 sm:gap-4 sm:items-end">
           <div className="flex-1">
             <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
@@ -47,15 +47,15 @@ export default async function AdminsPage() {
           </div>
           <button
             type="submit"
-            className="bg-[#dc9222] text-white px-4 py-2 rounded-md hover:bg-[#c7831f] transition-colors text-sm font-medium"
+            className="bg-[#dc9222] text-white px-4 py-2 rounded-md hover:bg-[#c7831f] transition-colors text-sm font-medium w-full sm:w-auto"
           >
             Crear Admin
           </button>
         </form>
       </div>
 
-      {/* List */}
-      <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+      {/* Desktop Table */}
+      <div className="hidden md:block bg-white rounded-lg shadow-sm overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -74,6 +74,34 @@ export default async function AdminsPage() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile Cards */}
+      <div className="md:hidden space-y-3">
+        {admins.length === 0 && (
+          <div className="bg-white rounded-xl shadow-sm p-6 text-center text-gray-500">
+            No hay administradores registrados.
+          </div>
+        )}
+        {admins.map((admin) => (
+          <div key={admin.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 space-y-2">
+            <div className="flex items-center gap-2">
+              <div className="bg-[#dc9222]/10 p-2 rounded-lg">
+                <Mail className="h-4 w-4 text-[#dc9222]" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="font-semibold text-gray-900 text-sm truncate">{admin.email}</p>
+              </div>
+            </div>
+            <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+              <div className="flex items-center gap-1.5 text-xs text-gray-400">
+                <Calendar className="h-3 w-3" />
+                {admin.createdAt.toLocaleDateString()}
+              </div>
+              <code className="text-[10px] text-gray-400 font-mono truncate max-w-[140px]">{admin.id}</code>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )

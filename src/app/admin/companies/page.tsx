@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import { createCompany } from '@/app/actions/admin'
-import { Building2 } from 'lucide-react'
+import { Building2, Calendar, Hash } from 'lucide-react'
 
 export const dynamic = 'force-dynamic';
 
@@ -11,21 +11,21 @@ export default async function CompaniesPage() {
   })
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 md:space-y-8">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold flex items-center gap-2 text-gray-900">
-          <Building2 className="h-6 w-6" />
+        <h1 className="text-xl md:text-2xl font-bold flex items-center gap-2 text-gray-900">
+          <Building2 className="h-5 w-5 md:h-6 md:w-6" />
           Empresas
         </h1>
       </div>
 
       {/* Create Form */}
-      <div className="bg-white p-6 rounded-lg shadow-sm">
+      <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm">
         <h2 className="text-lg font-semibold mb-4 text-gray-900">Nueva Empresa</h2>
         <form action={async (formData) => {
           'use server'
           await createCompany(formData)
-        }} className="flex gap-4 items-end">
+        }} className="flex flex-col sm:flex-row gap-3 sm:gap-4 sm:items-end">
           <div className="flex-1">
             <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
             <input
@@ -47,15 +47,15 @@ export default async function CompaniesPage() {
           </div>
           <button
             type="submit"
-            className="bg-[#dc9222] text-white px-4 py-2 rounded-md hover:bg-[#c7831f] transition-colors text-sm font-medium"
+            className="bg-[#dc9222] text-white px-4 py-2 rounded-md hover:bg-[#c7831f] transition-colors text-sm font-medium w-full sm:w-auto"
           >
             Crear Empresa
           </button>
         </form>
       </div>
 
-      {/* List */}
-      <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+      {/* Desktop Table */}
+      <div className="hidden md:block bg-white rounded-lg shadow-sm overflow-hidden">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -83,6 +83,38 @@ export default async function CompaniesPage() {
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile Cards */}
+      <div className="md:hidden space-y-3">
+        {companies.length === 0 && (
+          <div className="bg-white rounded-xl shadow-sm p-6 text-center text-gray-500">
+            No hay empresas registradas.
+          </div>
+        )}
+        {companies.map((company) => (
+          <div key={company.id} className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 space-y-3">
+            <div className="flex items-start justify-between gap-2">
+              <div className="min-w-0 flex-1">
+                <h3 className="font-semibold text-gray-900 text-sm">{company.name}</h3>
+                {company.nit && (
+                  <p className="text-xs text-gray-500 mt-0.5 flex items-center gap-1">
+                    <Hash className="h-3 w-3" />
+                    NIT: {company.nit}
+                  </p>
+                )}
+              </div>
+              <div className="shrink-0 bg-[#dc9222]/10 text-[#dc9222] px-2.5 py-1 rounded-full text-xs font-bold">
+                {company._count.campanas} campaña{company._count.campanas !== 1 ? 's' : ''}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1.5 text-xs text-gray-400 pt-1 border-t border-gray-100">
+              <Calendar className="h-3 w-3" />
+              Registrada: {company.createdAt.toLocaleDateString()}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )

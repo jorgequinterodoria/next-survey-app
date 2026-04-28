@@ -30,7 +30,7 @@ export default async function DashboardPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Dashboard General</h1>
+      <h1 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">Dashboard General</h1>
 
       {error && (
         <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-amber-900">

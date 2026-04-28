@@ -20,6 +20,7 @@ export interface ParticipantListMeta {
   campanaName: string;
   generatedAt: string;
   totalRegistrados: number;
+  totalHabilitados: number;
   totalCompletados: number;
   totalPendientes: number;
 }
@@ -220,6 +221,7 @@ const ParticipantListDocument = ({
         <View style={styles.statBox}>
           <Text style={styles.statLabel}>Registrados</Text>
           <Text style={styles.statValue}>{meta.totalRegistrados}</Text>
+          <Text style={{ fontSize: 9, fontWeight: 'bold', fontFamily: 'Helvetica-Bold', color: '#4f46e5', marginTop: 2 }}>{meta.totalHabilitados} <Text style={{ fontSize: 7, color: '#818cf8', fontFamily: 'Helvetica' }}>habilitados</Text></Text>
         </View>
         <View style={styles.statBox}>
           <Text style={styles.statLabel}>Completados</Text>

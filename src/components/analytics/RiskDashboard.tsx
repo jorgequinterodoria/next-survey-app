@@ -234,7 +234,7 @@ export default function RiskDashboard({ participants }: RiskDashboardProps) {
 
 
   return (
-    <div className="space-y-12 p-6 bg-slate-50 min-h-screen">
+    <div className="space-y-8 md:space-y-12 p-3 md:p-6 bg-slate-50 min-h-screen">
       
       {/* Sección Demográfica */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -270,10 +270,10 @@ export default function RiskDashboard({ participants }: RiskDashboardProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <ChartCard title="Nivel de Estudios">
             <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={educationData} layout="vertical" margin={{ left: 20 }}>
+                <BarChart data={educationData} layout="vertical" margin={{ left: 10, right: 10 }}>
                 <CartesianGrid strokeDasharray="3 3" horizontal={false} />
                 <XAxis type="number" allowDecimals={false} />
-                <YAxis dataKey="name" type="category" width={120} tick={{fontSize: 11}} />
+                <YAxis dataKey="name" type="category" width={100} tick={{fontSize: 10}} />
                 <Tooltip cursor={{ fill: 'transparent' }} />
                 <Bar dataKey="value" fill="#10b981" radius={[0, 4, 4, 0]}>
                     <LabelList dataKey="value" position="right" />
@@ -284,10 +284,10 @@ export default function RiskDashboard({ participants }: RiskDashboardProps) {
 
           <ChartCard title="Antigüedad en la Empresa">
             <ResponsiveContainer width="100%" height={300}>
-                <BarChart data={seniorityData} layout="vertical" margin={{ left: 20 }}>
+                <BarChart data={seniorityData} layout="vertical" margin={{ left: 10, right: 10 }}>
                 <CartesianGrid strokeDasharray="3 3" horizontal={false} />
                 <XAxis type="number" allowDecimals={false} />
-                <YAxis dataKey="name" type="category" width={120} tick={{fontSize: 11}} />
+                <YAxis dataKey="name" type="category" width={100} tick={{fontSize: 10}} />
                 <Tooltip cursor={{ fill: 'transparent' }} />
                 <Bar dataKey="value" fill="#f59e0b" radius={[0, 4, 4, 0]}>
                     <LabelList dataKey="value" position="right" />
@@ -300,12 +300,13 @@ export default function RiskDashboard({ participants }: RiskDashboardProps) {
       {/* Sección Riesgos */}
       <div className="space-y-8">
           <ChartCard title="Factores Intralaborales (Dimensiones) - Distribución de Riesgo (%)">
-             <div className="h-[500px] w-full">
+             <div className="h-[500px] w-full overflow-x-auto">
+               <div className="min-w-[600px] h-full">
                 <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={intralaboralChartData} layout="vertical" margin={{ left: 40, right: 20 }}>
+                    <BarChart data={intralaboralChartData} layout="vertical" margin={{ left: 20, right: 20 }}>
                         <CartesianGrid strokeDasharray="3 3" horizontal={false} />
                         <XAxis type="number" domain={[0, 100]} />
-                        <YAxis dataKey="name" type="category" width={180} tick={{fontSize: 11}} />
+                        <YAxis dataKey="name" type="category" width={140} tick={{fontSize: 10}} />
                         <Tooltip />
                         <Legend />
                         {RISK_ORDER.map((risk) => (
@@ -313,6 +314,7 @@ export default function RiskDashboard({ participants }: RiskDashboardProps) {
                         ))}
                     </BarChart>
                 </ResponsiveContainer>
+               </div>
              </div>
           </ChartCard>
 
@@ -339,8 +341,8 @@ export default function RiskDashboard({ participants }: RiskDashboardProps) {
 
 function ChartCard({ title, children }: { title: string, children: React.ReactNode }) {
     return (
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-            <h3 className="text-lg font-bold text-slate-800 mb-6">{title}</h3>
+        <div className="bg-white p-3 md:p-6 rounded-xl shadow-sm border border-slate-200">
+            <h3 className="text-sm md:text-lg font-bold text-slate-800 mb-4 md:mb-6">{title}</h3>
             {children}
         </div>
     );

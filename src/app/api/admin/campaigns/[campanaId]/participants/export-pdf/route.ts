@@ -30,6 +30,12 @@ export async function GET(
       return NextResponse.json({ error: 'Campaña no encontrada' }, { status: 404 });
     }
 
+    // Total count of ALL participants in the campaign
+    const totalRegistrados = await prisma.participante.count({
+      where: { campanaId },
+    });
+
+    // Only participants enabled for the survey (Forma A or B)
     const participants = await prisma.participante.findMany({
       where: {
         campanaId,
@@ -78,7 +84,8 @@ export async function GET(
         hour: '2-digit',
         minute: '2-digit',
       }),
-      totalRegistrados: rows.length,
+      totalRegistrados,
+      totalHabilitados: rows.length,
       totalCompletados,
       totalPendientes: rows.length - totalCompletados,
     };
