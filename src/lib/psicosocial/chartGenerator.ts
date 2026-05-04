@@ -290,6 +290,90 @@ export function buildRiskStackedBarSVG(
 </svg>`;
 }
 
+type LikertStackedRow = {
+  factor: string;
+  nunca: { count: number; pct: number };
+  aVeces: { count: number; pct: number };
+  casiSiempre: { count: number; pct: number };
+  siempre: { count: number; pct: number };
+  total: number;
+};
+
+export function buildLikertStackedBarSVG(
+  rows: LikertStackedRow[],
+  title = '',
+  width = 700,
+  height?: number
+): string {
+  const h = height || Math.max(280, rows.length * 32 + 110);
+  const marginLeft = 260;
+  const marginRight = 20;
+  const barW = width - marginLeft - marginRight;
+  const barH = 20;
+  const gap = 12;
+
+  const COLORS = {
+    nunca: '#1a9641',
+    aVeces: '#ffffbf',
+    casiSiempre: '#fdae61',
+    siempre: '#d73027',
+  };
+
+  const bars = rows.map((row, i) => {
+    const y = 70 + i * (barH + gap);
+    const t = row.total || 1;
+    const segments: string[] = [];
+    let x = marginLeft;
+
+    const parts = [
+      { key: 'nunca', val: row.nunca.count },
+      { key: 'aVeces', val: row.aVeces.count },
+      { key: 'casiSiempre', val: row.casiSiempre.count },
+      { key: 'siempre', val: row.siempre.count },
+    ] as const;
+
+    for (const part of parts) {
+      const w = (part.val / t) * barW;
+      if (w > 0) {
+        segments.push(
+          `<rect x="${x.toFixed(1)}" y="${y}" width="${w.toFixed(1)}" height="${barH}" fill="${COLORS[part.key]}"/>`
+        );
+        if (w > 28) {
+          segments.push(
+            `<text x="${(x + w / 2).toFixed(1)}" y="${y + barH / 2 + 4}" text-anchor="middle" font-size="9" fill="${part.key === 'aVeces' ? '#555' : 'white'}">${(part.val / t * 100).toFixed(0)}%</text>`
+          );
+        }
+        x += w;
+      }
+    }
+
+    const shortLabel = row.factor.length > 32 ? row.factor.substring(0, 30) + '…' : row.factor;
+    return `
+    <text x="${marginLeft - 6}" y="${y + barH / 2 + 4}" text-anchor="end" font-size="9.5" fill="#333">${escapeXml(shortLabel)}</text>
+    ${segments.join('')}`;
+  });
+
+  const legendItems = [
+    { label: 'Nunca', color: COLORS.nunca },
+    { label: 'A veces', color: COLORS.aVeces },
+    { label: 'Casi siempre', color: COLORS.casiSiempre },
+    { label: 'Siempre', color: COLORS.siempre },
+  ];
+  const legendY = h - 30;
+  const legendSpacing = (width - marginLeft) / 4;
+  const legend = legendItems.map((item, i) => `
+    <rect x="${marginLeft + i * legendSpacing}" y="${legendY}" width="12" height="12" fill="${item.color}"/>
+    <text x="${marginLeft + i * legendSpacing + 16}" y="${legendY + 10}" font-size="9" fill="#444">${item.label}</text>`
+  ).join('');
+
+  return `<svg width="${width}" height="${h}" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+  <rect width="${width}" height="${h}" fill="white"/>
+  ${title ? `<text x="${width / 2}" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#222">${escapeXml(title)}</text>` : ''}
+  ${bars.join('')}
+  ${legend}
+</svg>`;
+}
+
 let cachedFontBase64: string | null = null;
 
 function getFontBase64(): string {

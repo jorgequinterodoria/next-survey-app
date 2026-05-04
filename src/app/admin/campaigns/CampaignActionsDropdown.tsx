@@ -30,6 +30,8 @@ export function CampaignActionsDropdown({ campaign }: { campaign: CampaignRow })
   const [open, setOpen] = useState(false);
   const [isGeneratingWord, setIsGeneratingWord] = useState(false);
   const [wordError, setWordError] = useState<string | null>(null);
+  const [isGeneratingExcel, setIsGeneratingExcel] = useState(false);
+  const [excelError, setExcelError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -91,6 +93,39 @@ export function CampaignActionsDropdown({ campaign }: { campaign: CampaignRow })
     }
   }
 
+  async function handleExportExcel() {
+    setIsGeneratingExcel(true);
+    setExcelError(null);
+    try {
+      const response = await fetch(`/api/admin/export?campanaId=${campaign.id}`, { method: 'GET' });
+      if (!response.ok) {
+        const contentType = response.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+          const data = await response.json();
+          throw new Error(data?.error || 'Error al exportar el Excel');
+        }
+        throw new Error(`Error al exportar el Excel (HTTP ${response.status})`);
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      const disposition = response.headers.get('Content-Disposition');
+      const match = disposition?.match(/filename="(.+?)"/);
+      a.download = match ? match[1] : `resultados-campana-${campaign.id}.xlsx`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      setExcelError(err instanceof Error ? err.message : 'Error exportando el Excel');
+    } finally {
+      setIsGeneratingExcel(false);
+      setOpen(false);
+    }
+  }
+
   return (
     <div className="relative inline-block" ref={rootRef}>
       <button
@@ -135,16 +170,16 @@ export function CampaignActionsDropdown({ campaign }: { campaign: CampaignRow })
               Ver listado
             </Link>
 
-            <Link
-              href={`/api/admin/export?campanaId=${campaign.id}`}
-              target="_blank"
-              className="w-full px-3 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2"
+            <button
+              type="button"
+              onClick={handleExportExcel}
+              disabled={isGeneratingExcel}
+              className="w-full px-3 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2 disabled:opacity-50"
               role="menuitem"
-              onClick={() => setOpen(false)}
             >
               <FileSpreadsheet className="h-4 w-4" />
-              Exportar Excel
-            </Link>
+              {isGeneratingExcel ? 'Generando Excel...' : 'Exportar Excel (con gráficos)'}
+            </button>
 
             <button
               type="button"
@@ -172,6 +207,11 @@ export function CampaignActionsDropdown({ campaign }: { campaign: CampaignRow })
           {wordError && (
             <div className="border-t border-slate-200 px-3 py-2 text-xs text-red-600">
               {wordError}
+            </div>
+          )}
+          {excelError && (
+            <div className="border-t border-slate-200 px-3 py-2 text-xs text-red-600">
+              {excelError}
             </div>
           )}
         </div>
