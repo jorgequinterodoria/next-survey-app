@@ -396,13 +396,12 @@ async function getFontBase64(): Promise<string> {
       } catch {}
     }
 
-    // 2) Try fetching from the deployed public URL (Netlify/Vercel production)
-    const siteUrl =
-      process.env.NEXT_PUBLIC_SITE_URL ||
-      (process.env.NETLIFY ? process.env.URL : undefined);
+    // 2) Try fetching from the deployed site URL (Netlify/Vercel production)
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
     if (siteUrl) {
       try {
-        const res = await fetch(`${siteUrl.replace(/\/$/, '')}/fonts/Roboto-Regular.ttf`);
+        const origin = new URL(siteUrl).origin;
+        const res = await fetch(`${origin}/fonts/Roboto-Regular.ttf`);
         if (res.ok) {
           const buf = Buffer.from(await res.arrayBuffer());
           cachedFontBase64 = buf.toString('base64');
@@ -410,6 +409,16 @@ async function getFontBase64(): Promise<string> {
         }
       } catch {}
     }
+
+    // 3) Ultimate fallback: download Roboto from Google Fonts CDN
+    try {
+      const res = await fetch('https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxPKTU1Kg.ttf');
+      if (res.ok) {
+        const buf = Buffer.from(await res.arrayBuffer());
+        cachedFontBase64 = buf.toString('base64');
+        return cachedFontBase64;
+      }
+    } catch {}
 
     console.warn('Could not load Roboto font for charts, falling back to system fonts');
     cachedFontBase64 = '';
