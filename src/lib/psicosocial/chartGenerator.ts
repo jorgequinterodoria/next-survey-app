@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { Resvg } from '@resvg/resvg-js';
 import type { FrequencyItem, RiskTableRow } from './types';
 
 const RISK_COLORS: Record<string, string> = {
@@ -84,7 +85,7 @@ export function buildPieSVG(
     startAngle = endAngle;
   });
 
-  return `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+  return `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" font-family="Roboto, sans-serif">
   <rect width="${width}" height="${height}" fill="white"/>
   ${slices.join('\n  ')}
   ${labels.join('\n  ')}
@@ -154,7 +155,7 @@ export function buildBarVerticalSVG(
     `;
   });
 
-  return `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+  return `<svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg" font-family="Roboto, sans-serif">
     <rect width="${width}" height="${height}" fill="white"/>
     
     <!-- Title -->
@@ -205,7 +206,7 @@ export function buildBarHorizontalSVG(
     <text x="${marginLeft + bw + 4}" y="${y + barH / 2 + 4}" font-size="11" fill="#444">${item.count} (${(item.percentage * 100).toFixed(1)}%)</text>`;
   });
 
-  return `<svg width="${width}" height="${h}" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+  return `<svg width="${width}" height="${h}" xmlns="http://www.w3.org/2000/svg" font-family="Roboto, sans-serif">
   <rect width="${width}" height="${h}" fill="white"/>
   ${title ? `<text x="${width / 2}" y="24" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">${escapeXml(title)}</text>` : ''}
   ${bars.join('')}
@@ -282,7 +283,7 @@ export function buildRiskStackedBarSVG(
     <text x="${marginLeft + i * legendSpacing + 16}" y="${legendY + 10}" font-size="9" fill="#444">${item.label}</text>`
   ).join('');
 
-  return `<svg width="${width}" height="${h}" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+  return `<svg width="${width}" height="${h}" xmlns="http://www.w3.org/2000/svg" font-family="Roboto, sans-serif">
   <rect width="${width}" height="${h}" fill="white"/>
   ${title ? `<text x="${width / 2}" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#222">${escapeXml(title)}</text>` : ''}
   ${bars.join('')}
@@ -366,7 +367,7 @@ export function buildLikertStackedBarSVG(
     <text x="${marginLeft + i * legendSpacing + 16}" y="${legendY + 10}" font-size="9" fill="#444">${item.label}</text>`
   ).join('');
 
-  return `<svg width="${width}" height="${h}" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+  return `<svg width="${width}" height="${h}" xmlns="http://www.w3.org/2000/svg" font-family="Roboto, sans-serif">
   <rect width="${width}" height="${h}" fill="white"/>
   ${title ? `<text x="${width / 2}" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#222">${escapeXml(title)}</text>` : ''}
   ${bars.join('')}
@@ -374,81 +375,87 @@ export function buildLikertStackedBarSVG(
 </svg>`;
 }
 
-let cachedFontBase64: string | null = null;
-let fontLoadPromise: Promise<string> | null = null;
+const FONT_FILE = 'Roboto-Regular.ttf';
 
-async function getFontBase64(): Promise<string> {
-  if (cachedFontBase64 !== null) return cachedFontBase64;
+let cachedFontBuffer: Buffer | null = null;
+let fontLoadPromise: Promise<Buffer | null> | null = null;
+
+async function getFontBuffer(): Promise<Buffer | null> {
+  if (cachedFontBuffer !== null) return cachedFontBuffer.length > 0 ? cachedFontBuffer : null;
   if (fontLoadPromise) return fontLoadPromise;
 
   fontLoadPromise = (async () => {
-    // 1) Try filesystem (local dev / Netlify with public bundled)
     const paths = [
-      path.join(process.cwd(), 'public', 'fonts', 'Roboto-Regular.ttf'),
-      path.join(process.cwd(), '.next', 'server', 'public', 'fonts', 'Roboto-Regular.ttf'),
-      path.resolve('public/fonts/Roboto-Regular.ttf'),
+      path.join(process.cwd(), 'public', 'fonts', FONT_FILE),
+      path.join(process.cwd(), '.next', 'server', 'public', 'fonts', FONT_FILE),
+      path.join(process.cwd(), '.next', 'standalone', 'public', 'fonts', FONT_FILE),
     ];
     for (const fontPath of paths) {
       try {
-        const fontBuffer = fs.readFileSync(fontPath);
-        cachedFontBase64 = fontBuffer.toString('base64');
-        return cachedFontBase64;
+        cachedFontBuffer = fs.readFileSync(fontPath);
+        return cachedFontBuffer;
       } catch {}
     }
 
-    // 2) Try fetching from the deployed site URL (Netlify/Vercel production)
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.URL;
     if (siteUrl) {
       try {
         const origin = new URL(siteUrl).origin;
-        const res = await fetch(`${origin}/fonts/Roboto-Regular.ttf`);
+        const res = await fetch(`${origin}/fonts/${FONT_FILE}`);
         if (res.ok) {
-          const buf = Buffer.from(await res.arrayBuffer());
-          cachedFontBase64 = buf.toString('base64');
-          return cachedFontBase64;
+          cachedFontBuffer = Buffer.from(await res.arrayBuffer());
+          return cachedFontBuffer;
         }
       } catch {}
     }
 
-    // 3) Ultimate fallback: download Roboto from Google Fonts CDN
     try {
       const res = await fetch('https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxPKTU1Kg.ttf');
       if (res.ok) {
-        const buf = Buffer.from(await res.arrayBuffer());
-        cachedFontBase64 = buf.toString('base64');
-        return cachedFontBase64;
+        cachedFontBuffer = Buffer.from(await res.arrayBuffer());
+        return cachedFontBuffer;
       }
     } catch {}
 
-    console.warn('Could not load Roboto font for charts, falling back to system fonts');
-    cachedFontBase64 = '';
-    return cachedFontBase64;
+    console.warn('Could not load Roboto font for charts');
+    cachedFontBuffer = Buffer.alloc(0);
+    return null;
   })();
 
   return fontLoadPromise;
 }
 
 export async function svgToPng(svg: string, width?: number, height?: number): Promise<Buffer> {
-  const fontBase64 = await getFontBase64();
-  
-  if (fontBase64) {
-    const styleTag = `<style>
-      @font-face {
-        font-family: 'Roboto';
-        src: url(data:font/truetype;charset=utf-8;base64,${fontBase64}) format('truetype');
-      }
-      text { font-family: 'Roboto', sans-serif !important; }
-    </style>`;
-    svg = svg.replace(/(<svg[^>]*>)/i, `$1${styleTag}`);
+  const fontBuffer = await getFontBuffer();
+
+  const opts: {
+    background: string;
+    fitTo?: { mode: 'width'; value: number };
+    font: {
+      fontBuffers?: Buffer[];
+      loadSystemFonts: boolean;
+      defaultFontFamily: string;
+      sansSerifFamily: string;
+    };
+  } = {
+    background: 'rgba(255,255,255,1)',
+    font: {
+      loadSystemFonts: false,
+      defaultFontFamily: 'Roboto',
+      sansSerifFamily: 'Roboto',
+    },
+  };
+
+  if (fontBuffer) {
+    opts.font.fontBuffers = [fontBuffer];
+  } else {
+    opts.font.loadSystemFonts = true;
   }
 
-  const sharp = (await import('sharp')).default;
-  const buf = Buffer.from(svg, 'utf-8');
-  let pipeline = sharp(buf);
-  if (width || height) {
-    pipeline = pipeline.resize(width, height, { fit: 'contain', background: 'white' });
-  }
-  return pipeline.png().toBuffer();
+  if (width) opts.fitTo = { mode: 'width', value: width };
+
+  const resvg = new Resvg(svg, opts);
+  return Buffer.from(resvg.render().asPng());
 }
 
 import type { ReportData } from './types';
