@@ -1,6 +1,8 @@
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 import { Resvg } from '@resvg/resvg-js';
+import { ROBOTO_FONT_BASE64 } from './robotoFont';
 import type { FrequencyItem, RiskTableRow } from './types';
 
 const RISK_COLORS: Record<string, string> = {
@@ -375,64 +377,27 @@ export function buildLikertStackedBarSVG(
 </svg>`;
 }
 
-const FONT_FILE = 'Roboto-Regular.ttf';
+const EMBEDDED_ROBOTO_FONT = Buffer.from(ROBOTO_FONT_BASE64, 'base64');
+let cachedFontFilePath: string | null = null;
 
-let cachedFontBuffer: Buffer | null = null;
-let fontLoadPromise: Promise<Buffer | null> | null = null;
+function getFontFilePath(): string {
+  if (cachedFontFilePath) return cachedFontFilePath;
 
-async function getFontBuffer(): Promise<Buffer | null> {
-  if (cachedFontBuffer !== null) return cachedFontBuffer.length > 0 ? cachedFontBuffer : null;
-  if (fontLoadPromise) return fontLoadPromise;
+  const fontPath = path.join(os.tmpdir(), 'resvg-roboto-regular.ttf');
+  if (!fs.existsSync(fontPath)) {
+    fs.writeFileSync(fontPath, EMBEDDED_ROBOTO_FONT);
+  }
 
-  fontLoadPromise = (async () => {
-    const paths = [
-      path.join(process.cwd(), 'public', 'fonts', FONT_FILE),
-      path.join(process.cwd(), '.next', 'server', 'public', 'fonts', FONT_FILE),
-      path.join(process.cwd(), '.next', 'standalone', 'public', 'fonts', FONT_FILE),
-    ];
-    for (const fontPath of paths) {
-      try {
-        cachedFontBuffer = fs.readFileSync(fontPath);
-        return cachedFontBuffer;
-      } catch {}
-    }
-
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || process.env.URL;
-    if (siteUrl) {
-      try {
-        const origin = new URL(siteUrl).origin;
-        const res = await fetch(`${origin}/fonts/${FONT_FILE}`);
-        if (res.ok) {
-          cachedFontBuffer = Buffer.from(await res.arrayBuffer());
-          return cachedFontBuffer;
-        }
-      } catch {}
-    }
-
-    try {
-      const res = await fetch('https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Mu4mxPKTU1Kg.ttf');
-      if (res.ok) {
-        cachedFontBuffer = Buffer.from(await res.arrayBuffer());
-        return cachedFontBuffer;
-      }
-    } catch {}
-
-    console.warn('Could not load Roboto font for charts');
-    cachedFontBuffer = Buffer.alloc(0);
-    return null;
-  })();
-
-  return fontLoadPromise;
+  cachedFontFilePath = fontPath;
+  return fontPath;
 }
 
 export async function svgToPng(svg: string, width?: number, height?: number): Promise<Buffer> {
-  const fontBuffer = await getFontBuffer();
-
   const opts: {
     background: string;
     fitTo?: { mode: 'width'; value: number };
     font: {
-      fontBuffers?: Buffer[];
+      fontFiles: string[];
       loadSystemFonts: boolean;
       defaultFontFamily: string;
       sansSerifFamily: string;
@@ -440,17 +405,12 @@ export async function svgToPng(svg: string, width?: number, height?: number): Pr
   } = {
     background: 'rgba(255,255,255,1)',
     font: {
+      fontFiles: [getFontFilePath()],
       loadSystemFonts: false,
       defaultFontFamily: 'Roboto',
       sansSerifFamily: 'Roboto',
     },
   };
-
-  if (fontBuffer) {
-    opts.font.fontBuffers = [fontBuffer];
-  } else {
-    opts.font.loadSystemFonts = true;
-  }
 
   if (width) opts.fitTo = { mode: 'width', value: width };
 
