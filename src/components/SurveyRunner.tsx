@@ -46,7 +46,6 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
     isSubmitting,
     isVerifying,
     notEligibleMessage,
-    filterClientes,
     progressSteps,
     getCurrentSections,
     setConsentName,
@@ -72,9 +71,9 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
   } = useSurvey({ campaignId });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-[#dc9222]/5 to-[#7c7b7b]/10 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+    <div className="min-h-screen bg-linear-to-br from-white via-[#dc9222]/5 to-[#7c7b7b]/10 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
       {notEligibleMessage && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-4">
+        <div className="fixed inset-0 z-60 flex items-center justify-center bg-black/50 px-4">
           <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700 w-full max-w-md overflow-hidden">
             <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700">
               <h3 className="text-base font-bold text-slate-900 dark:text-slate-100">No aplica</h3>
@@ -206,7 +205,7 @@ export default function SurveyRunner({ campaignId, campaignName, companyName }: 
         {phase === 'estres' && (
           <div className="max-w-2xl mx-auto">
             <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
-              <div className="bg-gradient-to-r from-rose-600 to-pink-700 px-6 py-5">
+              <div className="bg-linear-to-r from-rose-600 to-pink-700 px-6 py-5">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs font-medium text-white/70 uppercase tracking-wide">
                     Cuestionario de Estrés

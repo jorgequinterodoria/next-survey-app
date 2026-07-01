@@ -375,22 +375,52 @@ export function buildLikertStackedBarSVG(
 }
 
 let cachedFontBase64: string | null = null;
+let fontLoadPromise: Promise<string> | null = null;
 
-function getFontBase64(): string {
+async function getFontBase64(): Promise<string> {
   if (cachedFontBase64 !== null) return cachedFontBase64;
-  try {
-    const fontPath = path.join(process.cwd(), 'public', 'fonts', 'Roboto-Regular.ttf');
-    const fontBuffer = fs.readFileSync(fontPath);
-    cachedFontBase64 = fontBuffer.toString('base64');
-  } catch (e) {
-    console.warn('Could not load Roboto font for charts, falling back to system fonts:', e);
+  if (fontLoadPromise) return fontLoadPromise;
+
+  fontLoadPromise = (async () => {
+    // 1) Try filesystem (local dev / Netlify with public bundled)
+    const paths = [
+      path.join(process.cwd(), 'public', 'fonts', 'Roboto-Regular.ttf'),
+      path.join(process.cwd(), '.next', 'server', 'public', 'fonts', 'Roboto-Regular.ttf'),
+      path.resolve('public/fonts/Roboto-Regular.ttf'),
+    ];
+    for (const fontPath of paths) {
+      try {
+        const fontBuffer = fs.readFileSync(fontPath);
+        cachedFontBase64 = fontBuffer.toString('base64');
+        return cachedFontBase64;
+      } catch {}
+    }
+
+    // 2) Try fetching from the deployed public URL (Netlify/Vercel production)
+    const siteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL ||
+      (process.env.NETLIFY ? process.env.URL : undefined);
+    if (siteUrl) {
+      try {
+        const res = await fetch(`${siteUrl.replace(/\/$/, '')}/fonts/Roboto-Regular.ttf`);
+        if (res.ok) {
+          const buf = Buffer.from(await res.arrayBuffer());
+          cachedFontBase64 = buf.toString('base64');
+          return cachedFontBase64;
+        }
+      } catch {}
+    }
+
+    console.warn('Could not load Roboto font for charts, falling back to system fonts');
     cachedFontBase64 = '';
-  }
-  return cachedFontBase64;
+    return cachedFontBase64;
+  })();
+
+  return fontLoadPromise;
 }
 
 export async function svgToPng(svg: string, width?: number, height?: number): Promise<Buffer> {
-  const fontBase64 = getFontBase64();
+  const fontBase64 = await getFontBase64();
   
   if (fontBase64) {
     const styleTag = `<style>
