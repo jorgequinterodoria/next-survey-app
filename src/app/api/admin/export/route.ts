@@ -7,6 +7,12 @@ import { buildBarHorizontalSVG, buildBarVerticalSVG, buildRiskStackedBarSVG, bui
 // Tipos auxiliares
 type ResultRow = {
     id_encuesta: string
+    id_aplicacion: string
+    id_trabajador: string
+    documento_trabajador: string
+    Empresa: string
+    Campana: string
+    Componente: string
     Tipo: string
     Variable: string
     Valor: string | number
@@ -100,6 +106,16 @@ function normalizeRiskLevel(raw: unknown): string {
         'no aplica': 'No aplica',
     }
     return map[v] || (normalizeText(raw) || 'Sin datos')
+}
+
+function getSurveyIdentifier(formType: unknown): string {
+    return formType === 'A'
+        ? 'BATERIA_RIESGO_PSICOSOCIAL_FORMA_A'
+        : 'BATERIA_RIESGO_PSICOSOCIAL_FORMA_B'
+}
+
+function hasObjectData(value: unknown): boolean {
+    return typeof value === 'object' && value !== null && Object.keys(value as Record<string, unknown>).length > 0
 }
 
 const RISK_LEVELS_5 = new Set([
@@ -591,9 +607,18 @@ export async function GET(req: NextRequest) {
                 edad = (new Date().getFullYear() - anioNacimiento).toString()
             }
 
+            const empresa = r.participante?.campana?.empresa?.name || ''
+            const campana = r.participante?.campana?.name || ''
+            const documentoTrabajador = r.consentDoc || r.participante?.cedula || ''
+
             return {
+                'ID trabajador': r.participanteId,
+                'ID aplicación': r.id,
+                'Documento trabajador': documentoTrabajador,
+                'ID encuesta': getSurveyIdentifier(r.formType),
                 'Nombre': ficha['ficha_1'] || r.consentName || '',
-                'Empresa': r.participante?.campana?.empresa?.name || '',
+                'Empresa': empresa,
+                'Campaña': campana,
                 'Sexo': ficha['ficha_2'] || '',
                 'Año de nacimiento': ficha['ficha_3'] || '',
                 'Estado civil': '', 
@@ -623,16 +648,30 @@ export async function GET(req: NextRequest) {
         const analysisData: ResultRow[] = [];
 
         responses.forEach(r => {
-            const idEncuesta = `ENC_${r.id.substring(0, 4)}_${r.formType === 'A' ? 'ia' : 'ib'}`;
             const results = r.results as any; // Assuming it follows the structure from our engine
             const ficha = (r.fichaData as unknown as Record<string, string>) || {};
             const cargo = ficha['ficha_12'] || ficha['cargo'] || 'No especificado';
+            const empresa = r.participante?.campana?.empresa?.name || ''
+            const campana = r.participante?.campana?.name || ''
+            const documentoTrabajador = r.consentDoc || r.participante?.cedula || ''
 
             if (!results) return;
 
-            const addRow = (tipo: string, variable: string, valor: string | number, interpretacion: string) => {
+            const addRow = (
+                componente: string,
+                tipo: string,
+                variable: string,
+                valor: string | number,
+                interpretacion: string
+            ) => {
                 analysisData.push({
-                    id_encuesta: idEncuesta,
+                    id_encuesta: getSurveyIdentifier(r.formType),
+                    id_aplicacion: r.id,
+                    id_trabajador: r.participanteId,
+                    documento_trabajador: documentoTrabajador,
+                    Empresa: empresa,
+                    Campana: campana,
+                    Componente: componente,
                     Tipo: tipo,
                     Variable: variable,
                     Valor: valor,
@@ -646,9 +685,9 @@ export async function GET(req: NextRequest) {
             // Dimensiones Intralaborales
             if (results.intralaboral?.domains) {
                 results.intralaboral.domains.forEach((d: any) => {
-                    addRow('Dominio', d.name, d.transformed, d.level);
+                    addRow('Intralaboral', 'Dominio', d.name, d.transformed, d.level);
                     d.dimensions.forEach((dim: any) => {
-                        addRow('Dimensión', dim.name, dim.transformed, dim.level);
+                        addRow('Intralaboral', 'Dimensión', dim.name, dim.transformed, dim.level);
                     });
                 });
             }
@@ -657,23 +696,23 @@ export async function GET(req: NextRequest) {
             if (results.extralaboral?.domains) {
                 results.extralaboral.domains.forEach((d: any) => {
                     d.dimensions.forEach((dim: any) => {
-                        addRow('Extralaboral', dim.name, dim.transformed, dim.level);
+                        addRow('Extralaboral', 'Extralaboral', dim.name, dim.transformed, dim.level);
                     });
                 });
             }
 
             // --- TOTALES ---
             if (results.extralaboral?.total) {
-                addRow('Total cuestionario', 'Factores Extralaborales', results.extralaboral.total.transformed, results.extralaboral.total.level);
+                addRow('Extralaboral', 'Total cuestionario', 'Factores Extralaborales', results.extralaboral.total.transformed, results.extralaboral.total.level);
             }
             if (results.intralaboral?.total) {
-                addRow('Total cuestionario', 'Factores Intralaborales', results.intralaboral.total.transformed, results.intralaboral.total.level);
+                addRow('Intralaboral', 'Total cuestionario', 'Factores Intralaborales', results.intralaboral.total.transformed, results.intralaboral.total.level);
             }
             if (results.global) {
-                addRow('Total cuestionario', 'Factores Intralaborales + Extralaborales', results.global.transformed, results.global.level);
+                addRow('Total general', 'Total cuestionario', 'Factores Intralaborales + Extralaborales', results.global.transformed, results.global.level);
             }
             if (results.estres?.total) {
-                addRow('Total cuestionario', 'Nivel de Estrés', results.estres.total.transformed, results.estres.total.level);
+                addRow('Estrés', 'Total cuestionario', 'Nivel de Estrés', results.estres.total.transformed, results.estres.total.level);
             }
 
             // --- ESTRES DETALLADO (Items) ---
@@ -691,12 +730,93 @@ export async function GET(req: NextRequest) {
                              else if (answerVal === 'casi_nunca') points = 1;
                              else if (answerVal === 'nunca') points = 0;
 
-                             addRow(`Estrés: ${dim.name}`, (STRESS_QUESTIONS as any)[itemId] || `Pregunta ${itemId}`, points, text);
+                             addRow('Estrés', `Estrés: ${dim.name}`, (STRESS_QUESTIONS as any)[itemId] || `Pregunta ${itemId}`, points, text);
                         }
                     });
                 });
             }
         });
+
+        const controlMap = new Map<string, Set<string>>()
+        const registerControl = (params: {
+            empresa: string
+            campana: string
+            forma: string
+            componente: string
+            trabajadorId: string
+            include: boolean
+        }) => {
+            if (!params.include) return
+            const key = [
+                params.empresa || 'Sin datos',
+                params.campana || 'Sin datos',
+                params.forma || 'Sin datos',
+                params.componente,
+            ].join('||')
+            if (!controlMap.has(key)) controlMap.set(key, new Set<string>())
+            controlMap.get(key)!.add(params.trabajadorId)
+        }
+
+        for (const r of responses) {
+            const empresa = r.participante?.campana?.empresa?.name || 'Sin datos'
+            const campana = r.participante?.campana?.name || 'Sin datos'
+            const forma = r.formType || 'Sin datos'
+            const trabajadorId = r.participanteId
+            const ficha = (r.fichaData as Record<string, unknown> | null) || {}
+            const results = (r.results as Record<string, any> | null) || {}
+
+            registerControl({ empresa, campana, forma, componente: 'Sociodemográfico', trabajadorId, include: hasObjectData(ficha) })
+            registerControl({ empresa, campana, forma, componente: 'Intralaboral', trabajadorId, include: Boolean(results.intralaboral?.total) })
+            registerControl({ empresa, campana, forma, componente: 'Extralaboral', trabajadorId, include: Boolean(results.extralaboral?.total || results.extralaboral?.domains?.length) })
+            registerControl({ empresa, campana, forma, componente: 'Estrés', trabajadorId, include: Boolean(results.estres?.total) })
+            registerControl({ empresa, campana, forma, componente: 'Total general', trabajadorId, include: Boolean(results.global) })
+        }
+
+        const controlRows = Array.from(controlMap.entries())
+            .map(([key, workers]) => {
+                const [empresa, campana, forma, componente] = key.split('||')
+                return {
+                    Empresa: empresa,
+                    Campaña: campana,
+                    'Forma de aplicación': forma,
+                    Componente: componente,
+                    'Trabajadores evaluados': workers.size,
+                    'Criterio de conteo': 'Conteo de ID trabajador únicos con resultados válidos por componente',
+                }
+            })
+            .sort((a, b) =>
+                a.Empresa.localeCompare(b.Empresa) ||
+                a.Campaña.localeCompare(b.Campaña) ||
+                a['Forma de aplicación'].localeCompare(b['Forma de aplicación']) ||
+                a.Componente.localeCompare(b.Componente)
+            )
+
+        const metodologiaRows = [
+            {
+                Campo: 'ID encuesta',
+                Descripción: 'Identifica el cuestionario aplicado (Forma A o Forma B). No se usa como unidad de conteo de trabajadores.',
+            },
+            {
+                Campo: 'ID aplicación',
+                Descripción: 'Identificador único del registro de aplicación almacenado en SurveyResponse.',
+            },
+            {
+                Campo: 'ID trabajador',
+                Descripción: 'Identificador único del trabajador evaluado dentro del sistema. Es la unidad principal de análisis en reportes consolidados.',
+            },
+            {
+                Campo: 'Documento trabajador',
+                Descripción: 'Documento reportado por el trabajador o la cédula del participante cargado en campaña.',
+            },
+            {
+                Campo: 'Criterio de frecuencias y porcentajes',
+                Descripción: 'Cada frecuencia se calcula sobre trabajadores únicos con resultado válido en el componente o factor analizado. Los registros "No aplica" o sin resultado válido no incrementan el denominador.',
+            },
+            {
+                Campo: 'Hoja Control de Conteo',
+                Descripción: 'Valida el total de trabajadores evaluados por empresa, campaña, forma de aplicación y componente aplicado.',
+            },
+        ]
 
         const workbook = new ExcelJS.Workbook()
         workbook.creator = 'next-survey-app'
@@ -707,6 +827,12 @@ export async function GET(req: NextRequest) {
 
         const wsAnalysis = workbook.addWorksheet('Análisis de Riesgo')
         sheetFromObjects(wsAnalysis, analysisData as unknown as Record<string, unknown>[])
+
+        const wsControl = workbook.addWorksheet('Control de Conteo')
+        sheetFromObjects(wsControl, controlRows as unknown as Record<string, unknown>[])
+
+        const wsMethodology = workbook.addWorksheet('Metodología')
+        sheetFromObjects(wsMethodology, metodologiaRows as unknown as Record<string, unknown>[])
 
         const wsCharts = workbook.addWorksheet('Gráficos')
         wsCharts.columns = [
